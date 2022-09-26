@@ -11,6 +11,8 @@ package data;
  */
 
 public abstract class Client{
-	
+	protected String name;
+	protected String phoneNo;
+	protected String emailAddr;
 }
 

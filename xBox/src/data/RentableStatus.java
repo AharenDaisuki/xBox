@@ -18,35 +18,16 @@ public enum RentableStatus {
 	RENTED_PAID(5), // * is held by client with payment
 	RETURNED(6); // * is held by company & job is done 
 	
-	private int status;
+	private final int status;
 	
 	private RentableStatus(int status_) {
 		this.status = status_;
 	}
 	
-	public static RentableStatus statusIntToEnum(int status) {
-		switch(status) {
-		case 0:
-			return AVAILABLE;
-		case 1:
-			return RENTED_NO_PAY;
-		case 2: 
-			return TO_BE_CHECKOUT;
-		case 3:
-			return TO_BE_CHECKIN;
-		case 4:
-			return TO_BE_PICKUP;
-		case 5: 
-			return RENTED_PAID;
-		case 6: 
-			return RETURNED;
-		default:
-			return INVALID;
-		}
-	}
-	
-	public static String statusIntToString(int status) {
-		switch(status) {
+	@Override
+	public String toString() {
+		// TODO: modify
+		switch(this.status) {
 		case 0:
 			return "[status: held by person in charge, available]";
 		case 1:
