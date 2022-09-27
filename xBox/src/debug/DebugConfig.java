@@ -12,5 +12,6 @@ package debug;
 public class DebugConfig {
 	// pkg cmd
 	public static final boolean CMD_UNDOABLE_DEBUG_FLAG = false;
+	public static final boolean IO_FILEIO_DEBUG_FLAG = false;
 
 }

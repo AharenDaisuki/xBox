@@ -41,7 +41,7 @@ public abstract class Undoable implements Command {
 	public static void undoCmd() {
 		try {
 			if(undoList.isEmpty()) {
-				throw new ExEmptyVector("Empty vector exception: [undoCmd]");
+				throw new ExEmptyVector("[dev Error] empty vector => {undoCmd}");
 			}
 			// undo from the top of the stack
 			undoList.remove(undoList.size()-1).undo();
@@ -55,7 +55,7 @@ public abstract class Undoable implements Command {
 	public static void redoCmd() {
 		try {
 			if(redoList.isEmpty()) {
-				throw new ExEmptyVector("Empty vector exception: [redoCmd]");
+				throw new ExEmptyVector("[dev Error] empty vector => {redoCmd}");
 			}
 			// redo from the top of the stack
 			redoList.remove(redoList.size()-1).redo();
