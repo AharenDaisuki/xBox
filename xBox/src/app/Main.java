@@ -15,8 +15,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		/*需要测试自己的代码，在test文件夹里写测试代码，不要写在main里面run*/
+		
 	}
-
 }
