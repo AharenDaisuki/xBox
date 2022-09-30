@@ -9,66 +9,66 @@ public class RecordSearcher {
 	{
 		return searcher;
 	}
-	public Record searchByRecordID(String str)
+	public Record searchByRecordID(String aRecordID)
 	{
 		RecordStorer storer=RecordStorer.getInstance();
 		ArrayList<Record> recordlist=storer.getList();
 		for(Record r:recordlist)
-			if(r.getID().equals(str))
+			if(r.getID().equals(aRecordID))
 				return r;
 		return null; // exception later
 	}
-	public ArrayList<Record> searchByClientName(String str)
+	public ArrayList<Record> searchByClientName(String aName)
 	{
 		RecordStorer storer=RecordStorer.getInstance();
 		ArrayList<Record> recordlist=storer.getList(),result=new ArrayList<>();
 		for(Record r:recordlist)
-			if(r.getClient().getName().equals(str))
+			if(r.getClient().getName().equals(aName))
 				result.add(r);
 		return result;
 	}
-	public ArrayList<Record> searchByClientSid(String str)
+	public ArrayList<Record> searchByClientID(String aID)
 	{
 		RecordStorer storer=RecordStorer.getInstance();
 		ArrayList<Record> recordlist=storer.getList(),result=new ArrayList<>();
 		for(Record r:recordlist)
-			if(r.getClient().getId().equals(str))
+			if(r.getClient().getId().equals(aID))
 				result.add(r);
 		return result;
 	}
-	public ArrayList<Record> searchByClientEmail(String str)
+	public ArrayList<Record> searchByClientEmail(String aEmail)
 	{
 		RecordStorer storer=RecordStorer.getInstance();
 		ArrayList<Record> recordlist=storer.getList(),result=new ArrayList<>();
 		for(Record r:recordlist)
-			if(r.getClient().getEmail().equals(str))
+			if(r.getClient().getEmail().equals(aEmail))
 				result.add(r);
 		return result;
 	}
-	public Record searchByRentableID(String str)
+	public Record searchByRentableID(String aRentableID)
 	{
 		RecordStorer storer=RecordStorer.getInstance();
 		ArrayList<Record> recordlist=storer.getList();
 		for(Record r:recordlist)
-			if(r.getRentable().getId().equals(str))
+			if(r.getRentable().getId().equals(aRentableID))
 				return r;
 		return null;
 	}
-	public ArrayList<Record> searchByRentableType(String str)
+	public ArrayList<Record> searchByRentableType(String aRentableType)
 	{
 		RecordStorer storer=RecordStorer.getInstance();
 		ArrayList<Record> recordlist=storer.getList(),result=new ArrayList<>();
 		for(Record r:recordlist)
-			if(r.getRentable().getType().equals(str))
+			if(r.getRentable().getType().equals(aRentableType))
 				result.add(r);
 		return result;
 	}
-	public ArrayList<Record> searchByDue(Day d)
+	public ArrayList<Record> searchByDue(Day aDue)
 	{
 		RecordStorer storer=RecordStorer.getInstance();
 		ArrayList<Record> recordlist=storer.getList(),result=new ArrayList<>();
 		for(Record r:recordlist)
-			if(r.getDue().equals(d))
+			if(r.getDue().equals(aDue))
 				result.add(r);
 		return result;
 	}

@@ -31,8 +31,8 @@ public abstract class Rentable implements Comparable<Rentable>{
 
 
     @Override
-    public int compareTo(Rentable o) {
-        return this.id.compareTo(o.id);
+    public int compareTo(Rentable r) {
+        return this.id.compareTo(r.id);
     }
 
 

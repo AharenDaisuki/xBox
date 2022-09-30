@@ -1,14 +1,13 @@
 package data;
 
 public class Box extends Rentable{
-    final String type = "A";
 
-    public Box(String i, String n){
-        super(i,n);
+    public Box(String i){
+        super(i);
     }
 
     @Override
     public String getType(){
-        return type;
+        return "Box";
     }
 }

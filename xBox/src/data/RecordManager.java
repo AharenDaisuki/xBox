@@ -15,12 +15,12 @@ public class RecordManager {
 		ArrayList<Record> recordlist=storer.getList();
 		recordlist.add(new Record(client,box,due,id));
 	}
-	public void delete(Rentable box)
+	public void delete(Rentable aRentable)
 	{
 		RecordStorer storer=RecordStorer.getInstance();
 		ArrayList<Record> recordlist=storer.getList();
 		RecordSearcher searcher=RecordSearcher.getInstance();
-		Record result=searcher.searchByRentableID(box.getId());
+		Record result=searcher.searchByRentableID(aRentable.getId());
 		recordlist.remove(result);
 	}
 }

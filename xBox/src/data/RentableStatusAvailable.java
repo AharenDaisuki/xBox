@@ -3,7 +3,7 @@ public class RentableStatusAvailable implements RentableStatus{
 
     @Override
     public String toString(){
-        return "Available";
+        return "This Rentable is Available";
     }
 
     @Override

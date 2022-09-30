@@ -2,28 +2,28 @@ package data;
 
 public class Record {
 	private Client client;
-	private Rentable box;
+	private Rentable aRentable;
 	private Day due;
 	private String id;
 
 	public Record(){}
-	public Record(Client c,Rentable b,Day d,String i)
+	public Record(Client c,Rentable r,Day d,String Id)
 	{
 		client=c;
-		box=b;
+		aRentable=r;
 		due=d;
-		id=i;
+		id=Id;
 	}
 
 	public void setClient(Client c) {client=c;}
 	public Client getClient() {return client;}
 
-	public void setRentable(Rentable b) {box=b;}
-	public Rentable getRentable() {return box;}
+	public void setRentable(Rentable r) {aRentable=r;}
+	public Rentable getRentable() {return aRentable;}
 	
 	public void setDue(Day d) {due=d;}
 	public Day getDue() {return due;}
 	
-	public void setID(String i) {id=i;}
+	public void setID(String Id) {id=Id;}
 	public String getID() {return id;}
 }

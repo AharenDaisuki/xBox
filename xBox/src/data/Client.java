@@ -1,15 +1,20 @@
 package data;
 
-public class Client implements Comparable<Client>{
+public abstract class Client implements Comparable<Client>{
     private String id;
     private String name;
     private String email;
-    private int borrowedCount; //we can set max borrowed later on
+    private String phoneNo;
+    private String password;
+    private int borrowedCount;
 
-    public Client(String id, String name, String e) {	
+
+    public Client(String id, String name, String email, String phoneNo, String password) {	
         this.id=id;
         this.name=name;
-        this.email=e;
+        this.email=email;
+        this.phoneNo=phoneNo;
+        this.password=password;
         this.borrowedCount=0;
     }
 
@@ -37,12 +42,20 @@ public class Client implements Comparable<Client>{
         return id;
     }
 
+    public String getPhoneNo(){
+        return phoneNo;
+    }
+
     public String getName(){
         return name;
     }
 
     public String getEmail(){
         return email;
+    }
+
+    public String getPassword(){
+        return password;
     }
 
     public void borrowItem(Rentable i)
