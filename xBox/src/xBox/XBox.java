@@ -10,12 +10,12 @@ package xBox;
  * User interfaces are provided here. 
  * 
  */
-public class System {
-	private static System instance = new System();
+public class XBox {
+	private static XBox instance = new XBox();
 	
-	private System() {}
+	private XBox() {}
 	
-	public static System getInstance() {
+	public static XBox getInstance() {
 		return instance;
 	}
 	/*example*/
