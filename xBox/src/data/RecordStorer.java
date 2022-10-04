@@ -2,7 +2,7 @@ package data;
 
 import java.util.ArrayList;
 
-public class RecordStorer {
+public class RecordStorer{
 	private ArrayList<Record> recordList;
 	private static RecordStorer storer=new RecordStorer();
 	
