@@ -8,6 +8,8 @@ package utils;
  *
  */
 public class StringUtils {
+	public static final String splitLine = "********************************************************************************";
+	
 	public static String getExtensionName(String filePathName_) {
 		if(filePathName_ == null || filePathName_.length() <= 0) {
 			return "";

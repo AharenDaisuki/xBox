@@ -3,8 +3,8 @@ package data;
 public class Bag extends Rentable{
     final String type = "B";
 
-    public Bag(String i, String n){
-        super(i,n);
+    public Bag(String bagID, RentableStatus status){
+        super(bagID, status);
     }
 
     @Override

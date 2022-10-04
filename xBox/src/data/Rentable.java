@@ -2,16 +2,16 @@ package data;
 
 
 public abstract class Rentable implements Comparable<Rentable>{
-    private String id,name;
+    private String id;
     private RentableStatus status;
 
 
-    public Rentable(String i, String n){
-        id=i;
-        name=n;
-        status=new RentableStatusAvailable();
+    public Rentable(String rentableID_, RentableStatus status_){
+        id = rentableID_;
+        status = status_;
     }
-
+    
+    /*
     public void lendOut(Client c)
     {
 
@@ -27,45 +27,30 @@ public abstract class Rentable implements Comparable<Rentable>{
         RentableManager rm=RentableManager.getInstance();
         rm.getBackRentable(this);
         
-    }
-
-
-    @Override
-    public int compareTo(Rentable o) {
-        return this.id.compareTo(o.id);
-    }
-
+    }*/
 
     public String getId(){
         return id;
     }
 
-    public String getName(){
-        return name;
-    }
-
     public abstract String getType();
     
-
-
-    @Override
-    public String toString() {
-        return String.format("%-5s%-20s%-9s", id, name, status.toString());
-    }
-
-    public String getIdAndName() {
-        return id+" "+name;
-    }
 
     public RentableStatus getStatus(){
         return status;
     }
 
-    public void setAvailale(){
-        status=new RentableStatusAvailable();
+    public void setStatus(RentableStatus status_) {
+    	this.status = status_;
     }
-
-    public void setOccupied(Day d, Client c){
-        status=new RentableStatusOccupied(d,c);
+    
+    //@Override
+    //public String toString() {
+    //    return String.format("%-5s%-70s", id, status.toString());
+    //}
+    
+    @Override
+    public int compareTo(Rentable o) {
+        return this.id.compareTo(o.id);
     }
 }

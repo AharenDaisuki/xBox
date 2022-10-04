@@ -1,4 +1,7 @@
-package data;
+package utils;
+
+import data.Day;
+
 public class SystemDate extends Day{
 
     private static SystemDate instance;
@@ -8,9 +11,9 @@ public class SystemDate extends Day{
     public static SystemDate getInstance(){ return instance; }
 
     public static void createTheInstance(String s) {
-    if (instance==null)
-        instance = new SystemDate(s);
-    else
-        System.out.println("Cannot create one more system date instance.");
+	    if (instance==null)
+	        instance = new SystemDate(s);
+	    else
+	        System.out.println("Cannot create one more system date instance.");
     }
 }
