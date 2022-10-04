@@ -2,26 +2,25 @@ package data;
 
 
 public abstract class Rentable implements Comparable<Rentable>{
-    private String id,name;
+    private String id;
     private RentableStatus status;
 
 
-    public Rentable(String i, String n){
-        id=i;
-        name=n;
+    public Rentable(String aId){
+        id=aId;
         status=new RentableStatusAvailable();
     }
 
-    public void lendOut(Client c)
+    public void lendOut(Client aClient)
     {
 
         Day d=SystemDate.getInstance().clone();
-        status=new RentableStatusOccupied(d, c);
+        status=new RentableStatusOccupied(d, aClient);
         RentableManager rm=RentableManager.getInstance();
         rm.lendOutRentable(this);
     }
 
-    public void getBack(Client c)
+    public void getBack(Client aClient)
     {
         status=new RentableStatusAvailable();
         RentableManager rm=RentableManager.getInstance();
@@ -31,8 +30,8 @@ public abstract class Rentable implements Comparable<Rentable>{
 
 
     @Override
-    public int compareTo(Rentable r) {
-        return this.id.compareTo(r.id);
+    public int compareTo(Rentable aRentable) {
+        return this.id.compareTo(aRentable.id);
     }
 
 
@@ -40,21 +39,11 @@ public abstract class Rentable implements Comparable<Rentable>{
         return id;
     }
 
-    public String getName(){
-        return name;
-    }
-
     public abstract String getType();
     
-
-
     @Override
     public String toString() {
-        return String.format("%-5s%-20s%-9s", id, name, status.toString());
-    }
-
-    public String getIdAndName() {
-        return id+" "+name;
+        return String.format("%-5s%-9s", id, status.toString());
     }
 
     public RentableStatus getStatus(){
@@ -65,7 +54,12 @@ public abstract class Rentable implements Comparable<Rentable>{
         status=new RentableStatusAvailable();
     }
 
-    public void setOccupied(Day d, Client c){
-        status=new RentableStatusOccupied(d,c);
+    public void setOccupied(Day d, Client aClient){
+        status=new RentableStatusOccupied(d,aClient);
+    }
+
+    public void setRequested(Client aClient)
+    {
+    	status=new RentableStatusRequested(aClient);
     }
 }

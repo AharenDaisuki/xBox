@@ -3,7 +3,7 @@ package data;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class RentableStorer {
+public class RentableStorer{
     private static RentableStorer instance;
     private HashMap<String,ArrayList<Rentable>> manager;
 

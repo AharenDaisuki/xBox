@@ -2,8 +2,8 @@ package data;
 
 public class Bag extends Rentable{
 
-    public Bag(String i){
-        super(i);
+    public Bag(String aId){
+        super(aId);
     }
 
     @Override

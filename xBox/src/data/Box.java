@@ -2,8 +2,8 @@ package data;
 
 public class Box extends Rentable{
 
-    public Box(String i){
-        super(i);
+    public Box(String aId){
+        super(aId);
     }
 
     @Override

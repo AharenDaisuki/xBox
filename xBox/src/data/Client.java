@@ -1,17 +1,13 @@
 package data;
 
 public abstract class Client implements Comparable<Client>{
-    private String id;
-    private String name;
     private String email;
     private String phoneNo;
     private String password;
     private int borrowedCount;
 
 
-    public Client(String id, String name, String email, String phoneNo, String password) {	
-        this.id=id;
-        this.name=name;
+    public Client(String email, String phoneNo, String password) {	
         this.email=email;
         this.phoneNo=phoneNo;
         this.password=password;
@@ -20,11 +16,11 @@ public abstract class Client implements Comparable<Client>{
 
     @Override
     public String toString() {
-        return String.format("%-5s%-9s%7d", id, name, borrowedCount);
+        return String.format("%-30s%-7d", email, borrowedCount);
     }
 
     public static String getHeader() {
-        return String.format("%-5s%-9s%11s%11s", "ID", "Name", "#Borrowed");
+        return String.format("%-30s%-7d", "Email", "#Borrowed");
     }
 
     public int compareTo(Client another) {
@@ -38,16 +34,8 @@ public abstract class Client implements Comparable<Client>{
         return another.getName().equals(name) && another.getId().equals(id);
     }
 
-    public String getId(){
-        return id;
-    }
-
     public String getPhoneNo(){
         return phoneNo;
-    }
-
-    public String getName(){
-        return name;
     }
 
     public String getEmail(){
@@ -58,19 +46,16 @@ public abstract class Client implements Comparable<Client>{
         return password;
     }
 
-    public void borrowItem(Rentable i)
+    public void borrowItem(Rentable aRentable)
     {
-        i.lendOut(this);
+        aRentable.lendOut(this);
         borrowedCount++;
     }
 
-    public void returnItem(Rentable i)
+    public void returnItem(Rentable aRentable)
     {
-        i.getBack(this);
+        aRentable.getBack(this);
         borrowedCount--;
     }
 
-    public String getIdAndName(){
-        return id+" "+name;
-    }
 }
