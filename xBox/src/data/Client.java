@@ -1,61 +1,23 @@
 package data;
 
-public abstract class Client implements Comparable<Client>{
+
+public abstract class Client implements Comparable<Client>{    
+    private String name;
     private String email;
-    private String phoneNo;
-    private String password;
-    private int borrowedCount;
-
-
-    public Client(String email, String phoneNo, String password) {	
-        this.email=email;
-        this.phoneNo=phoneNo;
-        this.password=password;
-        this.borrowedCount=0;
+	private String phoneNo;
+    private int borrowedCount; //we can set max borrowed later on
+    
+    public Client(String name_, String email_, String phoneNo_) {
+    	this.name = name_;
+    	this.email = email_;
+    	this.phoneNo = phoneNo_;
     }
-
-    @Override
-    public String toString() {
-        return String.format("%-30s%-7d", email, borrowedCount);
-    }
-
-    public static String getHeader() {
-        return String.format("%-30s%-7d", "Email", "#Borrowed");
-    }
-
-    public int compareTo(Client another) {
-        if (this.id.equals(another.id)) return 0;
-        else if (this.id.compareTo(another.id)>0) return 1;
-        else return -1;
-    }
-
-
-    public boolean equals(Client another){
-        return another.getName().equals(name) && another.getId().equals(id);
-    }
-
-    public String getPhoneNo(){
-        return phoneNo;
-    }
-
-    public String getEmail(){
-        return email;
-    }
-
-    public String getPassword(){
-        return password;
-    }
-
-    public void borrowItem(Rentable aRentable)
-    {
-        aRentable.lendOut(this);
-        borrowedCount++;
-    }
-
-    public void returnItem(Rentable aRentable)
-    {
-        aRentable.getBack(this);
-        borrowedCount--;
-    }
-
+    
+    public String getName() { return this.name; }
+    
+    public String getEmail() { return this.email; }
+    
+    public String getPhoneNo() { return this.phoneNo; }
+    
+    public int getBorrowedCount() { return this.borrowedCount; }
 }

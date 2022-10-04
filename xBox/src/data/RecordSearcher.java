@@ -27,7 +27,9 @@ public class RecordSearcher {
 				result.add(r);
 		return result;
 	}
-	public ArrayList<Record> searchByClientID(String aID)
+	
+	/*
+	public ArrayList<Record> searchByClientSid(String str)
 	{
 		RecordStorer storer=RecordStorer.getInstance();
 		ArrayList<Record> recordlist=storer.getList(),result=new ArrayList<>();
@@ -35,8 +37,9 @@ public class RecordSearcher {
 			if(r.getClient().getId().equals(aID))
 				result.add(r);
 		return result;
-	}
-	public ArrayList<Record> searchByClientEmail(String aEmail)
+	}*/
+	
+	public ArrayList<Record> searchByClientEmail(String str)
 	{
 		RecordStorer storer=RecordStorer.getInstance();
 		ArrayList<Record> recordlist=storer.getList(),result=new ArrayList<>();

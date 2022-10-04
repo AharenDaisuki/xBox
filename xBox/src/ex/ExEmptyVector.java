@@ -18,6 +18,6 @@ public class ExEmptyVector extends Exception{
 	 */
 	private static final long serialVersionUID = 1L;
 	// constructor
-	public ExEmptyVector() { super("Empty vector exception!"); }
+	public ExEmptyVector() { super("[dev Error] empty vector"); }
 	public ExEmptyVector(String errorMsg) { super(errorMsg); }
 }

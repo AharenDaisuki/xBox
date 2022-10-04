@@ -6,34 +6,28 @@ public abstract class Rentable implements Comparable<Rentable>{
     private RentableStatus status;
 
 
-    public Rentable(String aId){
-        id=aId;
-        status=new RentableStatusAvailable();
+    public Rentable(String rentableID_, RentableStatus status_){
+        id = rentableID_;
+        status = status_;
     }
-
-    public void lendOut(Client aClient)
+    
+    /*
+    public void lendOut(Client c)
     {
 
         Day d=SystemDate.getInstance().clone();
-        status=new RentableStatusOccupied(d, aClient);
+        status=new RentableStatusOccupied(d, c);
         RentableManager rm=RentableManager.getInstance();
         rm.lendOutRentable(this);
     }
 
-    public void getBack(Client aClient)
+    public void getBack(Client c)
     {
         status=new RentableStatusAvailable();
         RentableManager rm=RentableManager.getInstance();
         rm.getBackRentable(this);
         
-    }
-
-
-    @Override
-    public int compareTo(Rentable aRentable) {
-        return this.id.compareTo(aRentable.id);
-    }
-
+    }*/
 
     public String getId(){
         return id;
@@ -41,25 +35,22 @@ public abstract class Rentable implements Comparable<Rentable>{
 
     public abstract String getType();
     
-    @Override
-    public String toString() {
-        return String.format("%-5s%-9s", id, status.toString());
-    }
 
     public RentableStatus getStatus(){
         return status;
     }
 
-    public void setAvailale(){
-        status=new RentableStatusAvailable();
+    public void setStatus(RentableStatus status_) {
+    	this.status = status_;
     }
-
-    public void setOccupied(Day d, Client aClient){
-        status=new RentableStatusOccupied(d,aClient);
-    }
-
-    public void setRequested(Client aClient)
-    {
-    	status=new RentableStatusRequested(aClient);
+    
+    //@Override
+    //public String toString() {
+    //    return String.format("%-5s%-70s", id, status.toString());
+    //}
+    
+    @Override
+    public int compareTo(Rentable o) {
+        return this.id.compareTo(o.id);
     }
 }
