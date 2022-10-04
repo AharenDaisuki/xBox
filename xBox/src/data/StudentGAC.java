@@ -10,19 +10,22 @@ package data;
 public class StudentGAC extends Client{
 	private String sid;
 	
+	public StudentGAC(String name_, String email_, String phoneNo_) {
+		super(name_, email_, phoneNo_);
+		// TODO Auto-generated constructor stub
+	}
+	
 	public String getName() {
-		return this.name;
-	}
-	
-	public String getPhoneNo() {
-		return this.phoneNo;
-	}
-	
-	public String getEmailAddr() {
-		return this.emailAddr;
+		return String.format("%s(%s)", super.getName(), this.sid);
 	}
 	
 	public String getSid() {
 		return this.sid;
+	}
+
+	@Override
+	public int compareTo(Client o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
