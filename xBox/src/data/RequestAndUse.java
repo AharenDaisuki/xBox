@@ -1,19 +1,16 @@
 package data;
 
-import java.util.ArrayList;
-
 public class RequestAndUse implements Target{
-	public Day DueDate;
+	public Day dueDate;
 	public Client client;
 	public RequestAndUse(Day aDate,Client aClient)
 	{
-		DueDate=aDate;
+		dueDate=aDate;
 		client=aClient;
 	}
-	public void changeRentableStatus(ArrayList<Rentable> rentableList)
+	public void changeRentableStatus(Rentable rentable)
 	{
-		for(Rentable rentable: rentableList)
-			rentable.setOccupied(DueDate, client);
+		rentable.setStatus(new RentableStatusOccupied(dueDate,client));
 	}
 	
 	@Override

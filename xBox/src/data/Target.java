@@ -1,8 +1,6 @@
 package data;
 
-import java.util.ArrayList;
-
 public interface Target {
-	public void changeRentableStatus(ArrayList<Rentable> rentableList);
+	public void changeRentableStatus(Rentable rentable);
 	public String toString();
 }

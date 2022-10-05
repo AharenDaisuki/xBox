@@ -39,7 +39,7 @@ public class RecordSearcher {
 		return result;
 	}*/
 	
-	public ArrayList<Record> searchByClientEmail(String str)
+	public ArrayList<Record> searchByClientEmail(String aEmail)
 	{
 		RecordStorer storer=RecordStorer.getInstance();
 		ArrayList<Record> recordlist=storer.getList(),result=new ArrayList<>();

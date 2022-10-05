@@ -1,7 +1,7 @@
 package data;
 
 
-public abstract class Client implements Comparable<Client>{    
+public abstract class Client{    
     private String name;
     private String email;
 	private String phoneNo;
