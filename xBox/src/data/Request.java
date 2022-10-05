@@ -4,14 +4,16 @@ public class Request {
 	private Client client;
 	private Rentable rentable;
 	private Target target;
+	private String requestId;
 	
 	public Request() {
 	}
-	public Request(Client aClient,Rentable aRentable,Target aTarget)
+	public Request(Client aClient,Rentable aRentable,Target aTarget, String id)
 	{
 		client=aClient;
 		rentable=aRentable;
 		target=aTarget;
+		requestId=id;
 	}
 	
 	public Client getClient()
@@ -39,5 +41,10 @@ public class Request {
 	public void setTarget(Target aTarget)
 	{
 		target=aTarget;
+	}
+	
+	public String getId()
+	{
+		return requestId;
 	}
 }

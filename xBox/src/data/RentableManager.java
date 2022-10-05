@@ -21,7 +21,8 @@ public class RentableManager {
         HashMap<String,ArrayList<Rentable>> manager = rs.getManager();
         manager.remove(aRentable.getType());
     }
-
+    
+    /*
     public void lendOutRentable(Rentable aRentable){
         RentableStorer rs = RentableStorer.getInstance();
         HashMap<String,ArrayList<Rentable>> manager = rs.getManager();
@@ -33,4 +34,5 @@ public class RentableManager {
         HashMap<String,ArrayList<Rentable>> manager = rs.getManager();
         manager.get(aRentable.getType()).remove(aRentable);
     }
+    */
 }
