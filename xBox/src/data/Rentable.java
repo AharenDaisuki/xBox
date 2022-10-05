@@ -1,14 +1,13 @@
 package data;
 
 
-public abstract class Rentable implements Comparable<Rentable>{
+public abstract class Rentable{
     private String id;
     private RentableStatus status;
 
 
-    public Rentable(String rentableID_, RentableStatus status_){
+    public Rentable(String rentableID_){
         id = rentableID_;
-        status = status_;
     }
     
     /*
@@ -44,13 +43,16 @@ public abstract class Rentable implements Comparable<Rentable>{
     	this.status = status_;
     }
     
-    //@Override
-    //public String toString() {
-    //    return String.format("%-5s%-70s", id, status.toString());
-    //}
+    public void setAvailale(){
+        status=new RentableStatusAvailable();
+    }
+
+    public void setOccupied(Day d, Client c){
+        status=new RentableStatusOccupied(d,c);
+    }
     
-    @Override
-    public int compareTo(Rentable o) {
-        return this.id.compareTo(o.id);
+    public void setRequested(Client c)
+    {
+    	status=new RentableStatusRequested(c);
     }
 }

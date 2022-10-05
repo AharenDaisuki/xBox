@@ -2,7 +2,7 @@ package data;
 
 import java.util.ArrayList;
 
-public class RequestStorer extends Database{
+public class RequestStorer{
 
 	private ArrayList<Request> requestList;
 	private static RequestStorer storer=new RequestStorer();

@@ -15,7 +15,7 @@ public class ClientSearcher {
 		ClientStorer storer=ClientStorer.getInstance();
 		ArrayList<Client> Clientlist=storer.getList(),result=new ArrayList<>();
 		for(Client r:Clientlist)
-			if(r.getClient().getEmail().equals(aEmail))
+			if(r.getEmail().equals(aEmail))
 				result.add(r);
 		return result;
 	}

@@ -12,7 +12,7 @@ public class RentableStatusOccupied implements RentableStatus{
 
     @Override
     public String toString() {        
-        return "Borrowed by "+ borrowedPerson.getIdAndName() +" on "+ borrowedDay;
+        return "Borrowed by "+ borrowedPerson.getEmail() +" on "+ borrowedDay;
     }       
 
     public Client getOwner(){
