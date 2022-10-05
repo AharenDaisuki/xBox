@@ -1,19 +1,16 @@
 package data;
 
-import java.util.ArrayList;
-
 public class Request {
 	private Client client;
-	private ArrayList<Rentable> rentableList;
+	private Rentable rentable;
 	private Target target;
 	
 	public Request() {
-		rentableList=new ArrayList<Rentable>();
 	}
-	public Request(Client aClient,ArrayList<Rentable> aRentableList,Target aTarget)
+	public Request(Client aClient,Rentable aRentable,Target aTarget)
 	{
 		client=aClient;
-		rentableList=aRentableList;
+		rentable=aRentable;
 		target=aTarget;
 	}
 	
@@ -25,10 +22,14 @@ public class Request {
 	{
 		client=aClient;
 	}
-
-	public ArrayList<Rentable> getRentableList()
+	
+	public Rentable getRentable()
 	{
-		return rentableList;
+		return rentable;
+	}
+	public void setRentable(Rentable aRentable)
+	{
+		rentable=aRentable;
 	}
 
 	public Target getTarget()

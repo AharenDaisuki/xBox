@@ -42,17 +42,4 @@ public abstract class Rentable{
     public void setStatus(RentableStatus status_) {
     	this.status = status_;
     }
-    
-    public void setAvailale(){
-        status=new RentableStatusAvailable();
-    }
-
-    public void setOccupied(Day d, Client c){
-        status=new RentableStatusOccupied(d,c);
-    }
-    
-    public void setRequested(Client c)
-    {
-    	status=new RentableStatusRequested(c);
-    }
 }
