@@ -2,19 +2,26 @@ package cmd;
 
 import java.util.InputMismatchException;
 
+import data.*;
+
 public class ClientCommand extends UserCommand{
     protected static RentableManager rentableManager=RentableManager.getInstance() ;
-    protected static RecordManager recordManager= RecordManager.getInstance;
+    protected static RecordManager recordManager= RecordManager.getInstance();
     protected static RequestManager requestManager= RequestManager .getInstance();
-    protected static clientManager clientManager=ClientManager.getInstance((); protected static Requeststorer requeststorer=Requeststorer.getInstance();
-    protected static ClientSearcher clientSearcher=ClientSearcher.getInstance(();
+     ClientManager clientManager=ClientManager.getInstance(); 
+    protected static RequestStorer requeststorer=RequestStorer.getInstance();
+    protected static ClientSearcher clientSearcher=ClientSearcher.getInstance();
+    protected static RentableAllocator rentableAllocator=RentableAllocator.getInstance();
 
-    @Override
-    public String register(String username, String password) {
-        return super.register(username, password);
+    public String register(String username, String password,String phone_num){
+        //String username, String password,String phone_num
+        Client newClient=new ClientStaff(username,password,phone_num);
+        clientManager.insert(newClient);
+        return newClient.getName();
     }
     @Override
-    public void login(String username, String password){
+    public void login(){
+        //String username, String password,String phone_num
         try{
             if (findClient(username)){
                 if (validLogin(password)){

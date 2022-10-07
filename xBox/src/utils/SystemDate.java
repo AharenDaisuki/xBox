@@ -10,6 +10,13 @@ public class SystemDate extends Day{
 
     public static SystemDate getInstance(){ return instance; }
 
+    public static Day toDate(String date){
+        int year=Integer.parseInt(date, 0, 3, 0);
+        int month=Integer.parseInt(date, 4, 6, 0);
+        int day=Integer.parseInt(date, 7, 9, 0);
+        return new Day(year,month,day);
+    }
+
     public static void createTheInstance(String s) {
 	    if (instance==null)
 	        instance = new SystemDate(s);

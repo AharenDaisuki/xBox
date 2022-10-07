@@ -10,7 +10,7 @@ public class RequestSearcher {
 		return searcher;
 	}
 
-    public ArrayList<Request> searchByClient(client aClient)
+    public ArrayList<Request> searchByClient(Client aClient)
     {
         RequestStorer storer=RequestStorer.getInstance();
         ArrayList<Request> result=new ArrayList<>();
