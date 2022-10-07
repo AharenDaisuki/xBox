@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;  
 import utils.*;
 
-public class RequestBoxCommand extends Undoable{
+public class ClientRequestBoxCommand extends Undoable{
     @Override
     public void redo(){      
         addUndo(this);
@@ -22,14 +22,12 @@ public class RequestBoxCommand extends Undoable{
         /*
         clientname of the reuqest,box/bag,date
         */
-        RequestManager requestManager= RequestManager .getInstance(); 
+        RequestManager requestManager= RequestManager.getInstance(); 
         RentableAllocator rentableAllocator=RentableAllocator.getInstance();
         
-        //reordManager 内在实现自动分布 
-        Rentable rentable=  rentableAllocator.borrowRentable(thisClient,cmdLine[1],SystemDate.toDate(cmdLine[2]));
-        //[change newRequest]
-        requestManager.newRequest(thisClient, rentable, new RequestAndUse(SystemDate.toDate(cmdLine[2]), thisClient));;
-        addUndo(null);
+        Rentable rentable= rentableAllocator.borrowRentable(thisClient,cmdLine[1],SystemDate.toDate(cmdLine[2]));
+        requestManager.newRequest(thisClient, rentable,null);;
+        addUndo(this);
         clearList();
     }
 
