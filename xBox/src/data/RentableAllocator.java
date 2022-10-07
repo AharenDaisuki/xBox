@@ -10,8 +10,13 @@ public class RentableAllocator {
 	{
 		return allocator;
 	}
+<<<<<<< HEAD
 	public Rentable borrowRentable(Client aClient,String aType)
 	{
+=======
+	public Rentable borrowRentable(Client aClient,String aType,Day aDate)
+	{	
+>>>>>>> eaa41f9 (add class)
 		RentableStorer storer=RentableStorer.getInstance();
 		HashMap<String,ArrayList<Rentable>> list=storer.getManager();
 		boolean isFound=false; // NotFoundexception later
@@ -20,6 +25,7 @@ public class RentableAllocator {
 			if(r.getStatus().equals("Available"))
 			{
 				isFound=true;
+				r.setOccupied(aDate, aClient);
                 return r;
 			}
 		}
