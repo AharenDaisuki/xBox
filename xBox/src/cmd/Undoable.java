@@ -23,6 +23,7 @@ public abstract class Undoable implements Command {
 	// undo list & redo list
 	private static ArrayList<Undoable> undoList = new ArrayList<>();
 	private static ArrayList<Undoable> redoList = new ArrayList<>();
+	
 	protected static RentableManager rentableManager=RentableManager.getInstance();
 	protected static RecordManager recordManager= RecordManager.getInstance();
 	protected static RequestManager requestManager= RequestManager .getInstance(); 

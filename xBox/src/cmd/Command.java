@@ -13,6 +13,6 @@ package cmd;
 import data.*;
 public interface Command {
 	// execute
-	void execute(String[] cmdLine);
+	void execute(String[] cmdLine,Client thisClient);
 	
 }

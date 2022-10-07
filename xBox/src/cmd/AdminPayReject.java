@@ -16,19 +16,15 @@ public class AdminPayReject extends Undoable{
     }
     public void execute(String[] cmdLine){
         /*
-         * adminName of the reuqest,clientName
+         *clientName
         */
-        if(cmdLine[0]=="ubox@gmail.com"){
+
             RequestSearcher requestSearcher=RequestSearcher.getInstance();
             Client thisClient=clientSearcher.searchByClientEmail(cmdLine[0]);
             ArrayList<Request> request= requestSearcher.searchByClient(thisClient);
             for (Request request2:request){
-                request2.getTarget().changeRentableStatus(request2.getRentable());;
-                requestManager.removeRequest(request2);
+                request2=new Request(thisClient, ;null, RequestButNotUsed);
+
             }
-        }
-        else{
-            
-        }
     }
 }
