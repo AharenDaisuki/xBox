@@ -22,7 +22,6 @@ public class RequestBoxCommand extends Undoable{
 
     public void execute(String[] cmdLine){
         /*
-        cmdLine[0] 
         clientname of the reuqest,box/bag,date
         */
         RentableManager rentableManager=RentableManager.getInstance();
@@ -33,9 +32,10 @@ public class RequestBoxCommand extends Undoable{
         RentableAllocator rentableAllocator=RentableAllocator.getInstance();
         
         thisClient=clientSearcher.searchByClientEmail(cmdLine[0]);
+        //reordManager 内在实现自动分布 
         Rentable rentable=  rentableAllocator.borrowRentable(thisClient,cmdLine[1],SystemDate.toDate(cmdLine[2]));
         rentableManager.lendOutRentable(rentable);
-        recordManager.insert(thisClient,rentable,SystemDate.toDate(cmdLine[2])，); 
+        recordManager.insert(thisClient,rentable,SystemDate.toDate(cmdLine[2])，);
         requestManager.newRequest(thisClient, rentable, new RequestAndUse(SystemDate.toDate(cmdLine[2]), thisClient));;
         addUndo(null);
         clearList();
