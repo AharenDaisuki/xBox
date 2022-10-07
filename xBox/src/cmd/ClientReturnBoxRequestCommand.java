@@ -5,7 +5,7 @@ import data.*;
 import data.Record;
 
 public class ReturnBoxRequestCommand extends Undoable{
-    private static Client thisClient;
+    private Client thisClient;
     @Override
     public void redo(){      
         addUndo(this);
@@ -16,7 +16,7 @@ public class ReturnBoxRequestCommand extends Undoable{
 
         addRedo(this);
     }
-    public void execute(String[] cmdLine){
+    public void execute(String[] cmdLine,Client thisClient){
         /*
         clientname of the reuqest,searchbytype
         */
