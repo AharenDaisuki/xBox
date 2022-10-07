@@ -1,5 +1,5 @@
 package data;
-
+import utils.*;
 public class RequestAndUse implements Target{
 	public Day dueDate;
 	public Client client;
@@ -17,5 +17,8 @@ public class RequestAndUse implements Target{
 	public String toString()
 	{
 		return "RequestAndUse";
+	}
+	public Day getDueDate(){
+		return this.dueDate;
 	}
 }

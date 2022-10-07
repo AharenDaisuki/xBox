@@ -3,7 +3,7 @@ package cmd;
 import java.util.ArrayList;
 
 import data.*;
-
+import utils.*;
 public class AdminPayApprove extends Undoable{
     @Override
     public void undo(){
@@ -14,25 +14,22 @@ public class AdminPayApprove extends Undoable{
 
     }
 
-    public void execute(String[] cmdLine){
+    public void execute(String[] cmdLine,Client thisClient){
         /*
-         * adminName of the reuqest,clientName，payOrNot
+         * clientName，payOrNot
         */
         RequestSearcher requestSearcher=RequestSearcher.getInstance();
-
-        if(cmdLine[0].equals("ubox@gmail.com")){
-             if(cmdLine[2].equals("paied")){
-                
-                Client thisClient=clientSearcher.searchByClientEmail(cmdLine[0]);
-                ArrayList<Request> request= requestSearcher.searchByClient(thisClient);
-                for (Request request2:request){
-                    request2.getTarget().changeRentableStatus(request2.getRentable());;
-                    requestManager.removeRequest(request2);
-                }
-                recordManager.insert(thisClient,rentable,SystemDate.toDate(cmdLine[2])，);
-            }else if(cmdLine[2].equals("unpaied")){
-
+        
+        if(cmdLine[2].equals("paied")){
+            ArrayList<Request> requestList= requestSearcher.searchByClient(thisClient);
+            for (Request request:requestList){
+                Rentable rentable=request.getRentable();
+                requestManager.removeRequest(request);
+                recordManager.insert(thisClient,rentable,request.getTarget().getDueDate());
             }
+        }else if(cmdLine[2].equals("unpaied")){
+
         }
+
     }
 }

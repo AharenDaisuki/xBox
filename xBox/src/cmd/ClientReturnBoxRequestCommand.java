@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import data.*;
 import data.Record;
 
-public class ReturnBoxRequestCommand extends Undoable{
+public class ClientReturnBoxRequestCommand extends Undoable{
     private Client thisClient;
     @Override
     public void redo(){      
@@ -18,15 +18,13 @@ public class ReturnBoxRequestCommand extends Undoable{
     }
     public void execute(String[] cmdLine,Client thisClient){
         /*
-        clientname of the reuqest,searchbytype
+        
         */
         RentableManager rentableManager=RentableManager.getInstance();
         RecordManager recordManager= RecordManager.getInstance();
         RecordSearcher recordSearcher=RecordSearcher.getInstance();
-        ClientSearcher clientSearcher=ClientSearcher.getInstance();
         RentableAllocator rentableAllocator=RentableAllocator.getInstance();
         
-        thisClient=clientSearcher.searchByClientEmail(cmdLine[0]);
         ArrayList<Record> recordList=recordSearcher.searchByClientName(cmdLine[0]);
         for(Record record:recordList){
             Rentable rentable=record.getRentable();

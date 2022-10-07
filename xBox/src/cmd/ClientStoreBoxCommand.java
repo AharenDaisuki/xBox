@@ -5,7 +5,7 @@ import java.util.Arrays;
 import utils.*;
 import data.*;
 
-public class StoreBoxCommand extends Undoable{
+public class ClientStoreBoxCommand extends Undoable{
     private Client myClient;
     @Override
     public void redo(){      
@@ -31,15 +31,13 @@ public class StoreBoxCommand extends Undoable{
             Rentable rentable=request.getRentable();
             if(cmdLine[num+i].equals("y")){
                 request.setTarget(new RequestButNotUsed());
-                recordManager.insert(thisClient,rentable,SystemDate.toDate(cmdLine[2]));
             }
             else if(cmdLine[num+i].equals("y")){
                 request.setTarget(new RequestAndUse(SystemDate.toDate(cmdLine[2]),thisClient));
-                recordManager.insert(thisClient,rentable,SystemDate.toDate(cmdLine[2]));
             }
-            else;
+            else ;
         }
-        addUndo(null);
+        addUndo(this);
         clearList();
     }
 	
