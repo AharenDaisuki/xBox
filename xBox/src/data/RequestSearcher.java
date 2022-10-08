@@ -21,4 +21,19 @@ public class RequestSearcher {
         }
         return result;
     }
+
+    public Request searchByRentableID(String aID)
+    {
+        RequestStorer storer=RequestStorer.getInstance();
+        Request result;
+        for(Request request:storer.getList())
+        {
+            if(request.getRentable().getId().equals(aID))
+            {
+                result=request;
+                break;
+            }
+        }
+        return result;
+    }
 }

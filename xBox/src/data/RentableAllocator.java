@@ -10,7 +10,7 @@ public class RentableAllocator {
 	{
 		return allocator;
 	}
-	public Rentable borrowRentable(Client aClient,String aType,Day aDate)
+	public Rentable borrowRentable(Client aClient,String aType)
 	{
 		RentableStorer storer=RentableStorer.getInstance();
 		HashMap<String,ArrayList<Rentable>> list=storer.getManager();
@@ -20,14 +20,9 @@ public class RentableAllocator {
 			if(r.getStatus().equals("Available"))
 			{
 				isFound=true;
-				r.setOccupied(aDate, aClient);
                 return r;
 			}
 		}
         return null; // NotFoundexception later
-	}
-	public void returnRentable(Rentable aRentable)
-	{
-		aRentable.setAvailale();
 	}
 }
