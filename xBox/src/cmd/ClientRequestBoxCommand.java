@@ -1,9 +1,7 @@
 package cmd;
 
-import java.util.ArrayList;
 import data.*;
 import java.text.SimpleDateFormat;  
-import java.util.Date;  
 import utils.*;
 
 public class ClientRequestBoxCommand extends Undoable{
@@ -20,13 +18,16 @@ public class ClientRequestBoxCommand extends Undoable{
 
     public void execute(String[] cmdLine,Client thisClient){
         /*
-        clientname of the reuqest,box/bag,date
+        [1+1+1]box/bag,number of box/bag,rentingMonth
         */
         RequestManager requestManager= RequestManager.getInstance(); 
         RentableAllocator rentableAllocator=RentableAllocator.getInstance();
         
-        Rentable rentable= rentableAllocator.borrowRentable(thisClient,cmdLine[1],SystemDate.toDate(cmdLine[2]));
-        requestManager.newRequest(thisClient, rentable,null);;
+        for(int i=0;i<Integer.parseInt(cmdLine[1]);i++){
+            Rentable rentable= rentableAllocator.borrowRentable(thisClient,cmdLine[0],SystemDate.toDate(cmdLine[2]));
+            requestManager.newRequest(thisClient, rentable,null);
+        }
+
         addUndo(this);
         clearList();
     }

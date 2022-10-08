@@ -20,7 +20,7 @@ public class ClientStoreBoxCommand extends Undoable{
 
     public void execute(String[] cmdLine,Client thisClient){
         /*
-        numOfRequest,num*rentableId,num*yes or not used,date
+        [3*num+1] number Of Request（num）,num*rentableId,num*yes or not used,month
         */
         RecordManager recordManager= RecordManager.getInstance();  
         RequestSearcher requestSearcher=RequestSearcher.getInstance();
@@ -29,13 +29,15 @@ public class ClientStoreBoxCommand extends Undoable{
         for (int i=1;i<=num;i++){
             Request request= requestSearcher.searchByRentableId(cmdLine[i]);
             Rentable rentable=request.getRentable();
-            if(cmdLine[num+i].equals("y")){
+            if(cmdLine[num+i].equals("_")){
                 request.setTarget(new RequestButNotUsed());
             }
             else if(cmdLine[num+i].equals("y")){
-                request.setTarget(new RequestAndUse(SystemDate.toDate(cmdLine[2]),thisClient));
+                Day curreDay= SystemDate.getInstance();
+                int rentMonth=Integer.parseInt(cmdLine[cmdLine.length-1]);
+                Day dueDay=new Day(curreDay.getYear(),rentMonth+curreDay.getMonth(),curreDay.getDay());
+                request.setTarget(new RequestAndUse(dueDay,thisClient));
             }
-            else ;
         }
         addUndo(this);
         clearList();
