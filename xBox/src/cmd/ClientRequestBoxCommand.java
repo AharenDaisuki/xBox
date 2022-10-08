@@ -24,7 +24,7 @@ public class ClientRequestBoxCommand extends Undoable{
         RentableAllocator rentableAllocator=RentableAllocator.getInstance();
         
         for(int i=0;i<Integer.parseInt(cmdLine[1]);i++){
-            Rentable rentable= rentableAllocator.borrowRentable(thisClient,cmdLine[0],SystemDate.toDate(cmdLine[2]));
+            Rentable rentable= rentableAllocator.borrowRentable(thisClient,cmdLine[0]);
             requestManager.newRequest(thisClient, rentable,null);
         }
 
