@@ -19,12 +19,5 @@ public class AdminPayReject extends Undoable{
          *clientName
         */
 
-            RequestSearcher requestSearcher=RequestSearcher.getInstance();
-            Client thisClient=clientSearcher.searchByClientEmail(cmdLine[0]);
-            ArrayList<Request> request= requestSearcher.searchByClient(thisClient);
-            for (Request request2:request){
-                request2=new Request(thisClient, ;null, RequestButNotUsed);
-
-            }
     }
 }

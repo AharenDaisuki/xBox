@@ -11,4 +11,7 @@ public class RequestButNotUsed implements Target{
 	{
 		return "RequestButNotUse";
 	}
+	public Day getDueDate(){
+		return null;
+	}
 }

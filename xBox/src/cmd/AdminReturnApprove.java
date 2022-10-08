@@ -3,6 +3,7 @@ package cmd;
 import java.util.ArrayList;
 
 import data.*;
+import data.Record;
 public class AdminReturnApprove extends Undoable{
     @Override
     public void redo(){      
@@ -14,21 +15,27 @@ public class AdminReturnApprove extends Undoable{
 
         addRedo(this);
     }
-    public void execute(String[] cmdLine){
+    public void execute(String[] cmdLine,Client myClient){
         /*
-         * adminName of the reuqest,clientName
+         * [1+num]clientName,num*y or_
         */
-        if(cmdLine[0]=="ubox@gmail.com"){
-            RequestSearcher requestSearcher=RequestSearcher.getInstance();
-            Client thisClient=clientSearcher.searchByClientEmail(cmdLine[0]);
-            ArrayList<Request> request= requestSearcher.searchByClient(thisClient);
-            for (Request request2:request){
-                request2.getTarget().changeRentableStatus(request2.getRentable());;
-                requestManager.removeRequest(request2);
+        RecordManager recordManager= RecordManager.getInstance();
+        ClientSearcher clientSearcher=ClientSearcher.getInstance();
+        RequestSearcher requestSearcher=RequestSearcher.getInstance();
+        RequestManager requestManager=RequestManager.getInstance();
+
+        Client thisClient=clientSearcher.searchByClientEmail(cmdLine[0]);
+        ArrayList<Request> requestList= requestSearcher.searchByClient(thisClient);
+        int num=1;
+        for (Request request:requestList){
+            Rentable rentable=request.getRentable();
+            if(cmdLine[num++].equals("y")){
+                recordManager.delete(rentable);
+                requestManager.removeRequest(request);
             }
-        }
-        else{
-            
+            else if(cmdLine[num++].equals("_")){
+
+            }
         }
     }
 }

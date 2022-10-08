@@ -14,22 +14,25 @@ public class AdminPayApprove extends Undoable{
 
     }
 
-    public void execute(String[] cmdLine,Client thisClient){
+    public void execute(String[] cmdLine,Client myClient){
         /*
-         * clientName，payOrNot
+         *[1+number] clientName，number *payOrNot
         */
+        ClientSearcher clientSearcher=ClientSearcher.getInstance();
         RequestSearcher requestSearcher=RequestSearcher.getInstance();
-        
-        if(cmdLine[2].equals("paied")){
-            ArrayList<Request> requestList= requestSearcher.searchByClient(thisClient);
-            for (Request request:requestList){
-                Rentable rentable=request.getRentable();
+
+        Client thisClient=clientSearcher.searchByClientEmail(cmdLine[0]);
+        ArrayList<Request> requestList= requestSearcher.searchByClient(thisClient);
+
+        int num=1;
+        for (Request request:requestList){
+            if(cmdLine[num++].equals("y")){
+                recordManager.insert(thisClient,request.getRentable(),request.getTarget().getDueDate());
                 requestManager.removeRequest(request);
-                recordManager.insert(thisClient,rentable,request.getTarget().getDueDate());
             }
-        }else if(cmdLine[2].equals("unpaied")){
-
+            else if(cmdLine[num++].equals("_")){
+                
+            }
         }
-
     }
 }
