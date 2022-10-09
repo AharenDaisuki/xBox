@@ -20,6 +20,8 @@ public class AdminPayApprove extends Undoable{
         */
         ClientSearcher clientSearcher=ClientSearcher.getInstance();
         RequestSearcher requestSearcher=RequestSearcher.getInstance();
+        RecordManager recordManager=RecordManager.getInstance();
+        RequestManager requestManager=RequestManager.getInstance();
 
         Client thisClient=clientSearcher.searchByClientEmail(cmdLine[0]);
         ArrayList<Request> requestList= requestSearcher.searchByClient(thisClient);
@@ -27,7 +29,7 @@ public class AdminPayApprove extends Undoable{
         int num=1;
         for (Request request:requestList){
             if(cmdLine[num++].equals("y")){
-                recordManager.insert(thisClient,request.getRentable(),request.getTarget().getDueDate());
+                //recordManager.insert(thisClient,request.getRentable(),request.getTarget().getDueDate());
                 requestManager.removeRequest(request);
             }
             else if(cmdLine[num++].equals("_")){
