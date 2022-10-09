@@ -16,4 +16,10 @@ public class RequestUnload implements Target{
 		return "Request and unload";
 	}
 
+	@Override
+	public Day getDueDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

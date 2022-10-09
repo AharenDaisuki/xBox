@@ -12,8 +12,8 @@ public class ClientLoginCommand implements UserCommand{
                 //return thisClient;
             }
         }
-        catch(InputMismatchException e){
+        catch(Exception e){
             System.out.println("Wrong Password");
         }
-        
+    }    
 }

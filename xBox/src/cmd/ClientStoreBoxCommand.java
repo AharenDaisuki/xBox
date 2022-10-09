@@ -22,13 +22,12 @@ public class ClientStoreBoxCommand extends Undoable{
         /*
         [3*num+1] number Of Request（num）,num*rentableId,num*yes or not used,month
         */
-        RecordManager recordManager= RecordManager.getInstance();  
         RequestSearcher requestSearcher=RequestSearcher.getInstance();
 
         int num=Integer.parseInt(cmdLine[0]);
         for (int i=1;i<=num;i++){
-            Request request= requestSearcher.searchByRentableId(cmdLine[i]);
-            Rentable rentable=request.getRentable();
+            Request request= requestSearcher.searchByRentableID(cmdLine[i]);
+            //Rentable rentable=request.getRentable();
             if(cmdLine[num+i].equals("_")){
                 request.setTarget(new RequestButNotUsed());
             }
