@@ -26,4 +26,10 @@ public class Record {
 	
 	public void setID(String Id) {id=Id;}
 	public String getID() {return id;}
+
+	@Override
+	public String toString()
+	{
+		return aRentable.getId()+" is occupied by "+client.getEmail()+". The due date is "+due.toString();
+	}
 }

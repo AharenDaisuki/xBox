@@ -10,14 +10,14 @@ public class ClientSearcher {
 		return searcher;
 	}
 	
-	public ArrayList<Client> searchByClientEmail(String aEmail)
+	public Client searchByClientEmail(String aEmail)
 	{
 		ClientStorer storer=ClientStorer.getInstance();
-		ArrayList<Client> Clientlist=storer.getList(),result=new ArrayList<>();
+		ArrayList<Client> Clientlist=storer.getList();
 		for(Client r:Clientlist)
-			if(r.getClient().getEmail().equals(aEmail))
-				result.add(r);
-		return result;
+			if(r.getEmail().equals(aEmail))
+				return r;
+		return null;
 	}
 	
 }

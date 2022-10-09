@@ -1,7 +1,5 @@
 package data;
 
-import java.util.ArrayList;
-
 public class RequestManager {
 	private static RequestManager instance=new RequestManager();
 	
@@ -9,16 +7,16 @@ public class RequestManager {
 	{
 		return instance;
 	}
-	public void newRequest(Client aClient,ArrayList<Rentable> aRentableList,Target aTarget)
+	public void newRequest(Client aClient,Rentable aRentable,Target aTarget)
 	{
-		for(Rentable rentable:aRentableList)
-			rentable.setRequested(aClient);
 		RequestStorer storer=RequestStorer.getInstance();
-		storer.getList().add(new Request(aClient,aRentableList,aTarget));
+		aRentable.setStatus(new RentableStatusRequested(aClient));
+		storer.getList().add(new Request(aClient,aRentable,aTarget));
 	}
 	public void removeRequest(Request request)
 	{
 		RequestStorer storer=RequestStorer.getInstance();
+		request.getTarget().changeRentableStatus(request.getRentable());
 		storer.getList().remove(request);
 	}
 }

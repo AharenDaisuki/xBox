@@ -11,7 +11,7 @@ public class RentableAllocator {
 		return allocator;
 	}
 	public Rentable borrowRentable(Client aClient,String aType,Day aDate)
-	{
+	{	
 		RentableStorer storer=RentableStorer.getInstance();
 		HashMap<String,ArrayList<Rentable>> list=storer.getManager();
 		boolean isFound=false; // NotFoundexception later
@@ -25,9 +25,5 @@ public class RentableAllocator {
 			}
 		}
         return null; // NotFoundexception later
-	}
-	public void returnRentable(Rentable aRentable)
-	{
-		aRentable.setAvailale();
 	}
 }

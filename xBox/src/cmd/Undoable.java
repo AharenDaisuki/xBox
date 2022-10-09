@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import debug.DebugConfig;
 import ex.*;
-
+import data.*;
 /**
  * @author xyli45
  *
@@ -23,7 +23,7 @@ public abstract class Undoable implements Command {
 	// undo list & redo list
 	private static ArrayList<Undoable> undoList = new ArrayList<>();
 	private static ArrayList<Undoable> redoList = new ArrayList<>();
-	
+
 	// modify list (subclass-visible)
 	protected static void addUndo(Undoable cmd) {
 		undoList.add(cmd);

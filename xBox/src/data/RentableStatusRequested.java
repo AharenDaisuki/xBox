@@ -8,7 +8,7 @@ public class RentableStatusRequested implements RentableStatus{
     }
 	public String toString()
 	{
-		return "Requested By "+client.getId();
+		return "Requested By "+client.getEmail();
 	}
 	public String getStatus()
 	{

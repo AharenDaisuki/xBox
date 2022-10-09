@@ -9,12 +9,11 @@ public class Database {
     private ClientStorer clientStorer;
     private RequestStorer requestStorer;
 
-    private Database(RentableStorer aRentableStorer, RecordStorer aRecordStorer, 
-                    ClientStorer aClientStorer, RequestStorer aRequestStorer){
-        rentableStorer=aRentableStorer;
-        recordStorer=aRecordStorer;
-        clientStorer=aClientStorer;
-        requestStorer=aRequestStorer;
+    private Database(){
+        rentableStorer=RentableStorer.getInstance();
+        recordStorer=RecordStorer.getInstance();
+        clientStorer=ClientStorer.getInstance();
+        requestStorer=RequestStorer.getInstance();
     }
 
     public static Database getInstance(){

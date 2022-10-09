@@ -10,8 +10,9 @@ package cmd;
  * command interface, extended by undoable.
  *
  */
+import data.*;
 public interface Command {
 	// execute
-	void execute(String[] cmdLine);
+	void execute(String[] cmdLine,Client thisClient);
 	
 }
