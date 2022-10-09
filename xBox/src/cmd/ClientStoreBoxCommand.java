@@ -25,6 +25,7 @@ public class ClientStoreBoxCommand extends Undoable{
         RequestSearcher requestSearcher=RequestSearcher.getInstance();
 
         int num=Integer.parseInt(cmdLine[0]);
+        /* TODO: modify
         for (int i=1;i<=num;i++){
             Request request= requestSearcher.searchByRentableID(cmdLine[i]);
             //Rentable rentable=request.getRentable();
@@ -37,7 +38,7 @@ public class ClientStoreBoxCommand extends Undoable{
                 Day dueDay=new Day(curreDay.getYear(),rentMonth+curreDay.getMonth(),curreDay.getDay());
                 request.setTarget(new RequestAndUse(dueDay,thisClient));
             }
-        }
+        }*/
         addUndo(this);
         clearList();
     }

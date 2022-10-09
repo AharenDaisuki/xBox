@@ -1,4 +1,6 @@
 package data;
+
+@Deprecated
 public class Day implements Cloneable{
 	
 	private int year;

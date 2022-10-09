@@ -1,21 +1,26 @@
 package data;
 
+import utils.XBoxDate;
+
 public class Request {
 	private Client client;
 	private Rentable rentable;
 	private Target target;
 	private String requestId;
-	private Day date;
+	//private Day date;
+	private XBoxDate date;
 	
 	public Request() {
+	
 	}
-	public Request(Client aClient,Rentable aRentable,Target aTarget, String id, Day aDate)
+	
+	public Request(Client aClient,Rentable aRentable,Target aTarget, String id, XBoxDate aDate)
 	{
-		client=aClient;
-		rentable=aRentable;
-		target=aTarget;
-		requestId=id;
-		date=aDate;
+		client = aClient;
+		rentable = aRentable;
+		target = aTarget;
+		requestId = id;
+		date = aDate;
 	}
 	
 	public Client getClient()

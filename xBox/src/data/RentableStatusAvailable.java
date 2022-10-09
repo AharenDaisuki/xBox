@@ -1,9 +1,12 @@
 package data;
 public class RentableStatusAvailable implements RentableStatus{
-
+	public static final String statusName = "Available";
+	
+	public RentableStatusAvailable() {}
+	
     @Override
     public String toString(){
-        return "This Rentable is Available";
+        return "[status]: Available";
     }
 
     @Override
