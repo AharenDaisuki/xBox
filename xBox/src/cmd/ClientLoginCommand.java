@@ -9,12 +9,11 @@ public class ClientLoginCommand implements UserCommand{
         Client thisClient=clientSearcher.searchByClientEmail(cmdLine[0]);
         try{
             if (thisClient.getPassword().equals(cmdLine[1])){
-                return thisClient;
+                //return thisClient;
             }
         }
         catch(InputMismatchException e){
             System.out.println("Wrong Password");
         }
         
-    }
 }
