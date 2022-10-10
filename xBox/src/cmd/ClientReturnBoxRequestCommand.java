@@ -28,7 +28,7 @@ public class ClientReturnBoxRequestCommand extends Undoable{
         for(Record record:recordList){
             Rentable rentable=record.getRentable();
             //rentableAllocator.returnRentable(rentable);
-            requestManager.newRequest(thisClient, rentable, new RequestUnload( thisClient));
+            //requestManager.newRequest(thisClient, rentable, new RequestUnload( thisClient));
         }
         addUndo(null);
         clearList();

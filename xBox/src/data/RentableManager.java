@@ -9,7 +9,8 @@ public class RentableManager {
     public static RentableManager getInstance(){
         return instance;
     }
-
+    
+    /*
     public void addNewRentableType(Rentable aRentable){
         RentableStorer rs = RentableStorer.getInstance();
         HashMap<String,ArrayList<Rentable>> manager = rs.getManager();
@@ -20,20 +21,20 @@ public class RentableManager {
         RentableStorer rs = RentableStorer.getInstance();
         HashMap<String,ArrayList<Rentable>> manager = rs.getManager();
         manager.remove(aRentable.getType());
-    }
+    }*/
 
-    public void addNewRentable(Rentable aRentable)
-    {
-        RentableStorer rs = RentableStorer.getInstance();
-        HashMap<String,ArrayList<Rentable>> manager = rs.getManager();
-        manager.get(aRentable.getType()).add(aRentable);
+    public void addNewRentable(Rentable aRentable){
+        RentableStorer rentableStorer = RentableStorer.getInstance();
+        rentableStorer.addEntry(aRentable);
+        //HashMap<String,ArrayList<Rentable>> manager = rs.getManager();
+        //manager.get(aRentable.getType()).add(aRentable);
     }
     
-    public void deleteRentable(Rentable aRentable)
-    {
-        RentableStorer rs = RentableStorer.getInstance();
-        HashMap<String,ArrayList<Rentable>> manager = rs.getManager();
-        manager.get(aRentable.getType()).remove(aRentable);
+    public void deleteRentable(Rentable aRentable){
+        RentableStorer rentableStorer = RentableStorer.getInstance();
+        rentableStorer.delEntry(aRentable);
+        //HashMap<String,ArrayList<Rentable>> manager = rs.getManager();
+        //manager.get(aRentable.getType()).remove(aRentable);
     }
     /*
     public void lendOutRentable(Rentable aRentable){

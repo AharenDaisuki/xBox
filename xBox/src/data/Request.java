@@ -5,21 +5,17 @@ import utils.XBoxDate;
 public class Request {
 	private Client client;
 	private Rentable rentable;
-	private Target target;
-	private String requestId;
-	//private Day date;
+	// private Target target;
+	// private int requestId;
 	private XBoxDate date;
 	
 	public Request() {
 	
 	}
 	
-	public Request(Client aClient,Rentable aRentable,Target aTarget, String id, XBoxDate aDate)
-	{
+	public Request(Client aClient, Rentable aRentable, XBoxDate aDate){
 		client = aClient;
 		rentable = aRentable;
-		target = aTarget;
-		requestId = id;
 		date = aDate;
 	}
 	
@@ -40,7 +36,8 @@ public class Request {
 	{
 		rentable=aRentable;
 	}
-
+	
+	/*
 	public Target getTarget()
 	{
 		return target;
@@ -49,11 +46,9 @@ public class Request {
 	{
 		target=aTarget;
 	}
-	
-	public String getId()
-	{
+	public int getId(){
 		return requestId;
-	}
+	}*/
 
 	@Override
 	public String toString()
