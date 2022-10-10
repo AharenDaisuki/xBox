@@ -2,22 +2,33 @@ package data;
 
 import java.util.ArrayList;
 
-public class RequestStorer{
-
-	private ArrayList<Request> requestList;
-	private static RequestStorer storer=new RequestStorer();
+public class RequestStorer implements XBoxStorer<Request>{
+    // data
+    private ArrayList<Request> requestList;
+    
+    // singleton 
+	private static RequestStorer storer = new RequestStorer();
 	
-	private RequestStorer()
-	{
-		requestList=new ArrayList<>();
+	private RequestStorer(){
+		requestList = new ArrayList<>();
 	}
 
-	public static RequestStorer getInstance()
-	{
+	public static RequestStorer getInstance(){
 		return storer;
 	}
-	public ArrayList<Request> getList()
-	{
+	
+	// TODO: replace
+	public ArrayList<Request> getList(){
 		return requestList;
 	}
+
+    @Override
+    public void addEntry(Request request_) {
+        requestList.add(request_);
+    }
+
+    @Override
+    public void delEntry(Request request_) {
+        requestList.remove(request_);
+    }
 }

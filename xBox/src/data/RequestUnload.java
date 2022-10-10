@@ -1,5 +1,7 @@
 package data;
 
+import utils.XBoxDate;
+
 public class RequestUnload implements Target{
 	private Client client;
 	
@@ -17,8 +19,8 @@ public class RequestUnload implements Target{
 	}
 
 	@Override
-	public Day getDueDate() {
-		// TODO Auto-generated method stub
+	public XBoxDate getDueDate() {
+		// TODO: modify
 		return null;
 	}
 

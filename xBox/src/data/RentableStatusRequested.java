@@ -1,17 +1,19 @@
 package data;
 
 public class RentableStatusRequested implements RentableStatus{
-	Client client;
-	public RentableStatusRequested(Client aClient)
-	{
-        client=aClient;
+    public static final String statusName = "Requested";
+	private Client client;
+	
+	public RentableStatusRequested(Client aClient){
+        client = aClient;
     }
-	public String toString()
-	{
-		return "Requested By "+client.getEmail();
+	
+	public String toString(){
+	    return String.format("[status]: Requested by %s", this.client.getEmail());
+		//return "Requested By "+client.getEmail();
 	}
-	public String getStatus()
-	{
+	
+	public String getStatus(){
 		return "Requested";
 	}
 }

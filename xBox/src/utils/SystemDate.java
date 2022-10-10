@@ -1,7 +1,17 @@
 package utils;
 
-import data.Day;
+public class SystemDate extends XBoxDate{
+    // singleton
+    private static SystemDate instance;
+    
+    private SystemDate() { super(); } // new java.util.Date
+    
+    public static SystemDate getInstance() { return instance; }
+}
 
+//import data.Day;
+
+/*
 public class SystemDate extends Day{
 
     private static SystemDate instance;
@@ -23,4 +33,4 @@ public class SystemDate extends Day{
 	    else
 	        System.out.println("Cannot create one more system date instance.");
     }
-}
+}*/

@@ -1,8 +1,7 @@
 package cmd;
 
-import data.*;
-import java.text.SimpleDateFormat;  
-import utils.*;
+import data.*;  
+import utils.XBoxDate;
 
 public class ClientRequestBoxCommand extends Undoable{
     @Override
@@ -16,16 +15,17 @@ public class ClientRequestBoxCommand extends Undoable{
         addRedo(this);
     }
 
-    public void execute(String[] cmdLine,Client thisClient){
+    public void execute(String[] cmdLine, Client thisClient){
         /*
-        [1+1+1]box/bag,number of box/bag,rentingMonth
+         * [0:type] [1:number] [2:month] 
         */
         RequestManager requestManager= RequestManager.getInstance(); 
         RentableAllocator rentableAllocator=RentableAllocator.getInstance();
-        
-        for(int i=0;i<Integer.parseInt(cmdLine[1]);i++){
-            Rentable rentable= rentableAllocator.borrowRentable(thisClient,cmdLine[0]);
-            requestManager.newRequest(thisClient, rentable,null);
+        XBoxDate currDate = new XBoxDate();
+        // TODO: handle exception
+        for(int i=0; i<Integer.parseInt(cmdLine[1]); i++){
+            Rentable rentable= rentableAllocator.borrowRentable(thisClient, cmdLine[0], currDate.getDayAfterNMonth(cmdLine[2]));
+            requestManager.newRequest(thisClient, rentable, null);
         }
 
         addUndo(this);
