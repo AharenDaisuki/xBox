@@ -2,18 +2,16 @@ package data;
 
 
 public abstract class Client{    
-    private String name;
     private String email;
 	private String phoneNo;
+    private String password;
     private int borrowedCount; //we can set max borrowed later on
     
-    public Client(String name_, String email_, String phoneNo_) {
-    	this.name = name_;
+    public Client(String email_, String phoneNo_, String password_) {
     	this.email = email_;
     	this.phoneNo = phoneNo_;
+        this.password = password_;
     }
-    
-    public String getName() { return this.name; }
     
     public String getEmail() { return this.email; }
     
