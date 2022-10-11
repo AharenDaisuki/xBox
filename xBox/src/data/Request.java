@@ -1,19 +1,19 @@
 package data;
 
-import utils.XBoxDate;
+import java.util.Date;
 
 public class Request {
 	private Client client;
 	private Rentable rentable;
 	// private Target target;
 	// private int requestId;
-	private XBoxDate date;
+	private Date date;
 	
 	public Request() {
 	
 	}
 	
-	public Request(Client aClient, Rentable aRentable, XBoxDate aDate){
+	public Request(Client aClient, Rentable aRentable, Date aDate){
 		client = aClient;
 		rentable = aRentable;
 		date = aDate;

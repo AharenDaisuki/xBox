@@ -12,11 +12,11 @@ public class RentableAllocator {
 	}
 	
 	public Rentable borrowRentable(Client aClient, String aType){	
-		RentableStorer storer=RentableStorer.getInstance();
+		RentableStorer storer = RentableStorer.getInstance();
 		HashMap<String,ArrayList<Rentable>> list = storer.getManager();
 		boolean isFound = false; // NotFoundexception later
 		for(Rentable rentable : list.get(aType)){
-			if(rentable.getStatus().equals(RentableStatusAvailable.statusName)){
+			if(rentable.getStatusStr().equals(RentableStatusAvailable.statusName)){
 				isFound = true;
                 return rentable;
 			}

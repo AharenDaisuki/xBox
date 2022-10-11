@@ -1,10 +1,12 @@
 package data;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.ArrayList;
+//import java.util.HashMap;
 
 public class RentableManager {
-    private static RentableManager instance=new RentableManager();
+    private static RentableManager instance = new RentableManager();
+    
+    private RentableManager() {}
     
     public static RentableManager getInstance(){
         return instance;

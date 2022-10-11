@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class RentableStorer implements XBoxStorer<Rentable>{
-    private static RentableStorer instance;
+    private static RentableStorer instance = new RentableStorer();
+    
     private HashMap<String, ArrayList<Rentable>> manager;
 
     private RentableStorer(){

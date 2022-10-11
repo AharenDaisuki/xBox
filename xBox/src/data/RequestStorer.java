@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class RequestStorer implements XBoxStorer<Request>{
     // data
     private ArrayList<Request> requestList;
-    private static int distributedId = 0;
+    //private static int distributedId = 0;
     
     // singleton 
 	private static RequestStorer storer = new RequestStorer();
@@ -18,9 +18,10 @@ public class RequestStorer implements XBoxStorer<Request>{
 		return storer;
 	}
 	
+	/*
 	public int generateRequestId() {
 	    return distributedId++;
-	}
+	}*/
 	
 	// TODO: replace
 	public ArrayList<Request> getList(){

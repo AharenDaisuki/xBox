@@ -11,9 +11,9 @@ public class RequestSearcher {
 	}
 
     public ArrayList<Request> searchByClient(Client aClient){
-        ArrayList<Request> result=new ArrayList<>();
+        ArrayList<Request> result = new ArrayList<>();
         for(Request request:storer.getList()){
-            if(request.getClient().getEmail().equals(aClient.getEmail())) {
+            if(request.getClient() == aClient) {
                 result.add(request);
             }
         }

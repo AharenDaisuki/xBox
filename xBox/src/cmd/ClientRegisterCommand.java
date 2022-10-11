@@ -12,11 +12,11 @@ public class ClientRegisterCommand implements Command{
         Client newClient;
 
         if(cmdLine[2].equals("y")) {
-            newClient=new ClientStaff(cmdLine[0],cmdLine[1]);
+            //newClient=new ClientStaff(cmdLine[0],cmdLine[1]);
+        }else {
+            //newClient=new ClientStudent(cmdLine[0],cmdLine[1]);
         }
-        else {
-            newClient=new ClientStudent(cmdLine[0],cmdLine[1]);}
-        clientManager.insert(newClient);
+        //clientManager.insert(newClient);
     }
 
 }

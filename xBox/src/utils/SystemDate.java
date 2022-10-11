@@ -1,10 +1,11 @@
 package utils;
 
-public class SystemDate extends XBoxDate{
+@Deprecated
+public class SystemDate{
     // singleton
     private static SystemDate instance;
     
-    private SystemDate() { super(); } // new java.util.Date
+    private SystemDate() {} // new java.util.Date
     
     public static SystemDate getInstance() { return instance; }
 }

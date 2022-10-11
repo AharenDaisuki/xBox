@@ -13,23 +13,22 @@ import utils.XBoxDate;
  */
 
 public class CmdRequestRentable extends Undoable{
+    private final int size = 10000;
     // save data for undo & redo
     private Client user;
     private String rentableType;
     private int requestN;
     private String monthN;
-    private Rentable[] allRentables;
-    private Request[] allRequests;
-    
-    // helper module
-    private static RequestManager requestManager = RequestManager.getInstance(); 
-    private static RentableAllocator rentableAllocator = RentableAllocator.getInstance();
+    private Rentable[] allRentables = new Rentable[size];
+    private Request[] allRequests = new Request[size];
     
     public void execute(String[] cmdLine, Client aClient){
         /*
          * [0:type] [1:number] [2:month] 
         */
-        XBoxDate currDate = new XBoxDate();
+        RequestManager requestManager = RequestManager.getInstance();
+        RentableAllocator rentableAllocator = RentableAllocator.getInstance();
+        XBoxDate systemDate = XBoxDate.getInstance();
         
         this.user = aClient;
         this.rentableType = cmdLine[0];
@@ -43,7 +42,7 @@ public class CmdRequestRentable extends Undoable{
             // set status
             allRentables[i].setStatus(new RentableStatusRequested(user));
             // new a request
-            allRequests[i] = new Request(user, allRentables[i], currDate.getDayAfterNMonth(monthN));
+            allRequests[i] = new Request(user, allRentables[i], systemDate.getDayAfterNMonth(monthN));
             requestManager.newRequest(allRequests[i]);
         }
         addUndo(this);
@@ -52,6 +51,7 @@ public class CmdRequestRentable extends Undoable{
 
     @Override
     public void undo() {
+        RequestManager requestManager = RequestManager.getInstance();
         // undo current command
         for(int i = this.requestN-1; i>=0; --i) {
             // remove request
@@ -65,6 +65,7 @@ public class CmdRequestRentable extends Undoable{
 
     @Override
     public void redo() {
+        RequestManager requestManager = RequestManager.getInstance();
         // redo current command
         for(int i = 0; i < requestN; ++i) {
             allRentables[i].setStatus(new RentableStatusRequested(user));
