@@ -19,6 +19,10 @@ public class RentableStorer implements XBoxStorer<Rentable>{
     public HashMap<String,ArrayList<Rentable>> getManager(){
         return manager;
     }
+    
+    public ArrayList<Rentable> getList(String rentableType){
+        return manager.get(rentableType);
+    }
 
     @Override
     public void addEntry(Rentable entry) {

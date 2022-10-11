@@ -10,7 +10,7 @@ public class RequestSearcher {
 		return searcher;
 	}
 
-    public ArrayList<Request> searchByClient(Client aClient){
+    public ArrayList<Request> searchAllByKeyword(Client aClient){
         ArrayList<Request> result = new ArrayList<>();
         for(Request request:storer.getList()){
             if(request.getClient() == aClient) {
@@ -20,15 +20,12 @@ public class RequestSearcher {
         return result;
     }
 
-    public Request searchByRentableID(String aID){
-        // TODO: not found exception
-        Request result = null;
+    public Request searchByKeyword(String aID){
         for(Request request : storer.getList()){
             if(request.getRentable().getId().equals(aID)){
-                result = request;
-                break;
+                return request;
             }
         }
-        return result;
+        return null;
     }
 }

@@ -1,35 +1,39 @@
 package data;
 
+import java.util.Date;
+
 public class Record {
 	private Client client;
-	private Rentable aRentable;
-	private Day due;
-	private String id;
+	private Rentable rentable;
+	private Date dueDate;
+	// private String id;
 
 	public Record(){}
-	public Record(Client c,Rentable r,Day d,String Id)
-	{
-		client=c;
-		aRentable=r;
-		due=d;
-		id=Id;
+	
+	public Record(Client client_, Rentable rentable_, Date due_){
+		client = client_;
+		rentable = rentable_;
+		dueDate = due_;
 	}
 
-	public void setClient(Client c) {client=c;}
-	public Client getClient() {return client;}
+	public void setClient(Client c) { client = c; }
+	
+	public Client getClient() { return this.client; }
 
-	public void setRentable(Rentable r) {aRentable=r;}
-	public Rentable getRentable() {return aRentable;}
+	public void setRentable(Rentable r) { rentable = r; }
 	
-	public void setDue(Day d) {due=d;}
-	public Day getDue() {return due;}
+	public Rentable getRentable() { return this.rentable; }
 	
-	public void setID(String Id) {id=Id;}
-	public String getID() {return id;}
+	public void setDue(Date d) { dueDate = d; }
+	
+	public Date getDue() {return this.dueDate; }
+	
+	//public void setID(String Id) {id=Id;}
+	
+	//public String getID() {return id;}
 
 	@Override
-	public String toString()
-	{
-		return aRentable.getId()+" is occupied by "+client.getEmail()+". The due date is "+due.toString();
+	public String toString(){
+	    return String.format("[record]: %s occupied by %s, due by %tF", rentable.getId(), client.getEmail(), dueDate);
 	}
 }

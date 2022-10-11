@@ -3,6 +3,8 @@ package cmd;
 import data.*;  
 import utils.XBoxDate;
 
+import ex.ExNoSufficientRentable;
+
 /**
  * @author
  *
@@ -22,7 +24,7 @@ public class CmdRequestRentable extends Undoable{
     private Rentable[] allRentables = new Rentable[size];
     private Request[] allRequests = new Request[size];
     
-    public void execute(String[] cmdLine, Client aClient){
+    public void execute(String[] cmdLine, Client aClient) throws ExNoSufficientRentable{
         /*
          * [0:type] [1:number] [2:month] 
         */
@@ -39,6 +41,9 @@ public class CmdRequestRentable extends Undoable{
         for(int i = 0; i < requestN; ++i){
             // return rentable
             allRentables[i] = rentableAllocator.borrowRentable(user, rentableType);
+            if(allRentables[i] == null) {
+                throw new ExNoSufficientRentable();
+            } 
             // set status
             allRentables[i].setStatus(new RentableStatusRequested(user));
             // new a request

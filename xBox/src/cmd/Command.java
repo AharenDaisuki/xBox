@@ -11,9 +11,10 @@ package cmd;
  *
  */
 import data.Client;
+import ex.ExNoSufficientRentable;
 
 public interface Command {
 	// execute
-	void execute(String[] cmdLine, Client thisClient);
+	void execute(String[] cmdLine, Client thisClient) throws ExNoSufficientRentable;
 	
 }
