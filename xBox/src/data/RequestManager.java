@@ -1,7 +1,10 @@
 package data;
 
+import utils.XBoxDate;
+
 public class RequestManager {
 	private static RequestManager instance = new RequestManager();
+	private static RequestStorer storer = RequestStorer.getInstance();
 	
 	private RequestManager() {}
 	
@@ -9,15 +12,13 @@ public class RequestManager {
 		return instance;
 	}
 	
-	public void newRequest(Client aClient,Rentable aRentable,Target aTarget){
-		RequestStorer storer=RequestStorer.getInstance();
-		aRentable.setStatus(new RentableStatusRequested(aClient));
-		storer.addEntry(new Request()); // TODO: to be replaced by a parameter-specified constructor
+	// add entry
+	public void newRequest(Request request) {
+	    storer.addEntry(request);
 	}
 	
+	// delete entry
 	public void removeRequest(Request request){
-		RequestStorer storer=RequestStorer.getInstance();
-		request.getTarget().changeRentableStatus(request.getRentable());
 		storer.delEntry(request);
 	}
 }

@@ -1,7 +1,5 @@
 package data;
 
-import java.util.ArrayList;
-
 public class RecordManager {
 	private static RecordManager instance=new RecordManager();
 	
@@ -9,18 +7,13 @@ public class RecordManager {
 	{
 		return instance;
 	}
-	public void insert(Client client,Rentable box,Day due, String id)
-	{
-		RecordStorer storer=RecordStorer.getInstance();
-		ArrayList<Record> recordlist=storer.getList();
-		recordlist.add(new Record(client,box,due,id));
+	public void insert(Record record){
+	    RecordStorer storer = RecordStorer.getInstance();
+	    storer.addEntry(record);
 	}
-	public void delete(Rentable aRentable)
-	{
-		RecordStorer storer=RecordStorer.getInstance();
-		ArrayList<Record> recordlist=storer.getList();
-		RecordSearcher searcher=RecordSearcher.getInstance();
-		Record result=searcher.searchByRentableID(aRentable.getId());
-		recordlist.remove(result);
+	
+	public void delete(Record record){
+	    RecordStorer storer=RecordStorer.getInstance();
+		storer.delEntry(record);
 	}
 }

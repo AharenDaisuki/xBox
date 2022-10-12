@@ -10,9 +10,11 @@ package cmd;
  * command interface, extended by undoable.
  *
  */
-import data.*;
+import data.Client;
+import ex.ExNoSufficientRentable;
+
 public interface Command {
 	// execute
-	void execute(String[] cmdLine,Client thisClient);
+	void execute(String[] cmdLine, Client thisClient) throws ExNoSufficientRentable;
 	
 }

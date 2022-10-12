@@ -5,19 +5,23 @@ import java.util.ArrayList;
 public class ClientSearcher {
 	private static ClientSearcher searcher=new ClientSearcher();
 	
-	public static ClientSearcher getInstance()
-	{
+	public static ClientSearcher getInstance(){
 		return searcher;
 	}
-	
-	public Client searchByClientEmail(String aEmail)
-	{
-		ClientStorer storer=ClientStorer.getInstance();
-		ArrayList<Client> Clientlist=storer.getList();
-		for(Client r:Clientlist)
-			if(r.getEmail().equals(aEmail))
-				return r;
-		return null;
-	}
-	
+
+
+    public ArrayList<Client> searchAll() {
+        ClientStorer storer = ClientStorer.getInstance();
+        return storer.getList();
+    }
+   
+    public Client searchByKeyword(String email) {
+        ClientStorer storer = ClientStorer.getInstance();
+        for(Client client : storer.getList()) {
+            if(client.getEmail().equals(email)) {
+                return client;
+            }
+        }
+        return null;
+    }
 }

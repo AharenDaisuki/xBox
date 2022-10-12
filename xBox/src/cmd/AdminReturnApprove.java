@@ -23,7 +23,7 @@ public class AdminReturnApprove extends Undoable{
         ClientSearcher clientSearcher=ClientSearcher.getInstance();
         RequestSearcher requestSearcher=RequestSearcher.getInstance();
         RequestManager requestManager=RequestManager.getInstance();
-
+        /*
         Client thisClient=clientSearcher.searchByClientEmail(cmdLine[0]);
         ArrayList<Request> requestList= requestSearcher.searchByClient(thisClient);
         int num=1;
@@ -36,6 +36,6 @@ public class AdminReturnApprove extends Undoable{
             else if(cmdLine[num++].equals("_")){
 
             }
-        }
+        }*/
     }
 }

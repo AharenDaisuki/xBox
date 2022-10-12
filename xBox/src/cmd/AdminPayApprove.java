@@ -22,7 +22,7 @@ public class AdminPayApprove extends Undoable{
         RequestSearcher requestSearcher=RequestSearcher.getInstance();
         RecordManager recordManager=RecordManager.getInstance();
         RequestManager requestManager=RequestManager.getInstance();
-
+        /*
         Client thisClient=clientSearcher.searchByClientEmail(cmdLine[0]);
         ArrayList<Request> requestList= requestSearcher.searchByClient(thisClient);
 
@@ -35,6 +35,6 @@ public class AdminPayApprove extends Undoable{
             else if(cmdLine[num++].equals("_")){
                 
             }
-        }
+        }*/
     }
 }
