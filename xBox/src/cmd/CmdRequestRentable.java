@@ -15,14 +15,15 @@ import ex.ExNoSufficientRentable;
  */
 
 public class CmdRequestRentable extends Undoable{
-    private final int size = 10000;
+    private final int size = 100;
     // save data for undo & redo
     private Client user;
-    private String rentableType;
+    //private String rentableType;
     private int requestN;
-    private String monthN;
-    private Rentable[] allRentables = new Rentable[size];
-    private Request[] allRequests = new Request[size];
+    //private String monthN;
+    private final Rentable[] allRentables = new Rentable[size];
+    private final Request[] allRequests = new Request[size];
+    private final RentableStatus[] allStatus = new RentableStatus[size];
     
     public void execute(String[] cmdLine, Client aClient) throws ExNoSufficientRentable{
         /*
@@ -33,9 +34,9 @@ public class CmdRequestRentable extends Undoable{
         XBoxDate systemDate = XBoxDate.getInstance();
         
         this.user = aClient;
-        this.rentableType = cmdLine[0];
+        String rentableType = cmdLine[0];
         this.requestN = Integer.parseInt(cmdLine[1]);
-        this.monthN = cmdLine[2]; 
+        String monthN = cmdLine[2]; 
         
         // TODO: handle exception
         for(int i = 0; i < requestN; ++i){
@@ -44,8 +45,9 @@ public class CmdRequestRentable extends Undoable{
             if(allRentables[i] == null) {
                 throw new ExNoSufficientRentable();
             } 
+            allStatus[i] = new RentableStatusRequested(user);
             // set status
-            allRentables[i].setStatus(new RentableStatusRequested(user));
+            allRentables[i].setStatus(allStatus[i]);
             // new a request
             allRequests[i] = new Request(user, allRentables[i], systemDate.getDayAfterNMonth(monthN));
             requestManager.newRequest(allRequests[i]);
@@ -73,7 +75,7 @@ public class CmdRequestRentable extends Undoable{
         RequestManager requestManager = RequestManager.getInstance();
         // redo current command
         for(int i = 0; i < requestN; ++i) {
-            allRentables[i].setStatus(new RentableStatusRequested(user));
+            allRentables[i].setStatus(allStatus[i]);
             requestManager.newRequest(allRequests[i]);
         }
         addUndo(this);

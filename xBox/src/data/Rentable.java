@@ -10,24 +10,6 @@ public abstract class Rentable{
         id = rentableID_;
         status = status_;
     }
-    
-    /*
-    public void lendOut(Client c)
-    {
-
-        Day d=SystemDate.getInstance().clone();
-        status=new RentableStatusOccupied(d, c);
-        RentableManager rm=RentableManager.getInstance();
-        rm.lendOutRentable(this);
-    }
-
-    public void getBack(Client c)
-    {
-        status=new RentableStatusAvailable();
-        RentableManager rm=RentableManager.getInstance();
-        rm.getBackRentable(this);
-        
-    }*/
 
     public String getId(){
         return id;
@@ -38,6 +20,10 @@ public abstract class Rentable{
 
     public String getStatusStr(){
         return status.getStatus();
+    }
+    
+    public RentableStatus getStatus() {
+        return this.status;
     }
 
     public void setStatus(RentableStatus status_) {

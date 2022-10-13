@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 
 import data.*;
 
+@Deprecated
 public class ClientRegisterCommand implements Command{
     @Override
     public void execute(String[] cmdLine, Client thisClient){

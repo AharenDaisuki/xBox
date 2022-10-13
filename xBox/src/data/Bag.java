@@ -11,4 +11,9 @@ public class Bag extends Rentable{
     public String getType(){
         return Bag.type;
     }
+    
+    @Override
+    public String toString() {
+        return String.format("%-7s%-50s", this.getId(), this.getStatusStr().toString());
+    }
 }

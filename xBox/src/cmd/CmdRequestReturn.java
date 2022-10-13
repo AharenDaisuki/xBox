@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import data.*;
 import data.Record;
 
-public class ClientReturnBoxRequestCommand extends Undoable{
+public class CmdRequestReturn extends Undoable{
     private Client thisClient;
     @Override
     public void redo(){      
