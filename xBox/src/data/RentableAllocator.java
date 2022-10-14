@@ -2,7 +2,8 @@ package data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-// import utils.XBoxDate;
+
+import ex.ExNoSufficientRentable;
 
 public class RentableAllocator {
 	private static RentableAllocator allocator = new RentableAllocator();
@@ -11,7 +12,7 @@ public class RentableAllocator {
 		return allocator;
 	}
 	
-	public Rentable borrowRentable(Client aClient, String aType){	
+	public Rentable borrowRentable(Client aClient, String aType) throws ExNoSufficientRentable{	
 		RentableStorer storer = RentableStorer.getInstance();
 		HashMap<String,ArrayList<Rentable>> list = storer.getManager();
 		boolean isFound = false; // NotFoundexception later
@@ -21,6 +22,7 @@ public class RentableAllocator {
                 return rentable;
 			}
 		}
-        return null; // NotFoundexception later
+		throw new ExNoSufficientRentable();
+        // return null; // NotFoundexception later
 	}
 }

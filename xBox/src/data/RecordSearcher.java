@@ -3,6 +3,8 @@ package data;
 import java.util.ArrayList;
 import java.util.Date;
 
+import ex.ExEntryNotFound;
+
 public class RecordSearcher{
 	private static RecordSearcher searcher=new RecordSearcher();
 	
@@ -10,24 +12,26 @@ public class RecordSearcher{
 		return searcher;
 	}
 	// search by rentable id
-	public Record searchByKeyword(String rentableId) {
+	public Record searchByKeyword(String rentableId) throws ExEntryNotFound{
 	    RecordStorer storer = RecordStorer.getInstance();
 	    for(Record record : storer.getList()) {
 	        if(record.getRentable().getId().equals(rentableId)) {
 	            return record;
 	        }
 	    }
-	    return null;
+	    throw new ExEntryNotFound(String.format("Record[%s] is not found", rentableId));
+	    // return null;
 	}
 	// search by rentable 
-	public Record searchByKeyword(Rentable rentable) {
+	public Record searchByKeyword(Rentable rentable) throws ExEntryNotFound{
 	       RecordStorer storer = RecordStorer.getInstance();
 	        for(Record record : storer.getList()) {
 	            if(record.getRentable().equals(rentable)) {
 	                return record;
 	            }
 	        }
-	        return null;
+	        throw new ExEntryNotFound(String.format("Record[%s] is not found", rentable.getId()));
+	        // return null;
 	}
 	// search client email
 	public ArrayList<Record> searchAllByKeyword(String email){

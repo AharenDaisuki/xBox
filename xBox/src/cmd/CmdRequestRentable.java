@@ -25,35 +25,36 @@ public class CmdRequestRentable extends Undoable{
     private final Request[] allRequests = new Request[size];
     private final RentableStatus[] allStatus = new RentableStatus[size];
     
-    public void execute(String[] cmdLine, Client aClient) throws ExNoSufficientRentable{
+    public void execute(String[] cmdLine, Client aClient){
         /*
          * [0:type] [1:number] [2:month] 
         */
-        RequestManager requestManager = RequestManager.getInstance();
-        RentableAllocator rentableAllocator = RentableAllocator.getInstance();
-        XBoxDate systemDate = XBoxDate.getInstance();
-        
-        this.user = aClient;
-        String rentableType = cmdLine[0];
-        this.requestN = Integer.parseInt(cmdLine[1]);
-        String monthN = cmdLine[2]; 
-        
-        // TODO: handle exception
-        for(int i = 0; i < requestN; ++i){
-            // return rentable
-            allRentables[i] = rentableAllocator.borrowRentable(user, rentableType);
-            if(allRentables[i] == null) {
-                throw new ExNoSufficientRentable();
-            } 
-            allStatus[i] = new RentableStatusRequested(user);
-            // set status
-            allRentables[i].setStatus(allStatus[i]);
-            // new a request
-            allRequests[i] = new Request(user, allRentables[i], systemDate.getDayAfterNMonth(monthN));
-            requestManager.newRequest(allRequests[i]);
+        try {
+            RequestManager requestManager = RequestManager.getInstance();
+            RentableAllocator rentableAllocator = RentableAllocator.getInstance();
+            XBoxDate systemDate = XBoxDate.getInstance();
+            
+            this.user = aClient;
+            String rentableType = cmdLine[0];
+            this.requestN = Integer.parseInt(cmdLine[1]);
+            String monthN = cmdLine[2]; 
+            
+            // TODO: handle exception
+            for(int i = 0; i < requestN; ++i){
+                // return rentable
+                allRentables[i] = rentableAllocator.borrowRentable(user, rentableType);
+                allStatus[i] = new RentableStatusRequested(user);
+                // set status
+                allRentables[i].setStatus(allStatus[i]);
+                // new a request
+                allRequests[i] = new Request(user, allRentables[i], systemDate.getDayAfterNMonth(monthN));
+                requestManager.newRequest(allRequests[i]);
+            }
+            addUndo(this);
+            clearList();
+        }catch(ExNoSufficientRentable ex) {
+            System.out.println(ex.getMessage());
         }
-        addUndo(this);
-        clearList();
     }
 
     @Override

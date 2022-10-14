@@ -6,7 +6,7 @@ public class Record {
 	private Client client;
 	private Rentable rentable;
 	private Date dueDate;
-	// private String id;
+	private boolean isPaid;
 
 	public Record(){}
 	
@@ -28,12 +28,10 @@ public class Record {
 	
 	public Date getDue() {return this.dueDate; }
 	
-	//public void setID(String Id) {id=Id;}
-	
-	//public String getID() {return id;}
+	public void setPaymentStatus() { this.isPaid = true; }
 
 	@Override
 	public String toString(){
-	    return String.format("[record]: %s occupied by %s, due by %tF", rentable.getId(), client.getEmail(), dueDate);
+	    return String.format("[record]: %s %s by %s, due by %tF", rentable.getId(), (isPaid ? "paid" : "occupied"), client.getEmail(), dueDate);
 	}
 }

@@ -2,6 +2,8 @@ package data;
 
 import java.util.ArrayList;
 
+import ex.ExEntryNotFound;
+
 public class RequestSearcher {
     private static RequestSearcher searcher = new RequestSearcher();
 	private static RequestStorer storer = RequestStorer.getInstance();
@@ -20,12 +22,13 @@ public class RequestSearcher {
         return result;
     }
 
-    public Request searchByKeyword(String aID){
+    public Request searchByKeyword(String aID) throws ExEntryNotFound{
         for(Request request : storer.getList()){
             if(request.getRentable().getId().equals(aID)){
                 return request;
             }
         }
-        return null;
+        throw new ExEntryNotFound(String.format("Request[%s] is not found", aID));
+        // return null;
     }
 }

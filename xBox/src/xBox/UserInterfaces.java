@@ -73,7 +73,7 @@ public class UserInterfaces {
 	}
 	
 	// summary
-	public void summary() {
+	public void summary(String[] cmdLine) {
 	    // TODO: terminal IO for the time being
 	    System.out.printf("%-7s%-50s\n", "[ID]", "[STATUS]");
 	    RequestSearcher requestSearcher = RequestSearcher.getInstance();
@@ -88,16 +88,22 @@ public class UserInterfaces {
 	    }
 	}
 	
+	public void undo() {
+	    Undoable.undoCmd();
+	}
+	
+	public void redo() {
+	    Undoable.redoCmd();
+	}
+	
 	// request rentable
 	public void request(String[] cmdLine) {
-	    try {
-            (new CmdRequestRentable()).execute(cmdLine, user);
-        } catch (ExNoSufficientRentable ex) {
-            System.out.println(ex.getMessage());
-        }
+        (new CmdRequestRentable()).execute(cmdLine, user);
 	}
 	
 	// store rentable
-	
+	public void store(String[] cmdLine) {
+	    (new CmdStoreRentable()).execute(cmdLine, user);
+	}
 	// return rentable
 }

@@ -3,10 +3,10 @@
  */
 package xBox;
 
-import utils.StringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import data.*;
+import cmd.CmdConfirmPayment;
 
 /**
  * @author xyli45
@@ -17,7 +17,6 @@ import data.*;
  */
 public class AdminInterfaces {
 	private static AdminInterfaces instance = new AdminInterfaces();
-	private RecordManager recordManager = RecordManager.getInstance();
 	
 	private AdminInterfaces() {}
 	
@@ -25,11 +24,34 @@ public class AdminInterfaces {
 		return instance;
 	}
 	
+	private Client admin;
+	
 	/*example*/
 	public void help() {}
 	// int login(String[] params); // return uid
 	// int register(String[] params); // return uid
-	void summary(String[] params) {}
-	void searchClient(String[] params) {}
-	void searchRentable(String[] params) {}
+	// 
+	void summaryAllItems(String[] cmdLine) {
+	    
+	}
+	
+	void summaryAllClients(String[] cmdLine) {
+	    
+	}
+	
+	void summaryClient(String[] cmdLine) {
+	    
+	}
+	
+	void summaryItem(String[] cmdLine) {
+	    
+	}
+	
+	void searchClient(String[] cmdLine) {
+	    
+	}
+	
+	void confirmPayment(String[] cmdLine) {
+	    (new CmdConfirmPayment()).execute(cmdLine, admin);
+	}
 }
