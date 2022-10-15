@@ -51,8 +51,7 @@ public class Request {
 	}*/
 
 	@Override
-	public String toString()
-	{
-		return rentable.getId()+" is requested by "+client.getEmail()+" on "+date.toString();
+	public String toString(){
+		return String.format("%-7s%-40s%tF", rentable.getId(), client.getEmail(), date);
 	}
 }

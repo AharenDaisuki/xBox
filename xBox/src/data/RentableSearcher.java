@@ -3,6 +3,10 @@
  */
 package data;
 
+import ex.ExEntryNotFound;
+
+import java.util.ArrayList;
+
 /**
  * @author lixiaoyang
  *
@@ -14,7 +18,7 @@ public class RentableSearcher {
         return searcher;
     }
     
-    public Rentable searchByKeyword(String rentableId) {
+    public Rentable searchByKeyword(String rentableId) throws ExEntryNotFound{
         RentableStorer storer = RentableStorer.getInstance();
         // TODO: the first three letter is type
         for(Rentable rentable : storer.getList(rentableId.substring(0, 3))) {
@@ -22,6 +26,13 @@ public class RentableSearcher {
                 return rentable;
             }
         }
-        return null;
+        throw new ExEntryNotFound(String.format("Item[%s] is not found", rentableId));
+        // return null;
+    }
+    
+    public ArrayList<Rentable> searchAllByKeyword(String type){
+        RentableStorer storer  = RentableStorer.getInstance();
+        return storer.getList(type);
+        
     }
 }

@@ -1,12 +1,13 @@
 package data;
 
 import utils.XBoxDate;
+import java.util.Date;
 
 public class RequestAndUse implements Target{
-	public XBoxDate dueDate;
+	public Date dueDate;
 	public Client client;
 	
-	public RequestAndUse(XBoxDate aDate,Client aClient){
+	public RequestAndUse(Date aDate,Client aClient){
 		dueDate = aDate;
 		client = aClient;
 	}
@@ -19,8 +20,14 @@ public class RequestAndUse implements Target{
 	public String toString(){
 		return "RequestAndUse";
 	}
+
+    @Override
+    public XBoxDate getDueDate() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 	
-	public XBoxDate getDueDate(){
-		return this.dueDate;
-	}
+	// public Date getDueDate(){
+	//	return this.dueDate;
+	//}
 }

@@ -6,7 +6,7 @@ public class RentableStatusAvailable implements RentableStatus{
 	
     @Override
     public String toString(){
-        return "[status]: Available";
+        return "Available";
     }
 
     @Override

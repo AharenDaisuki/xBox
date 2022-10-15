@@ -9,8 +9,7 @@ public class RentableStatusRequested implements RentableStatus{
     }
 	
 	public String toString(){
-	    return String.format("[status]: Requested by %s", this.client.getEmail());
-		//return "Requested By "+client.getEmail();
+	    return String.format("Requested by %s", this.client.getEmail());
 	}
 	
 	public String getStatus(){
