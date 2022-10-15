@@ -5,6 +5,8 @@ package data;
 
 import ex.ExEntryNotFound;
 
+import java.util.ArrayList;
+
 /**
  * @author lixiaoyang
  *
@@ -26,5 +28,11 @@ public class RentableSearcher {
         }
         throw new ExEntryNotFound(String.format("Item[%s] is not found", rentableId));
         // return null;
+    }
+    
+    public ArrayList<Rentable> searchAllByKeyword(String type){
+        RentableStorer storer  = RentableStorer.getInstance();
+        return storer.getList(type);
+        
     }
 }

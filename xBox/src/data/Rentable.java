@@ -5,7 +5,6 @@ public abstract class Rentable{
     private String id;
     private RentableStatus status;
 
-
     public Rentable(String rentableID_, RentableStatus status_){
         id = rentableID_;
         status = status_;
@@ -17,6 +16,7 @@ public abstract class Rentable{
 
     public abstract String getType();
     
+    public abstract double getPrice();
 
     public String getStatusStr(){
         return status.getStatus();

@@ -16,4 +16,9 @@ public class Bag extends Rentable{
     public String toString() {
         return String.format("%-7s%-50s", this.getId(), this.getStatusStr().toString());
     }
+
+    @Override
+    public double getPrice() {
+        return 80.0;
+    }
 }

@@ -16,4 +16,9 @@ public class Box extends Rentable{
     public String toString() {
     	return String.format("%-7s%-50s", this.getId(), this.getStatusStr().toString());
     }
+
+    @Override
+    public double getPrice() {
+        return 100.0;
+    }
 }

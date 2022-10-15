@@ -32,6 +32,6 @@ public class Record {
 
 	@Override
 	public String toString(){
-	    return String.format("[record]: %s %s by %s, due by %tF", rentable.getId(), (isPaid ? "paid" : "occupied"), client.getEmail(), dueDate);
+	    return String.format("%-7s%-10s%-40s%tF", rentable.getId(), (isPaid ? "paid" : "occupied"), client.getEmail(), dueDate);
 	}
 }

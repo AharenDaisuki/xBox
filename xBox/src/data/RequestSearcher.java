@@ -11,6 +11,10 @@ public class RequestSearcher {
 	public static RequestSearcher getInstance(){
 		return searcher;
 	}
+	
+	public ArrayList<Request> searchAll(){
+	    return storer.getList();
+	}
 
     public ArrayList<Request> searchAllByKeyword(Client aClient){
         ArrayList<Request> result = new ArrayList<>();

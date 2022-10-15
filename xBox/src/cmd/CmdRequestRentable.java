@@ -6,11 +6,10 @@ import utils.XBoxDate;
 import ex.ExNoSufficientRentable;
 
 /**
- * @author
+ * 
  *
- * Description: 
- * User command class for requesting rentable
- * Note that one can only request one type of rentable in one go
+ * User command: [Request *]
+ * 
  *  
  */
 
@@ -25,40 +24,40 @@ public class CmdRequestRentable extends Undoable{
     private final Request[] allRequests = new Request[size];
     private final RentableStatus[] allStatus = new RentableStatus[size];
     
-    public void execute(String[] cmdLine, Client aClient){
+    public String execute(String[] cmdLine, Client aClient) throws ExNoSufficientRentable{
         /*
          * [0:type] [1:number] [2:month] 
         */
-        try {
-            RequestManager requestManager = RequestManager.getInstance();
-            RentableAllocator rentableAllocator = RentableAllocator.getInstance();
-            XBoxDate systemDate = XBoxDate.getInstance();
+        RequestManager requestManager = RequestManager.getInstance();
+        RentableAllocator rentableAllocator = RentableAllocator.getInstance();
+        XBoxDate systemDate = XBoxDate.getInstance();
             
-            this.user = aClient;
-            String rentableType = cmdLine[0];
-            this.requestN = Integer.parseInt(cmdLine[1]);
-            String monthN = cmdLine[2]; 
+        this.user = aClient;
+        String rentableType = cmdLine[0];
+        this.requestN = Integer.parseInt(cmdLine[1]);
+        String monthN = cmdLine[2]; 
+        String ret = "[request list]\n";
+        
+        for(int i = 0; i < requestN; ++i){
+            // return rentable
+            allRentables[i] = rentableAllocator.borrowRentable(user, rentableType);
+            allStatus[i] = new RentableStatusRequested(user);
+            // set status
+            allRentables[i].setStatus(allStatus[i]);
+            // new a request
+            allRequests[i] = new Request(user, allRentables[i], systemDate.getDayAfterNMonth(monthN));
+            requestManager.newRequest(allRequests[i]);
             
-            // TODO: handle exception
-            for(int i = 0; i < requestN; ++i){
-                // return rentable
-                allRentables[i] = rentableAllocator.borrowRentable(user, rentableType);
-                allStatus[i] = new RentableStatusRequested(user);
-                // set status
-                allRentables[i].setStatus(allStatus[i]);
-                // new a request
-                allRequests[i] = new Request(user, allRentables[i], systemDate.getDayAfterNMonth(monthN));
-                requestManager.newRequest(allRequests[i]);
-            }
-            addUndo(this);
-            clearList();
-        }catch(ExNoSufficientRentable ex) {
-            System.out.println(ex.getMessage());
+            ret += String.format("> %s\n", allRentables[i].getId());
         }
+        addUndo(this);
+        clearList();
+        return ret;
     }
 
     @Override
-    public void undo() {
+    public String undo() {
+        String ret = "[Undo]\n";
         RequestManager requestManager = RequestManager.getInstance();
         // undo current command
         for(int i = this.requestN-1; i>=0; --i) {
@@ -66,20 +65,25 @@ public class CmdRequestRentable extends Undoable{
             requestManager.removeRequest(allRequests[i]);
             // change status
             allRentables[i].setStatus(new RentableStatusAvailable());
+            ret += String.format("> request %s\n", allRentables[i].getId());
         }
         // add this to redoList
         addRedo(this);
+        return ret;
     }
 
     @Override
-    public void redo() {
+    public String redo() {
+        String ret = "[Redo]\n";
         RequestManager requestManager = RequestManager.getInstance();
         // redo current command
         for(int i = 0; i < requestN; ++i) {
             allRentables[i].setStatus(allStatus[i]);
             requestManager.newRequest(allRequests[i]);
+            ret += String.format("> request %s\n", allRentables[i].getId());
         }
         addUndo(this);
+        return ret;
     }
 
 }

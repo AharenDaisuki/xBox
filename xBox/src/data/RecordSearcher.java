@@ -65,4 +65,9 @@ public class RecordSearcher{
 		}
 		return result;
 	}
+	
+	public ArrayList<Record> searchAll(){
+	    RecordStorer storer = RecordStorer.getInstance();
+	    return storer.getList();
+	}
 }

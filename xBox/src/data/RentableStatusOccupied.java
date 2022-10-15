@@ -23,9 +23,4 @@ public class RentableStatusOccupied implements RentableStatus{
     public String getStatus(){
         return "Occupied";
     }
-    
-    /*
-    public Client getOwner(){
-        return borrowedPerson;
-    }*/
 }

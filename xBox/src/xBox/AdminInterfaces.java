@@ -3,10 +3,11 @@
  */
 package xBox;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import data.*;
+import data.Record;
+import ex.ExEntryNotFound;
 import cmd.CmdConfirmPayment;
+import cmd.CmdConfirmReturn;
 
 /**
  * @author xyli45
@@ -27,31 +28,69 @@ public class AdminInterfaces {
 	private Client admin;
 	
 	/*example*/
-	public void help() {}
+	public String help() {
+	    return "";
+	}
 	// int login(String[] params); // return uid
 	// int register(String[] params); // return uid
 	// 
-	void summaryAllItems(String[] cmdLine) {
-	    
+	String summaryAllItems(String[] cmdLine) {
+	    // type
+	    String ret = "Summary all:\n";
+	    ret += String.format("%-7s%-50s\n", "[ID]", "[STATUS]");
+	    RentableSearcher searcher = RentableSearcher.getInstance();
+	    String type = cmdLine[0];
+	    for(Rentable rentable : searcher.searchAllByKeyword(type)) {
+	        ret += String.format("%s\n", rentable.toString());
+	    }
+	    return ret;
 	}
 	
-	void summaryAllClients(String[] cmdLine) {
-	    
+	String summaryAllClients(String[] cmdLine) {
+	    String ret = "Summary all:\n";
+	    ret += String.format("%-40s%-8s\n", "[EMAIL]", "[TEL]");
+	    ClientSearcher searcher = ClientSearcher.getInstance();
+	    for(Client client : searcher.searchAll()) {
+	        ret += String.format("%s\n", client.toString());
+	    }
+	    return ret;
 	}
 	
-	void summaryClient(String[] cmdLine) {
-	    
+	String summaryAllRequests(String[] cmdLine) {
+        String ret = "Summary all:\n";
+        ret += String.format("%-7s%-40s%-10s\n", "[ID]", "[EMAIL]", "[DATE]");
+        RequestSearcher searcher = RequestSearcher.getInstance();
+        for(Request request : searcher.searchAll()) {
+            ret += String.format("%s\n", request.toString());
+        }
+	    return ret;
 	}
 	
-	void summaryItem(String[] cmdLine) {
-	    
+	String summaryAllRecords(String[] cmdLine) {
+        String ret = "Summary all:\n";
+        ret += String.format("%-7s%-10s%-40s%tF\n", "[ID]", "[PAYMENT]", "[EMAIL]", "[DUE]");
+        RecordSearcher searcher = RecordSearcher.getInstance();
+        for(Record record : searcher.searchAll()) {
+            ret += String.format("%s\n", record.toString());
+        }
+        return ret;
 	}
 	
-	void searchClient(String[] cmdLine) {
-	    
+	String summaryClient(String[] cmdLine) {
+	    return "";
 	}
 	
-	void confirmPayment(String[] cmdLine) {
-	    (new CmdConfirmPayment()).execute(cmdLine, admin);
+	String summaryItem(String[] cmdLine) {
+	    return "";
+	}
+	
+	String confirmPayment(String[] cmdLine) {
+	    String ret = (new CmdConfirmPayment()).execute(cmdLine, admin);
+	    return ret;
+	}
+	
+	String confirmReturn(String[] cmdLine) throws ExEntryNotFound {
+	    String ret = (new CmdConfirmReturn()).execute(cmdLine, admin);
+	    return ret;
 	}
 }

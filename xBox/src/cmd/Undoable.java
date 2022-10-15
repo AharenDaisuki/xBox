@@ -17,8 +17,8 @@ import data.*;
  */
 public abstract class Undoable implements Command {
 	// undo & redo method
-	public abstract void undo();
-	public abstract void redo();
+	public abstract String undo();
+	public abstract String redo();
 	
 	// undo list & redo list
 	private static ArrayList<Undoable> undoList = new ArrayList<>();
@@ -38,31 +38,33 @@ public abstract class Undoable implements Command {
 	}
 	
 	// fetch undoable and execute undo or redo function
-	public static void undoCmd() {
+	public static String undoCmd() {
 		try {
 			if(undoList.isEmpty()) {
-				throw new ExEmptyVector("[dev Error] empty vector => {undoCmd}");
+				throw new ExEmptyVector("[Error] Nothing to undo");
 			}
 			// undo from the top of the stack
-			undoList.remove(undoList.size()-1).undo();
+			return undoList.remove(undoList.size()-1).undo();
 		} catch(ExEmptyVector ex) {
 			if(DebugConfig.CMD_UNDOABLE_DEBUG_FLAG) {
 				System.out.println(ex.getMessage());
 			}
 		}
+		return null;
 	}
 	
-	public static void redoCmd() {
+	public static String redoCmd() {
 		try {
 			if(redoList.isEmpty()) {
 				throw new ExEmptyVector("[dev Error] empty vector => {redoCmd}");
 			}
 			// redo from the top of the stack
-			redoList.remove(redoList.size()-1).redo();
+			return redoList.remove(redoList.size()-1).redo();
 		} catch(ExEmptyVector ex) {
 			if(DebugConfig.CMD_UNDOABLE_DEBUG_FLAG) {
 				System.out.println(ex.getMessage());
 			}
 		}
+		return null;
 	}
 }

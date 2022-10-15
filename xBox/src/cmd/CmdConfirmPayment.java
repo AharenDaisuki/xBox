@@ -5,10 +5,15 @@ import java.util.ArrayList;
 import data.*;
 import data.Record;
 
+/*
+ * Admin command [Confirm payment *]
+ * 
+ * */
+
 public class CmdConfirmPayment extends Undoable{
     private final int size = 100;
-    private Request[] allRequests = new Request[size]; 
-    public void execute(String[] cmdLine, Client aClient){
+    private final Request[] allRequests = new Request[size]; 
+    public String execute(String[] cmdLine, Client aClient){
         /*
          * 
          *
@@ -19,6 +24,8 @@ public class CmdConfirmPayment extends Undoable{
         
         ArrayList<Request> requestList = requestSearcher.searchAllByKeyword(aClient);
         ArrayList<Record> recordList = recordSearcher.searchAllByKeyword(aClient.getEmail());
+        
+        String ret = "[Payment]\n";
         // TODO: remove remaining request
         int cnt = 0;
         for(Request request : requestList) {
@@ -26,21 +33,37 @@ public class CmdConfirmPayment extends Undoable{
             requestManager.removeRequest(request);
         }
         // TODO: compute amount
+        double tot = 0.0;
+        for(Record record : recordList) {
+            Rentable rentable = record.getRentable();
+            double price = rentable.getPrice();
+            tot += price;
+            ret += String.format(">%-5s\t$%.2f\n", rentable.getId(), price);
+        }
+        tot *= aClient.getDiscount();
+        ret += String.format("\t total:\t$.2f\n", tot);
+        return ret;
     }
     
     @Override
-    public void undo(){
+    public String undo(){
+        String ret = "";
         RequestManager requestManager = RequestManager.getInstance();
         for(Request request : allRequests) {
             requestManager.newRequest(request);
+            ret += String.format("> recover request[%s] (unused)\n", request.getRentable().getId());
         }
+        return ret;
     }
     
     @Override
-    public void redo(){
+    public String redo(){
+        String ret = "";
         RequestManager requestManager = RequestManager.getInstance();
         for(Request request : allRequests) {
             requestManager.removeRequest(request);
+            ret += String.format("> delete request[%s] (unused)\n", request.getRentable().getId());
         }
+        return ret;
     }
 }
