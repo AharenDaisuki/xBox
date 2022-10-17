@@ -21,7 +21,9 @@ public abstract class Client{
     
     public String getPhoneNo() { return this.phoneNo; }
     
-    public String getPassword() { return password; }
+    public boolean verifyPassword(String password_) { return password_.equals(this.password); }
+    
+    // public String getPassword() { return password; } // TODO: 这是哪个小可爱写的
     
     @Override
     public String toString() { return String.format("%-40s%-8s", this.email, this.phoneNo); }
