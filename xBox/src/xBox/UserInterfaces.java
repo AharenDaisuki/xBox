@@ -36,7 +36,7 @@ public class UserInterfaces {
 	/*User Interface*/
 	
 	// register
-	public void register(String[] cmdLine) throws ExAccountExists{
+	public String register(String[] cmdLine) throws ExAccountExists{
 	    // email = user name
 	    // phone number
 	    // password
@@ -61,13 +61,14 @@ public class UserInterfaces {
 	            /*add new type*/
 	        }
 	        manager.insert(newClient);
+	        return "Register Success";
 	    }else {
 	        throw new ExAccountExists(String.format("[Error] Email address <%s> has been registered!", email));
 	    }
 	}
 	
 	// login
-	public void login(String[] cmdLine) throws ExEntryNotFound, ExInvalidPassword{
+	public String login(String[] cmdLine) throws ExEntryNotFound, ExInvalidPassword{
 	    // email
 	    // password
 	    String email = cmdLine[0];
@@ -86,6 +87,7 @@ public class UserInterfaces {
 	    }
 	    // assign user
 	    this.user = user_;
+	    return "Login Success" +email;
 	}
 	
 	// summary all rentables
