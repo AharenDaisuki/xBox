@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import data.*;
 import data.Record;
+
 import ex.*;
+import debug.DebugConfig;
 
 import cmd.Undoable;
 import cmd.CmdStoreRentable;
@@ -21,6 +23,14 @@ public class UserInterfaces {
 	
 	public static UserInterfaces getInstance() {
 		return instance;
+	}
+	
+	// debug
+	public boolean verifyLoginUser(String email) {
+	    if(DebugConfig.VERIFY_LOGIN_DEBUG_FLAG) {
+	        return this.user.getEmail().equals(email);
+	    }
+	    return false;
 	}
 	
 	/*User Interface*/
@@ -52,7 +62,7 @@ public class UserInterfaces {
 	        }
 	        manager.insert(newClient);
 	    }else {
-	        throw new ExAccountExists();
+	        throw new ExAccountExists(String.format("[Error] Email address <%s> has been registered!", email));
 	    }
 	}
 	
@@ -67,10 +77,10 @@ public class UserInterfaces {
 	    
 	    if(user_ == null) {
 	        // TODO: no such user, please register first
-	        throw new ExEntryNotFound("[error] No such user, please register first!");
+	        throw new ExEntryNotFound(String.format("[Error] No user <%s>, please register first!", email));
 	    }
 	    
-	    if(!user_.getPassword().equals(password)) {
+	    if(!user_.verifyPassword(password)) {
 	        // TODO: invalid password
 	        throw new ExInvalidPassword();
 	    }
