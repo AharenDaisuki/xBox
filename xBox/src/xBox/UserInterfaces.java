@@ -33,9 +33,16 @@ public class UserInterfaces {
 	    return false;
 	}
 	
+	public Client getUser() {
+	    if(DebugConfig.GET_USER_DEBUG_FLAG) {
+	        return this.user;
+	    }
+	    return null;
+	}
+	
 	/*User Interface*/
 	
-	// register
+	// register TODO: DONE
 	public String register(String[] cmdLine) throws ExAccountExists{
 	    // email = user name
 	    // phone number
@@ -47,9 +54,9 @@ public class UserInterfaces {
 	    String type = cmdLine[3];
 	    ClientSearcher searcher = ClientSearcher.getInstance();
 	    ClientManager manager = ClientManager.getInstance();
+	    Client newClient = null;
 	    if(searcher.searchByKeyword(email) == null) {
 	        // TODO: The email is available
-	        Client newClient = null;
 	        // TODO: hide
 	        switch(type) {
 	            case "student":
@@ -61,13 +68,13 @@ public class UserInterfaces {
 	            /*add new type*/
 	        }
 	        manager.insert(newClient);
-	        return "Register Success";
+	        return String.format("Register Success <%s>", email);
 	    }else {
 	        throw new ExAccountExists(String.format("[Error] Email address <%s> has been registered!", email));
 	    }
 	}
 	
-	// login
+	// login TODO: DONE
 	public String login(String[] cmdLine) throws ExEntryNotFound, ExInvalidPassword{
 	    // email
 	    // password
@@ -87,26 +94,28 @@ public class UserInterfaces {
 	    }
 	    // assign user
 	    this.user = user_;
-	    return "Login Success" +email;
+	    return String.format("Login Success <%s>", email);
 	}
 	
 	// summary all rentables
 	public String summary(String[] cmdLine) {
 	    String ret = "Summary:\n";
 	    
-	    ret += String.format("%-7s%-50s\n", "[ID]", "STATUS");
+	    ret += String.format("%-15s%-30s\n", "[ID]", "[STATUS]");
 	    // System.out.printf("%-7s%-50s\n", "[ID]", "[STATUS]");
 	    RequestSearcher requestSearcher = RequestSearcher.getInstance();
 	    RecordSearcher recordSearcher = RecordSearcher.getInstance();
+	    
 	    ArrayList<Request> allRequests = requestSearcher.searchAllByKeyword(user);
+	    //ret += "My requests:\n";
 	    for(Request request : allRequests) {
 	        ret += String.format("%s\n", request.getRentable().toString());
-	        //System.out.println(request.getRentable().toString());
 	    }
+	    
 	    ArrayList<Record> allRecords = recordSearcher.searchAllByKeyword(user.getEmail());
+	    //ret += "My records:\n";
 	    for(Record record : allRecords) {
 	        ret += String.format("%s\n", record.getRentable().toString());
-	        //System.out.println(record.getRentable().toString());
 	    }
 	    return ret;
 	}
@@ -126,22 +135,22 @@ public class UserInterfaces {
 	}
 	
 	// request rentable
-	public String request(String[] cmdLine) throws ExNoSufficientRentable {
-        String ret = (new CmdRequestRentable()).execute(cmdLine, user);
+	public String request(String[] cmdLine) {
+        String ret = (new CmdRequestRentable()).execute(cmdLine, user) + "\n";
         ret += summary(null);
         return ret; // TODO: sorting options
 	}
 	
 	// store rentable
 	public String store(String[] cmdLine) throws ExEntryNotFound {
-	    String ret = (new CmdStoreRentable()).execute(cmdLine, user);
+	    String ret = (new CmdStoreRentable()).execute(cmdLine, user) + "\n";
 	    ret += summary(null);
 	    return ret;
 	}
 	
 	// return rentable
 	public String unload(String[] cmdLine) throws ExEntryNotFound {
-	    String ret = (new CmdRequestReturn()).execute(cmdLine, user);
+	    String ret = (new CmdRequestReturn()).execute(cmdLine, user) + "\n";
 	    ret += summary(null);
 	    return ret;
 	}

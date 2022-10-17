@@ -49,9 +49,13 @@ public class Request {
 	public int getId(){
 		return requestId;
 	}*/
+	
+	public Date getDue() {
+	    return this.date;
+	}
 
 	@Override
 	public String toString(){
-		return String.format("%-7s%-40s%tF", rentable.getId(), client.getEmail(), date);
+	    return String.format("%-15s%-30s%tF", rentable.getId(), client.getEmail(), date);
 	}
 }

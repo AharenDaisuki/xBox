@@ -21,31 +21,32 @@ public class CmdStoreRentable extends Undoable{
     private final RentableStatus[] allStatus = new RentableStatus[size];
     private final RentableStatus[] allNewStatus = new RentableStatus[size];
     // private Client client; // TODO: remove
-    private Date date;
+    private final Date[] allDates = new Date[size];
     private int number;
     
     public String execute(String[] cmdLine,Client aClient) throws ExEntryNotFound{
         /*
-         * [0:n-1 rentableId] [n:month]
+         * [0:n-1 rentableId]
         */
         RequestSearcher requestSearcher = RequestSearcher.getInstance();
         RequestManager requestManager = RequestManager.getInstance();
         RecordManager recordManager = RecordManager.getInstance();
-        XBoxDate currDate = XBoxDate.getInstance();
+        // XBoxDate currDate = XBoxDate.getInstance();
         // this.client = aClient;
         
         String ret = "[stored list]\n";
         
-        this.number = cmdLine.length-1; // {id0, id1, 2}
-        this.date = currDate.getDayAfterNMonth(cmdLine[number]);
+        this.number = cmdLine.length; // {id0, id1}
+        // this.date = currDate.getDayAfterNMonth(cmdLine[number]);
         // used
         for (int i = 0; i < number; ++i){
-                // remember status
+            // remember status
             allRequests[i] = requestSearcher.searchByKeyword(cmdLine[i]); // TODO: no such request
+            allDates[i] = allRequests[i].getDue();
             allRentables[i] = allRequests[i].getRentable();
-            allRecords[i] = new Record(aClient, allRentables[i], date);
+            allRecords[i] = new Record(aClient, allRentables[i], allDates[i]);
             allStatus[i] = allRentables[i].getStatus(); // remember
-            allNewStatus[i] = new RentableStatusOccupied(date, aClient);
+            allNewStatus[i] = new RentableStatusOccupied(allDates[i], aClient);
             allRentables[i].setStatus(allNewStatus[i]);
             // manager
             recordManager.insert(allRecords[i]);

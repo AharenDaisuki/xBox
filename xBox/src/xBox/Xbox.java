@@ -87,6 +87,8 @@ public class Xbox {
         JOptionPane.showMessageDialog(null, a.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 
 	}
+	
+	/*
 	public static void main(String[] args) {
 		Xbox main = Xbox.getInstance();
 //    	new Client("Admin","1");
@@ -94,7 +96,7 @@ public class Xbox {
 
 //		UserPage.load("1");
 		login_or_register.load();
-	}
+	}*/
 
 
 }

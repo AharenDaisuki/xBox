@@ -2,6 +2,8 @@ package data;
 
 import java.util.ArrayList;
 
+import ex.ExEntryNotFound;
+
 public class ClientSearcher {
 	private static ClientSearcher searcher=new ClientSearcher();
 	
@@ -22,6 +24,7 @@ public class ClientSearcher {
                 return client;
             }
         }
+        // throw new ExEntryNotFound(String.format("[Error] User <%s> is not found. Please register first!", email));
         return null;
     }
 }

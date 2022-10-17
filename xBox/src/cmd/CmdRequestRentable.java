@@ -24,7 +24,7 @@ public class CmdRequestRentable extends Undoable{
     private final Request[] allRequests = new Request[size];
     private final RentableStatus[] allStatus = new RentableStatus[size];
     
-    public String execute(String[] cmdLine, Client aClient) throws ExNoSufficientRentable{
+    public String execute(String[] cmdLine, Client aClient) {
         /*
          * [0:type] [1:number] [2:month] 
         */
@@ -38,17 +38,20 @@ public class CmdRequestRentable extends Undoable{
         String monthN = cmdLine[2]; 
         String ret = "[request list]\n";
         
-        for(int i = 0; i < requestN; ++i){
-            // return rentable
-            allRentables[i] = rentableAllocator.borrowRentable(user, rentableType);
-            allStatus[i] = new RentableStatusRequested(user);
-            // set status
-            allRentables[i].setStatus(allStatus[i]);
-            // new a request
-            allRequests[i] = new Request(user, allRentables[i], systemDate.getDayAfterNMonth(monthN));
-            requestManager.newRequest(allRequests[i]);
-            
-            ret += String.format("> %s\n", allRentables[i].getId());
+        try {
+            for(int i = 0; i < requestN; ++i){
+                // return rentable
+                allRentables[i] = rentableAllocator.borrowRentable(user, rentableType);
+                allStatus[i] = new RentableStatusRequested(user);
+                // set status
+                allRentables[i].setStatus(allStatus[i]);
+                // new a request
+                allRequests[i] = new Request(user, allRentables[i], systemDate.getDayAfterNMonth(monthN));
+                requestManager.newRequest(allRequests[i]);
+                ret += String.format("> %s\n", allRentables[i].getId());
+            }
+        }catch(ExNoSufficientRentable ex) {
+            ret += ex.getMessage() + "\n";
         }
         addUndo(this);
         clearList();
@@ -65,7 +68,7 @@ public class CmdRequestRentable extends Undoable{
             requestManager.removeRequest(allRequests[i]);
             // change status
             allRentables[i].setStatus(new RentableStatusAvailable());
-            ret += String.format("> request %s\n", allRentables[i].getId());
+            ret += String.format("> cancel request %s\n", allRentables[i].getId());
         }
         // add this to redoList
         addRedo(this);
@@ -80,10 +83,9 @@ public class CmdRequestRentable extends Undoable{
         for(int i = 0; i < requestN; ++i) {
             allRentables[i].setStatus(allStatus[i]);
             requestManager.newRequest(allRequests[i]);
-            ret += String.format("> request %s\n", allRentables[i].getId());
+            ret += String.format("> resend request %s\n", allRentables[i].getId());
         }
         addUndo(this);
         return ret;
     }
-
 }
