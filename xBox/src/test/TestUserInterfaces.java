@@ -4,6 +4,7 @@
 package test;
 
 import data.*;
+import data.Record;
 import ex.ExAccountExists;
 import ex.ExEntryNotFound;
 import ex.ExInvalidPassword;
@@ -31,8 +32,10 @@ public class TestUserInterfaces {
     private UserInterfaces system = UserInterfaces.getInstance();
     // utils
     private ClientSearcher clientSearcher = ClientSearcher.getInstance();
+    private RentableSearcher rentableSearcher = RentableSearcher.getInstance();
     private RentableManager rentableManager = RentableManager.getInstance();
     private RequestSearcher requestSearcher = RequestSearcher.getInstance();
+    private RecordSearcher recordSearcher = RecordSearcher.getInstance();
     
     
     @Test
@@ -134,7 +137,7 @@ public class TestUserInterfaces {
     
     @Test
     public void TestRequestInsufficient() {
-        String[] requestParams = {"BAG", "10", "9"};
+        String[] requestParams = {"BAG", "10", "1"};
         String log = system.request(requestParams);
         System.out.println(log);
         // test
@@ -147,5 +150,88 @@ public class TestUserInterfaces {
             assertEquals(RentableStatusRequested.statusName, request.getRentable().getStatusStr());
         }
         System.out.println(String.format("***%s***\n", "Test Request2"));
+    }
+    
+    @Test
+    public void TestStoreValid() {
+        String[] storeParams = {"BOX1234"};
+        String log = system.store(storeParams);
+        System.out.println(log);
+        // test
+        ArrayList<Record> recordList = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
+        assertEquals(1, recordList.size());
+        for(Record record : recordList) {
+            assertEquals(RentableStatusOccupied.statusName, record.getRentable().getStatusStr());
+        }
+        System.out.println(String.format("***%s***\n", "Test Store1"));
+    }
+    
+    @Test
+    public void TestStoreInvalid() {
+        String[] storeParams = {"BOX3452", "BOX6666"};
+        // TODO: handle 
+        // String[] storeParams = {"BOX6666", "BOX3452"}; 
+        String log = system.store(storeParams);
+        System.out.println(log);
+        // test
+        ArrayList<Record> recordList = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
+        assertEquals(1 + 1, recordList.size());
+        for(Record record : recordList) {
+            assertEquals(RentableStatusOccupied.statusName, record.getRentable().getStatusStr());
+        }
+        System.out.println(String.format("***%s***\n", "Test Store2"));
+    }
+    
+    @Test
+    public void TestReturnValid() {
+        String[] returnParams = {"BOX1234"};
+        String log = system.unload(returnParams);
+        System.out.println(log);
+        ArrayList<Record> recordList = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
+        assertEquals(2, recordList.size());
+        assertEquals(RentableStatusPending.statusName, rentableSearcher.searchByKeyword("BOX1234").getStatusStr());
+        System.out.println(String.format("***%s***\n", "Test Return1"));
+    }
+    
+    @Test
+    public void TestReturnInvalid() {
+        String[] returnParams = {"BOX2333"}; 
+        String log = system.unload(returnParams);
+        System.out.println(log);
+        // assertEquals();
+        System.out.println(String.format("***%s***\n", "Test Return2"));
+    }
+    
+    @Test
+    public void TestUndo() {
+        String log1 = system.undo();
+        System.out.println(log1);
+        String log2 = system.undo();
+        System.out.println(log2);
+        // test
+        ArrayList<Record> recordList = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
+        assertEquals(1 + 1, recordList.size());
+        for(Record record : recordList) {
+            assertEquals(RentableStatusOccupied.statusName, record.getRentable().getStatusStr());
+        }
+        System.out.println(String.format("***%s***\n", "Test Undo"));
+    }
+    
+    @Test
+    public void TestRedo() {
+        String log = system.redo();
+        System.out.println(log);
+        // test
+        ArrayList<Record> recordList = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
+        assertEquals(2, recordList.size());
+        assertEquals(RentableStatusPending.statusName, rentableSearcher.searchByKeyword("BOX1234").getStatusStr());
+        System.out.println(String.format("***%s***\n", "Test Undo"));
+    }
+    
+    @Test
+    public void TestSummary() {
+        String log = system.summary(null);
+        System.out.println(log);
+        System.out.println("***End Test***\n");
     }
 }

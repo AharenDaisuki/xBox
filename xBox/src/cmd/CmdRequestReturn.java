@@ -1,7 +1,5 @@
 package cmd;
 
-import java.util.ArrayList;
-
 import data.*;
 import data.Record;
 
@@ -19,28 +17,32 @@ public class CmdRequestReturn extends Undoable{
     private final RentableStatus[] allStatus = new RentableStatus[size];
     private final RentableStatus[] allNewStatus = new RentableStatus[size];
     
-    public String execute(String[] cmdLine,Client aClient) throws ExEntryNotFound{
+    public String execute(String[] cmdLine,Client aClient) {
         /*
          * [0:n-1 rentableId]
         */
         RecordSearcher recordSearcher = RecordSearcher.getInstance();
         this.num = cmdLine.length;
-        
         String ret = "[Return list]\n";
-        for(int i = 0; i < num; ++i) {
-            String rentableId = cmdLine[i];
-            Record targetRecord = recordSearcher.searchByKeyword(rentableId);
-            // TODO: not belongs to the client
-            if(targetRecord.getClient() != aClient) {
-                new ExEntryNotFound(String.format("Rent record [%s] not found", rentableId));
+        try {
+            for(int i = 0; i < num; ++i) {
+                String rentableId = cmdLine[i];
+                Record targetRecord = recordSearcher.searchByKeyword(rentableId);
+                // TODO: not belongs to the client
+                if(targetRecord == null || targetRecord.getClient() != aClient) {
+                    new ExEntryNotFound(String.format("Rent record [%s] not found", rentableId));
+                }
+                allRentables[i] = targetRecord.getRentable();
+                allStatus[i] = allRentables[i].getStatus();
+                allNewStatus[i] = new RentableStatusPending(aClient);
+                allRentables[i].setStatus(allNewStatus[i]);
+                ret += String.format("> send checkin notification [%s]\n", allRentables[i].getId());
             }
-            allRentables[i] = targetRecord.getRentable();
-            allStatus[i] = allRentables[i].getStatus();
-            allNewStatus[i] = new RentableStatusPending(aClient);
-            allRentables[i].setStatus(allNewStatus[i]);
-            ret += String.format("> send checkin notification [%s]\n", allRentables[i].getId());
+        }catch(ExEntryNotFound ex) {
+            ret += ex.getMessage() + "\n";
         }
-        addUndo(null);
+       
+        addUndo(this);
         clearList();
         return ret;
     }
@@ -49,8 +51,11 @@ public class CmdRequestReturn extends Undoable{
     public String redo(){
         String ret = "";
         for(int i = 0; i < num; ++i) {
+            if(allRentables[i] == null) {
+                continue;
+            }
             allRentables[i].setStatus(allNewStatus[i]);
-            ret += String.format("> cancel checkin notification [%s]\n", allRentables[i].getId());
+            ret += String.format("> send checkin notification [%s]\n", allRentables[i].getId());
         }
         addUndo(this);
         return ret;
@@ -60,8 +65,11 @@ public class CmdRequestReturn extends Undoable{
     public String undo(){
         String ret = "";
         for(int i = 0; i < num; ++i) {
+            if(allRentables[i] == null) {
+                continue;
+            }
             allRentables[i].setStatus(allStatus[i]);
-            ret += String.format("> resend checkin notification [%s]\n", allRentables[i].getId());
+            ret += String.format("> send checkin notification [%s]\n", allRentables[i].getId());
         }
         addRedo(this);
         return ret;

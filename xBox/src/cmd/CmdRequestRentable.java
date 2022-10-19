@@ -1,5 +1,7 @@
 package cmd;
 
+import java.util.Date;
+
 import data.*;  
 import utils.XBoxDate;
 
@@ -37,6 +39,7 @@ public class CmdRequestRentable extends Undoable{
         this.requestN = Integer.parseInt(cmdLine[1]);
         String monthN = cmdLine[2]; 
         String ret = "[request list]\n";
+        Date dueDate = systemDate.getDayAfterNMonth(monthN);
         
         try {
             for(int i = 0; i < requestN; ++i){
@@ -46,9 +49,9 @@ public class CmdRequestRentable extends Undoable{
                 // set status
                 allRentables[i].setStatus(allStatus[i]);
                 // new a request
-                allRequests[i] = new Request(user, allRentables[i], systemDate.getDayAfterNMonth(monthN));
+                allRequests[i] = new Request(user, allRentables[i], dueDate);
                 requestManager.newRequest(allRequests[i]);
-                ret += String.format("> %s\n", allRentables[i].getId());
+                ret += String.format("> %-10s%tF\n", allRentables[i].getId(), allRequests[i].getDue());
             }
         }catch(ExNoSufficientRentable ex) {
             ret += ex.getMessage() + "\n";
@@ -64,6 +67,10 @@ public class CmdRequestRentable extends Undoable{
         RequestManager requestManager = RequestManager.getInstance();
         // undo current command
         for(int i = this.requestN-1; i>=0; --i) {
+            // TODO: skip empty slots
+            if(allRequests[i] == null) {
+                continue;
+            }
             // remove request
             requestManager.removeRequest(allRequests[i]);
             // change status
@@ -81,6 +88,10 @@ public class CmdRequestRentable extends Undoable{
         RequestManager requestManager = RequestManager.getInstance();
         // redo current command
         for(int i = 0; i < requestN; ++i) {
+            // TODO: skip empty slots
+            if(allRequests[i] == null) {
+                continue;
+            }
             allRentables[i].setStatus(allStatus[i]);
             requestManager.newRequest(allRequests[i]);
             ret += String.format("> resend request %s\n", allRentables[i].getId());

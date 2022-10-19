@@ -101,7 +101,7 @@ public class UserInterfaces {
 	public String summary(String[] cmdLine) {
 	    String ret = "Summary:\n";
 	    
-	    ret += String.format("%-15s%-30s\n", "[ID]", "[STATUS]");
+	    ret += String.format("%-15s%-30s%-10s\n", "[ID]", "[STATUS]", "[DUE]");
 	    // System.out.printf("%-7s%-50s\n", "[ID]", "[STATUS]");
 	    RequestSearcher requestSearcher = RequestSearcher.getInstance();
 	    RecordSearcher recordSearcher = RecordSearcher.getInstance();
@@ -109,28 +109,28 @@ public class UserInterfaces {
 	    ArrayList<Request> allRequests = requestSearcher.searchAllByKeyword(user);
 	    //ret += "My requests:\n";
 	    for(Request request : allRequests) {
-	        ret += String.format("%s\n", request.getRentable().toString());
+	        ret += String.format("%s%tF\n", request.getRentable().toString(), request.getDue());
 	    }
 	    
 	    ArrayList<Record> allRecords = recordSearcher.searchAllByKeyword(user.getEmail());
 	    //ret += "My records:\n";
 	    for(Record record : allRecords) {
-	        ret += String.format("%s\n", record.getRentable().toString());
+	        ret += String.format("%s%tF\n", record.getRentable().toString(), record.getDue());
 	    }
 	    return ret;
 	}
 	
 	// undo
 	public String undo() {
-	    String ret = "[Undo]\n";
+	    String ret = ">> Undo the following operations?\n";
 	    ret += Undoable.undoCmd();
 	    return ret;
 	}
 	
 	// redo
 	public String redo() {
-	    String ret = "[Redo]\n";
-	    Undoable.redoCmd();
+	    String ret = ">> Redo the following operations?\n";
+	    ret += Undoable.redoCmd();
 	    return ret;
 	}
 	
@@ -142,14 +142,14 @@ public class UserInterfaces {
 	}
 	
 	// store rentable
-	public String store(String[] cmdLine) throws ExEntryNotFound {
+	public String store(String[] cmdLine) {
 	    String ret = (new CmdStoreRentable()).execute(cmdLine, user) + "\n";
 	    ret += summary(null);
 	    return ret;
 	}
 	
 	// return rentable
-	public String unload(String[] cmdLine) throws ExEntryNotFound {
+	public String unload(String[] cmdLine) {
 	    String ret = (new CmdRequestReturn()).execute(cmdLine, user) + "\n";
 	    ret += summary(null);
 	    return ret;
