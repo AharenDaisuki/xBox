@@ -10,6 +10,10 @@ public class RentableStorer implements XBoxStorer<Rentable>{
 
     private RentableStorer(){
         manager = new HashMap<>();
+        // TODO: hard coding => rentable type
+        manager.put("BOX", new ArrayList<Rentable>());
+        manager.put("BAG", new ArrayList<Rentable>());
+        // TODO: add new rentable type
     }
 
     public static RentableStorer getInstance(){
@@ -36,9 +40,9 @@ public class RentableStorer implements XBoxStorer<Rentable>{
     @Override
     public void delEntry(Rentable entry) {
         String type = entry.getType();
-        if(manager.get(type) == null) {
+        // if(manager.get(type) == null) {
             // TODO: exception
-        }
+        // }
         manager.get(entry.getType()).remove(entry);
     }
 }

@@ -34,6 +34,8 @@ public class XBoxDate{
     public Date getDayAfterNMonth(String monthString) {
         int numMonth = Integer.parseInt(monthString);
         localCalendar.add(Calendar.MONTH, numMonth);
-        return localCalendar.getTime();
+        Date tmp = localCalendar.getTime();
+        localCalendar.add(Calendar.MONTH, -numMonth);
+        return tmp;
     }
 }

@@ -22,7 +22,7 @@ public class RentableAllocator {
                 return rentable;
 			}
 		}
-		throw new ExNoSufficientRentable();
+		throw new ExNoSufficientRentable(String.format("[Error] No sufficient %s!", aType));
         // return null; // NotFoundexception later
 	}
 }

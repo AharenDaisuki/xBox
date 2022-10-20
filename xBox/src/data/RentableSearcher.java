@@ -18,7 +18,7 @@ public class RentableSearcher {
         return searcher;
     }
     
-    public Rentable searchByKeyword(String rentableId) throws ExEntryNotFound{
+    public Rentable searchByKeyword(String rentableId) {
         RentableStorer storer = RentableStorer.getInstance();
         // TODO: the first three letter is type
         for(Rentable rentable : storer.getList(rentableId.substring(0, 3))) {
@@ -26,8 +26,8 @@ public class RentableSearcher {
                 return rentable;
             }
         }
-        throw new ExEntryNotFound(String.format("Item[%s] is not found", rentableId));
-        // return null;
+        // throw new ExEntryNotFound(String.format("Item[%s] is not found", rentableId));
+        return null;
     }
     
     public ArrayList<Rentable> searchAllByKeyword(String type){
