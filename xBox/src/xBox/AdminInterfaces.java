@@ -34,7 +34,7 @@ public class AdminInterfaces {
 	// int login(String[] params); // return uid
 	// int register(String[] params); // return uid
 	// 
-	String summaryAllItems(String[] cmdLine) {
+	public String summaryAllItems(String[] cmdLine) {
 	    // type
 	    String ret = "Summary all:\n";
 	    ret += String.format("%-7s%-50s\n", "[ID]", "[STATUS]");
@@ -46,7 +46,7 @@ public class AdminInterfaces {
 	    return ret;
 	}
 	
-	String summaryAllClients(String[] cmdLine) {
+	public String summaryAllClients(String[] cmdLine) {
 	    String ret = "Summary all:\n";
 	    ret += String.format("%-40s%-8s\n", "[EMAIL]", "[TEL]");
 	    ClientSearcher searcher = ClientSearcher.getInstance();
@@ -56,7 +56,7 @@ public class AdminInterfaces {
 	    return ret;
 	}
 	
-	String summaryAllRequests(String[] cmdLine) {
+	public String summaryAllRequests(String[] cmdLine) {
         String ret = "Summary all:\n";
         ret += String.format("%-7s%-40s%-10s\n", "[ID]", "[EMAIL]", "[DATE]");
         RequestSearcher searcher = RequestSearcher.getInstance();
@@ -66,7 +66,7 @@ public class AdminInterfaces {
 	    return ret;
 	}
 	
-	String summaryAllRecords(String[] cmdLine) {
+	public String summaryAllRecords(String[] cmdLine) {
         String ret = "Summary all:\n";
         ret += String.format("%-7s%-10s%-40s%tF\n", "[ID]", "[PAYMENT]", "[EMAIL]", "[DUE]");
         RecordSearcher searcher = RecordSearcher.getInstance();
@@ -84,12 +84,12 @@ public class AdminInterfaces {
 	    return "";
 	}
 	
-	String confirmPayment(String[] cmdLine) {
+	public String confirmPayment(String[] cmdLine) {
 	    String ret = (new CmdConfirmPayment()).execute(cmdLine, admin);
 	    return ret;
 	}
 	
-	String confirmReturn(String[] cmdLine) throws ExEntryNotFound {
+	public String confirmReturn(String[] cmdLine) throws ExEntryNotFound {
 	    String ret = (new CmdConfirmReturn()).execute(cmdLine, admin);
 	    return ret;
 	}

@@ -59,7 +59,11 @@ public class login implements IO{
             	try {
             	    String results = UserInterfaces.getInstance().login(cmdLine);
             	    Xbox.output(results);
-            	    UserPage.load();
+            	    if(jt1.getText().equals("Admin")) {
+            	        AdminPage.load();
+            	    }else {
+                        UserPage.load();
+            	    }
             	}catch (Exception e1) {
             	    Xbox.error(e1);
             	}
