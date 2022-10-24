@@ -1,0 +1,29 @@
+[
+{
+	"client":
+	{
+		"email":"abc@123.com",
+		"phoneNo":"12345678",
+		"password":"123456",
+		"type":"staff"
+	},
+	"rentable":
+	{
+		"id":"BAG001",
+		"status":
+		{
+			"status":"Occupied",
+			"client":
+			{
+				"email":"abc@123.com",
+				"phoneNo":"12345678",
+				"password":"123456",
+				"type":"staff"
+			},
+			"due":12345
+		},
+		"type":"BAG"
+	},
+	"dueDate":12345,
+}
+]
