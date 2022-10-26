@@ -58,4 +58,10 @@ public class Request {
 	public String toString(){
 	    return String.format("%-15s%-30s%tF", rentable.getId(), client.getEmail(), date);
 	}
+	
+	public String toJSONString()
+	{
+		return "{\"client\":"+client.toJSONString()+",\"rentable\":"+rentable.toJSONString()
+			+",\"dueDate\":"+date.getTime()+"}";
+	}
 }

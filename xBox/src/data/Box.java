@@ -21,4 +21,10 @@ public class Box extends Rentable{
     public double getPrice() {
         return 100.0;
     }
+    
+    public String toJSONString()
+    {
+    	String str=super.toJSONString();
+    	return str.substring(0,str.length()-1)+",\"type\":\"BOX\"}";
+    }
 }

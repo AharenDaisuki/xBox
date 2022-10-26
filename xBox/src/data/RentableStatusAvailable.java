@@ -13,4 +13,9 @@ public class RentableStatusAvailable implements RentableStatus{
     public String getStatus(){
         return "Available";
     }
+
+    public String toJSONString()
+    {
+    	return "{\"status\":\"Available\"}";
+    }
 }

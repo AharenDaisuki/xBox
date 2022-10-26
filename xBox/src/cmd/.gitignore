@@ -1,0 +1,10 @@
+/ClientLoginCommand.class
+/ClientRegisterCommand.class
+/CmdConfirmPayment.class
+/CmdConfirmReturn.class
+/CmdRequestRentable.class
+/CmdRequestReturn.class
+/CmdStoreRentable.class
+/Command.class
+/Undoable.class
+/UserCommand.class

@@ -29,4 +29,9 @@ public abstract class Rentable{
     public void setStatus(RentableStatus status_) {
     	this.status = status_;
     }
+    
+    public String toJSONString()
+    {
+    	return "{\"id\":\""+id+"\",\"status\":"+status.toJSONString()+"}";
+    }
 }

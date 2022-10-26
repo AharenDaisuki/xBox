@@ -16,6 +16,13 @@ public class Record {
 		dueDate = due_;
 	}
 
+	public Record(Client client_, Rentable rentable_, Date due_,boolean isPaid_){
+		client = client_;
+		rentable = rentable_;
+		dueDate = due_;
+		isPaid=isPaid_;
+	}
+
 	public void setClient(Client c) { client = c; }
 	
 	public Client getClient() { return this.client; }
@@ -28,10 +35,16 @@ public class Record {
 	
 	public Date getDue() {return this.dueDate; }
 	
-	public void setPaymentStatus() { this.isPaid = true; }
+	public void setPaymentStatus(boolean isPaid_) { this.isPaid = isPaid_; }
 
 	@Override
 	public String toString(){
 	    return String.format("%-7s%-10s%-40s%tF", rentable.getId(), (isPaid ? "paid" : "occupied"), client.getEmail(), dueDate);
+	}
+	
+	public String toJSONString()
+	{
+		return "{\"client\":"+client.toJSONString()+",\"rentable\":"+rentable.toJSONString()
+			+",\"dueDate\":"+dueDate.getTime()+",\"isPaid\":"+isPaid+"}";
 	}
 }

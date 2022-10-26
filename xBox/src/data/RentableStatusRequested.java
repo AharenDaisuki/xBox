@@ -15,4 +15,9 @@ public class RentableStatusRequested implements RentableStatus{
 	public String getStatus(){
 		return "Requested";
 	}
+    
+    public String toJSONString()
+    {
+    	return "{\"status\":\"Requested\",\"client\":"+client.toJSONString()+"}";
+    }
 }

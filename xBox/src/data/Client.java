@@ -27,4 +27,6 @@ public abstract class Client{
     
     @Override
     public String toString() { return String.format("%-40s%-8s", this.email, this.phoneNo); }
+    
+    public String toJSONString() { return "{\"email\":\""+email+"\",\"phoneNo\":\""+phoneNo+"\",\"password\":\""+password+"\"}";}
 }
