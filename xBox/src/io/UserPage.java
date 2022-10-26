@@ -30,7 +30,7 @@ public class UserPage implements IO{
 	public JPanel show() {
 		panel1 = new JPanel();
 		label1 = new JLabel("Select one command");
-		label2 = new JLabel("Data output:");
+		label2 = new JLabel("[console log]:");
 
 		btn0=new JButton("Back");
 		btn1=new JButton("Request new Box");
@@ -125,7 +125,7 @@ public class UserPage implements IO{
 	public static void load() {
 		Xbox main = Xbox.getInstance();
 		UserPage page =new UserPage();
-		System.out.println("Turn to User page");
+		System.out.println("User page");
 		main.show_page(page.show());
 		return;
 	}

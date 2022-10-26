@@ -1,9 +1,13 @@
 package data;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import debug.DebugConfig;
 
 public class Database {
-    private static Database database;
+    private static Database database = new Database();
     
     private RentableStorer rentableStorer;
     private RecordStorer recordStorer; 
@@ -23,10 +27,10 @@ public class Database {
 
     public void initialize() throws IOException
     {
-        rentableStorer.readFromJson();
-        recordStorer.readFromJson();
-        clientStorer.readFromJson();
-        requestStorer.readFromJson();
+        // rentableStorer.readFromJson();
+        // recordStorer.readFromJson();
+        // clientStorer.readFromJson();
+        // requestStorer.readFromJson();
     }
 
     public void storeUp()

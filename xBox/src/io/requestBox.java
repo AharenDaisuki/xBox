@@ -60,7 +60,7 @@ public class requestBox implements IO{
 		btn1.setBounds(275,215,50,35);
 		btn2.setBounds(270,55,50,35);
 
-		label4 = new JLabel("Data output:");
+		label4 = new JLabel("[console log]:");
 		label4.setBounds(10,260,100,30);
 		panel1.add(label4);
 		
@@ -74,9 +74,9 @@ public class requestBox implements IO{
 //                login_or_register.load();
                 String type;
                 if(jr1.isSelected()) {
-                    type="Box";
+                    type="BOX"; // TODO: all uppercase
                 }else {
-                    type="Bag";
+                    type="BAG"; // TODO: all uppercase
                 }
             	String[] cmdLine= {type,jt1.getText(),jt2.getText()};
             	String results;
@@ -112,7 +112,7 @@ public class requestBox implements IO{
 	public static void load() {
 		Xbox main = Xbox.getInstance();
 		requestBox page =new requestBox();
-		System.out.println("Turn to request page");
+		System.out.println("Request page");
 		main.show_page(page.show());
 		return;
 	}

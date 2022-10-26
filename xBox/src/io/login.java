@@ -32,7 +32,7 @@ public class login implements IO{
 		label2 = new JLabel("Password:");
 		label3 = new JLabel("login into the Xbox");
 
-		label4 = new JLabel("Data output:");
+		label4 = new JLabel("[console log]:");
 		label4.setBounds(10,260,100,40);
 		panel1.add(label4);
 		
@@ -91,7 +91,7 @@ public class login implements IO{
 	public static void load() {
 		Xbox main = Xbox.getInstance();
 		login page =new login();
-		System.out.println("Turn to login page");
+		System.out.println("Login page");
 		main.show_page(page.show());
 		return;
 	}

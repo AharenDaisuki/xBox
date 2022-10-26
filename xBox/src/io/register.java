@@ -56,7 +56,7 @@ public class register implements IO{
 		label3.setBounds(150,10,150,50);
 		label5.setBounds(100, 80, 100, 50);
 
-		label4 = new JLabel("Data output:");
+		label4 = new JLabel("[console log]:");
 		label4.setBounds(10,260,100,40);
 		panel1.add(label4);
 		
@@ -127,7 +127,7 @@ public class register implements IO{
 	public static void load() {
 		Xbox main = Xbox.getInstance();
 		register page =new register();
-		System.out.println("Turn to register page");
+		System.out.println("Register page");
 		main.show_page(page.show());
 		return;
 	}

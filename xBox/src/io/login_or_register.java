@@ -22,14 +22,14 @@ public class login_or_register implements IO{
 		panel1.setBounds(0, 0, 450, 300);
 		panel1.setLayout(null);
 		
-		label1 = new JLabel("Welcome to use Xbox");
+		label1 = new JLabel("Welcome to use XBOX");
 		btn1 = new JButton("login");
 		btn2 = new JButton("register");
 		
 		label1.setBounds(150, 40, 300, 50);
 		btn1.setBounds(100, 90, 100, 40);
 		btn2.setBounds(230, 90, 100, 40);
-		label2 = new JLabel("Data output:");
+		label2 = new JLabel("[console log]:");
 		label2.setBounds(10,260,100,40);
 		panel1.add(label2);
 
@@ -59,7 +59,7 @@ public class login_or_register implements IO{
 	public static void load() {
 		Xbox main = Xbox.getInstance();
 		login_or_register page =new login_or_register();
-		System.out.println("Turn to Main page");
+		System.out.println("Welcome to use xBox service!");
 		main.show_page(page.show());
 		return;
 	}

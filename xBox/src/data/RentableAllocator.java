@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import ex.ExNoSufficientRentable;
 
+import debug.DebugConfig;
+
 public class RentableAllocator {
 	private static RentableAllocator allocator = new RentableAllocator();
 	

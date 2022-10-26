@@ -18,10 +18,10 @@ public class RentableStorer implements XBoxStorer<Rentable>{
     private HashMap<String, ArrayList<Rentable>> manager;
 
     private RentableStorer(){
-        manager = new HashMap<>();
+        //manager = new HashMap<>();
         // TODO: hard coding => rentable type
-        manager.put("BOX", new ArrayList<Rentable>());
-        manager.put("BAG", new ArrayList<Rentable>());
+        //manager.put("BOX", new ArrayList<Rentable>());
+        //manager.put("BAG", new ArrayList<Rentable>());
         // TODO: add new rentable type
     }
 
@@ -97,10 +97,12 @@ public class RentableStorer implements XBoxStorer<Rentable>{
     }
 
     public void readFromJson() throws IOException{
+        // TODO: duplicate initialization
     	manager=new HashMap<>();
         manager.put("BOX", new ArrayList<Rentable>());
         manager.put("BAG", new ArrayList<Rentable>());
     	File file=new File("datasrc/RentableStorer.json");
+    	// File file=new File("datasrc/available_items.json"); // TODO: change filePathName
     	String jsonString=new String(Files.readAllBytes(Paths.get(file.getPath())));
     	JSONArray arr=new JSONArray(jsonString);
     	for(Object obj:arr)
