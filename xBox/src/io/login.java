@@ -57,7 +57,7 @@ public class login implements IO{
             	System.out.println(jt2.getText());
             	String[] cmdLine = {jt1.getText(),jt2.getText()};
             	try {
-            	    String results = UserInterfaces.getInstance().login(cmdLine);
+            	    String results = UserInterfaces.getInstance().login(cmdLine); // invoke
             	    Xbox.output(results);
             	    if(jt1.getText().equals("Admin")) {
             	        AdminPage.load();

@@ -78,8 +78,8 @@ public class register implements IO{
             	   type = "student";
             	}else {
                     type = "staff";
-
             	}
+            	// TODO: add new type
                 String[] cmdLine = {jt1.getText(),jt3.getText(),jt2.getText(),type};
                 try {
                     String results=UserInterfaces.getInstance().register(cmdLine);
