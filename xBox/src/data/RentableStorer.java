@@ -5,6 +5,10 @@ import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import jdk.incubator.vector.VectorOperators.Test;
+
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,10 +22,10 @@ public class RentableStorer implements XBoxStorer<Rentable>{
     private HashMap<String, ArrayList<Rentable>> manager;
 
     private RentableStorer(){
-        //manager = new HashMap<>();
+        manager = new HashMap<>();
         // TODO: hard coding => rentable type
-        //manager.put("BOX", new ArrayList<Rentable>());
-        //manager.put("BAG", new ArrayList<Rentable>());
+        manager.put("BOX", new ArrayList<Rentable>());
+        manager.put("BAG", new ArrayList<Rentable>());
         // TODO: add new rentable type
     }
 
@@ -102,7 +106,7 @@ public class RentableStorer implements XBoxStorer<Rentable>{
         manager.put("BOX", new ArrayList<Rentable>());
         manager.put("BAG", new ArrayList<Rentable>());
     	File file=new File("datasrc/RentableStorer.json");
-    	// File file=new File("datasrc/available_items.json"); // TODO: change filePathName
+    	// File file = new File("datasrc/available_items.json"); // TODO: change filePathName
     	String jsonString=new String(Files.readAllBytes(Paths.get(file.getPath())));
     	JSONArray arr=new JSONArray(jsonString);
     	for(Object obj:arr)
@@ -111,6 +115,45 @@ public class RentableStorer implements XBoxStorer<Rentable>{
     		Rentable r=getRentableByJSONObject(jsonObject);
     		manager.get(r.getType()).add(r);
     	}
+    }
+    
+    
+    public void readJson() throws IOException {
+        File jsonFile = new File(System.getProperty("user.dir") + "/src/datasrc/available_items.json");
+        String jsonStr = FileUtils.readFileToString(jsonFile, "UTF-8");
+        JSONArray arr = new JSONArray(jsonStr);
+        for(Object obj : arr){
+            JSONObject jsonObj = new JSONObject(obj.toString());
+            String id = jsonObj.getString("id");
+            String type = jsonObj.getString("type");
+            JSONObject status = jsonObj.getJSONObject("status");
+            RentableStatus statusObj = null;
+            switch(status.getString("status")) {
+                case RentableStatusAvailable.statusName:
+                    statusObj = new RentableStatusAvailable();
+                    break;
+                case RentableStatusOccupied.statusName:
+                    // TODO: 
+                    break;
+                case RentableStatusRequested.statusName:
+                    // TODO: 
+                    break;
+                case RentableStatusPending.statusName:
+                    // TODO: 
+                    break;
+            }
+            Rentable rentable = null;
+            switch(type){
+                case "BOX":
+                    rentable = new Box(id, statusObj);
+                    break;
+                case "BAG":
+                    rentable = new Bag(id, statusObj);
+                    break;
+            }
+            addEntry(rentable);
+            // System.out.println(rentable.toString());
+        }
     }
 
     public void writeToJson() {

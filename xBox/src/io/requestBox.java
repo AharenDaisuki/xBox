@@ -32,8 +32,8 @@ public class requestBox implements IO{
 	public JPanel show() {
 		panel1 = new JPanel();
 		label1 = new JLabel("Request");
-		label2 = new JLabel("Input number:");
-		label3 = new JLabel("Input month:");
+		label2 = new JLabel("Enter the number of items you'd like to rent:");
+		label3 = new JLabel("Enter your rent duration (month):");
 		jt1 = new JTextField();
 	    jt2 = new JTextField();
 	    jr1 = new JRadioButton("Box");
@@ -112,7 +112,7 @@ public class requestBox implements IO{
 	public static void load() {
 		Xbox main = Xbox.getInstance();
 		requestBox page =new requestBox();
-		System.out.println("Request page");
+		// System.out.println("Request page");
 		main.show_page(page.show());
 		return;
 	}

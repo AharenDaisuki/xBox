@@ -37,7 +37,7 @@ public class register implements IO{
 		panel1.setLayout(null);
 		label1 = new JLabel("Email:");
 		label2 = new JLabel("Password:");
-		label3 = new JLabel("Register a account");
+		label3 = new JLabel("Register an account");
 	    label5 = new JLabel("Phone number:");
 	    bg = new ButtonGroup();    
 
@@ -48,7 +48,7 @@ public class register implements IO{
 	    jr1 = new JRadioButton("student");
         jr2 = new JRadioButton("staff");
 
-		btn1 = new JButton("register");
+		btn1 = new JButton("Register");
 		btn2 = new JButton("Back");
 		
 		label1.setBounds(100,50,100,50);
@@ -127,7 +127,7 @@ public class register implements IO{
 	public static void load() {
 		Xbox main = Xbox.getInstance();
 		register page =new register();
-		System.out.println("Register page");
+		// System.out.println("Register page");
 		main.show_page(page.show());
 		return;
 	}

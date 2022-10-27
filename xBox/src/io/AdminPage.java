@@ -29,15 +29,15 @@ public class AdminPage implements IO{
 	public JPanel show() {
 		panel1 = new JPanel();
 		label1 = new JLabel("Select one command");
-		label2 = new JLabel("Data output:");
+		label2 = new JLabel("[console log]:");
 
 		btn0=new JButton("Back");
 		btn1=new JButton("Confirm Payment");
 		btn2=new JButton("Confirm Return");
-		btn3=new JButton("All Items");
-		btn4=new JButton("All Clients");
-		btn5=new JButton("All Requests");
-		btn6=new JButton("All Records");
+		btn3=new JButton("Search Items");
+		btn4=new JButton("Search Clients");
+		btn5=new JButton("Summary Requests");
+		btn6=new JButton("Summary Records");
 
 
 		panel1.setBounds(0, 0, 450, 300);
@@ -53,7 +53,11 @@ public class AdminPage implements IO{
 		btn4.setBounds(230,110,135,40);
 		btn5.setBounds(80,160,135,40);
 		btn6.setBounds(230,160,135,40);
-
+		
+		// String ret = "";
+		// ret += AdminInterfaces.getInstance().summaryAllClients();
+		// ret += AdminInterfaces.getInstance().summaryAllItems();
+		// Xbox.output(ret);
 		
 		btn0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -72,40 +76,32 @@ public class AdminPage implements IO{
         });	
 		btn3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                    String results = AdminInterfaces.getInstance().summaryAllItems(null);
-                    Xbox.output(results);
-                 }catch (Exception e1){
-                     Xbox.error(e1);
-                 }
-               }                
+                SearchItem.load();
+            }                
         });	
 		
 		btn4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                    String results = AdminInterfaces.getInstance().summaryAllClients(null);
-                    Xbox.output(results);
-                 }catch (Exception e1){
-                     Xbox.error(e1);
-                 }
-               } 
+                SearchClient.load();
+            } 
         });	
+		
 		btn5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    String results = AdminInterfaces.getInstance().summaryAllRequests(null);
+                    String results = AdminInterfaces.getInstance().summaryAllRequests();
                     Xbox.output(results);
                  }catch (Exception e1){
                      Xbox.error(e1);
                  }          
             }
         });	
+		
 		btn6.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                getBox.load(userid);
                 try {
-                    String results = AdminInterfaces.getInstance().summaryAllRecords(null);
+                    String results = AdminInterfaces.getInstance().summaryAllRecords();
                     Xbox.output(results);
                  }catch (Exception e1){
                      Xbox.error(e1);
@@ -131,7 +127,7 @@ public class AdminPage implements IO{
 	public static void load() {
 		Xbox main = Xbox.getInstance();
 		AdminPage page =new AdminPage();
-		System.out.println("Turn to Admin page");
+		// System.out.println("Turn to Admin page");
 		main.show_page(page.show());
 		return;
 	}

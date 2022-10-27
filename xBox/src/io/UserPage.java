@@ -33,12 +33,12 @@ public class UserPage implements IO{
 		label2 = new JLabel("[console log]:");
 
 		btn0=new JButton("Back");
-		btn1=new JButton("Request new Box");
-		btn2=new JButton("Store Box");
-		btn3=new JButton("Return Box");
+		btn1=new JButton("Request");
+		btn2=new JButton("Store");
+		btn3=new JButton("Return");
 		btn4=new JButton("Summary");
-		btn5=new JButton("undo");
-		btn6=new JButton("redo");
+		btn5=new JButton("Undo");
+		btn6=new JButton("Redo");
 
 
 		panel1.setBounds(0, 0, 450, 300);
@@ -125,7 +125,7 @@ public class UserPage implements IO{
 	public static void load() {
 		Xbox main = Xbox.getInstance();
 		UserPage page =new UserPage();
-		System.out.println("User page");
+		// System.out.println("User page");
 		main.show_page(page.show());
 		return;
 	}

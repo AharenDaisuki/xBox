@@ -26,7 +26,7 @@ public class returnBox implements IO{
 	public JPanel show() {
 		panel1 = new JPanel();
 		label1 = new JLabel("Return");
-		label2 = new JLabel("Input Boxid:");
+		label2 = new JLabel("Enter Item ID:");
 		jt1 = new JTextField();
 
 	    
@@ -45,7 +45,7 @@ public class returnBox implements IO{
 		btn1.setBounds(275,140,50,35);
 		btn2.setBounds(270,55,50,35);
 
-		label4 = new JLabel("Data output:");
+		label4 = new JLabel("[console log]:");
 		label4.setBounds(10,260,100,30);
 		panel1.add(label4);
 		
@@ -85,7 +85,7 @@ public class returnBox implements IO{
 	public static void load() {
 		Xbox main = Xbox.getInstance();
 		returnBox page =new returnBox();
-		System.out.println("Turn to return page");
+		// System.out.println("Return page");
 		main.show_page(page.show());
 		return;
 	}

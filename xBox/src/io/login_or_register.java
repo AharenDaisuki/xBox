@@ -59,7 +59,7 @@ public class login_or_register implements IO{
 	public static void load() {
 		Xbox main = Xbox.getInstance();
 		login_or_register page =new login_or_register();
-		System.out.println("Welcome to use xBox service!");
+		// System.out.println("Welcome to use xBox service!");
 		main.show_page(page.show());
 		return;
 	}

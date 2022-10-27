@@ -21,7 +21,8 @@ public class login implements IO{
 	private JTextField jt2;
 	private JButton btn1;
 	private JButton btn2;
-
+	
+	private final String adminEmail = "admin@xbox.com.hk";
 
 	@Override
 	public JPanel show() {
@@ -38,7 +39,7 @@ public class login implements IO{
 		
 		jt1 = new JTextField();
 		jt2 = new JTextField();
-		btn1 = new JButton("login");
+		btn1 = new JButton("Login");
 		btn2 = new JButton("Back");
 		
 		label1.setBounds(100,80,100,50);
@@ -59,7 +60,7 @@ public class login implements IO{
             	try {
             	    String results = UserInterfaces.getInstance().login(cmdLine); // invoke
             	    Xbox.output(results);
-            	    if(jt1.getText().equals("Admin")) {
+            	    if(jt1.getText().equals(adminEmail)) {
             	        AdminPage.load();
             	    }else {
                         UserPage.load();
@@ -91,7 +92,7 @@ public class login implements IO{
 	public static void load() {
 		Xbox main = Xbox.getInstance();
 		login page =new login();
-		System.out.println("Login page");
+		// System.out.println("Login page");
 		main.show_page(page.show());
 		return;
 	}

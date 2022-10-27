@@ -31,6 +31,7 @@ public class Database {
         // recordStorer.readFromJson();
         // clientStorer.readFromJson();
         // requestStorer.readFromJson();
+        rentableStorer.readJson();
     }
 
     public void storeUp()

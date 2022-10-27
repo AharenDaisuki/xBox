@@ -25,8 +25,8 @@ public class confirmPayment implements IO{
 	@Override
 	public JPanel show() {
 		panel1 = new JPanel();
-		label1 = new JLabel("");
-		label2 = new JLabel("Input Boxid:");
+		label1 = new JLabel("Confirm Payment");
+		label2 = new JLabel("Enter Client Email:");
 		jt1 = new JTextField();
 
 	    
@@ -45,7 +45,7 @@ public class confirmPayment implements IO{
 		btn1.setBounds(275,140,50,35);
 		btn2.setBounds(270,55,50,35);
 
-		label4 = new JLabel("Data output:");
+		label4 = new JLabel("[console log]:");
 		label4.setBounds(10,260,100,30);
 		panel1.add(label4);
 		
@@ -54,6 +54,7 @@ public class confirmPayment implements IO{
                 AdminPage.load();
             }
         });	
+		
 		btn1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                login_or_register.load();
@@ -85,7 +86,7 @@ public class confirmPayment implements IO{
 	public static void load() {
 		Xbox main = Xbox.getInstance();
 		confirmPayment page =new confirmPayment();
-		System.out.println("Turn to confirm payment page");
+		// System.out.println("Confirm payment page");
 		main.show_page(page.show());
 		return;
 	}
