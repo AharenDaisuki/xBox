@@ -23,4 +23,10 @@ public class RentableStatusOccupied implements RentableStatus{
     public String getStatus(){
         return "Occupied";
     }
+    
+    public String toJSONString()
+    {
+    	return "{\"status\":\"Occupied\",\"client\":"+borrowedPerson.toJSONString()
+    		+",\"due\":"+borrowedDay.getTime()+"}";
+    }
 }

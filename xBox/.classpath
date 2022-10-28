@@ -7,5 +7,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="src/commons-io-2.11.0.jar"/>
+	<classpathentry kind="lib" path="src/commons-io-2.11.0-javadoc.jar"/>
+	<classpathentry kind="lib" path="src/commons-io-2.11.0-sources.jar"/>
+	<classpathentry kind="lib" path="src/commons-io-2.11.0-tests.jar"/>
+	<classpathentry kind="lib" path="src/commons-io-2.11.0-test-sources.jar"/>
+	<classpathentry kind="lib" path="src/json-20220924.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

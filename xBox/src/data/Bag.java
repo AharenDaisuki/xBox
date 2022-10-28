@@ -21,4 +21,10 @@ public class Bag extends Rentable{
     public double getPrice() {
         return 80.0;
     }
+    
+    public String toJSONString()
+    {
+    	String str=super.toJSONString();
+    	return str.substring(0,str.length()-1)+",\"type\":\"BAG\"}";
+    }
 }

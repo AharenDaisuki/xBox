@@ -1,5 +1,6 @@
 package data;
 
+import java.io.*;
 
 public class Database {
     private static Database database;
@@ -20,7 +21,20 @@ public class Database {
         return database;
     }
 
-    
+    public void initialize() throws IOException
+    {
+        rentableStorer.readFromJson();
+        recordStorer.readFromJson();
+        clientStorer.readFromJson();
+        requestStorer.readFromJson();
+    }
 
+    public void storeUp() throws IOException
+    {
+        rentableStorer.writeToJson();
+        recordStorer.writeToJson();
+        clientStorer.writeToJson();
+        requestStorer.writeToJson();
+    }
     // save in json
 }

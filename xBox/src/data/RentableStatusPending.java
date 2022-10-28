@@ -22,4 +22,9 @@ public class RentableStatusPending implements RentableStatus {
     public String getStatus() {
         return "Pending";
     }
+    
+    public String toJSONString()
+    {
+    	return "{\"status\":\"Pending\",\"client\":"+client.toJSONString()+"}";
+    }
 }

@@ -22,5 +22,11 @@ public class ClientStudent extends Client{
         return 10;
     }
 
+    public String toJSONString()
+    {
+    	String str=super.toJSONString();
+    	return str.substring(0,str.length()-1)+",\"type\":\"student\"}";
+    }
+    
 	// fees calculation would be done later
 }
