@@ -66,7 +66,7 @@ public class ClientStorer{
 
     public void readFromJson() throws IOException{
     	list=new ArrayList<>();
-    	File file=new File("datasrc/ClientStorer.json");
+    	File file = new File(System.getProperty("user.dir") + "/src/datasrc/ClientStorer.json");
     	String jsonString=new String(Files.readAllBytes(Paths.get(file.getPath())));
     	JSONArray arr=new JSONArray(jsonString);
     	for(Object obj:arr)
@@ -84,7 +84,7 @@ public class ClientStorer{
 			jsonObject=putClientToJSONObject(c);
 			arr.put(jsonObject);
 		}
-		File file=new File("datasrc/ClientStorer.json");
+		File file = new File(System.getProperty("user.dir") + "/src/datasrc/ClientStorer.json","w");
 		FileUtils.write(file, arr.toString(), "utf-8", false);
     }
 }
