@@ -14,7 +14,7 @@ public class Bag extends Rentable{
     
     @Override
     public String toString() {
-        return String.format("%-15s%-30s", this.getId(), this.getStatusStr().toString());
+        return String.format("%-15s%-15s", this.getId(), this.getStatusStr().toString());
     }
 
     @Override

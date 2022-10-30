@@ -39,7 +39,7 @@ public class Record {
 
 	@Override
 	public String toString(){
-	    return String.format("%-15s%-15s%-30s%tF", rentable.getId(), (isPaid ? "paid" : "occupied"), client.getEmail(), dueDate);
+	    return String.format("%-15s%-15s%-25%tF", rentable.getId(), (isPaid ? "paid" : "unpaid"), client.getEmail(), dueDate);
 	}
 	
 	public String toJSONString()

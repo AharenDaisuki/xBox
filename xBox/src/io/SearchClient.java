@@ -26,7 +26,7 @@ public class SearchClient implements IO{
     public JPanel show() {
         panel1 = new JPanel();
         label1 = new JLabel("Search Client");
-        label2 = new JLabel("Enter Client Email:");
+        label2 = new JLabel("Client Email:");
         jt1 = new JTextField();
 
         
@@ -87,7 +87,7 @@ public class SearchClient implements IO{
 
     public static void load() {
         Xbox main = Xbox.getInstance();
-        storeBox page =new storeBox();
+        SearchClient page = new SearchClient();
         // System.out.println("Store page");
         main.show_page(page.show());
         return;

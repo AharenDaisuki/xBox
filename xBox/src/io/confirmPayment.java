@@ -1,12 +1,13 @@
 package io;
 
 import java.util.*;
-import cmd.*;
+//import cmd.*;
 import javax.swing.*;
 
 import java.awt.event.*;  
 import ex.*;
-import xBox.UserInterfaces;
+import xBox.AdminInterfaces;
+//import xBox.UserInterfaces;
 import xBox.Xbox;
 
 import java.awt.*;
@@ -26,7 +27,7 @@ public class confirmPayment implements IO{
 	public JPanel show() {
 		panel1 = new JPanel();
 		label1 = new JLabel("Confirm Payment");
-		label2 = new JLabel("Enter Client Email:");
+		label2 = new JLabel("Client Email:");
 		jt1 = new JTextField();
 
 	    
@@ -61,7 +62,7 @@ public class confirmPayment implements IO{
             	String[] cmdLine= {jt1.getText()};
             	String results;
                 try {
-                    results = UserInterfaces.getInstance().store(cmdLine);
+                    results = AdminInterfaces.getInstance().confirmPayment(cmdLine);
                     System.out.println(results);
                     Xbox.output(results);
                 } catch (Exception e1) {

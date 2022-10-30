@@ -25,13 +25,13 @@ public class Database {
         return database;
     }
 
-    public void initialize() throws IOException
+    public void initialize(String[] files) throws IOException
     {
-        // rentableStorer.readFromJson();
-        // recordStorer.readFromJson();
-        // clientStorer.readFromJson();
+        rentableStorer.readFromJson(files[0]);
+        clientStorer.readFromJson(files[1]);
         // requestStorer.readFromJson();
-        rentableStorer.readJson();
+        // recordStorer.readFromJson();
+        // rentableStorer.readJson(files[0]);
     }
 
     public void storeUp()

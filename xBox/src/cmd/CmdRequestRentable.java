@@ -75,7 +75,7 @@ public class CmdRequestRentable extends Undoable{
             requestManager.removeRequest(allRequests[i]);
             // change status
             allRentables[i].setStatus(new RentableStatusAvailable());
-            ret += String.format("> cancel request %s\n", allRentables[i].getId());
+            ret += String.format("> send request %s\n", allRentables[i].getId());
         }
         // add this to redoList
         addRedo(this);
@@ -94,7 +94,7 @@ public class CmdRequestRentable extends Undoable{
             }
             allRentables[i].setStatus(allStatus[i]);
             requestManager.newRequest(allRequests[i]);
-            ret += String.format("> resend request %s\n", allRentables[i].getId());
+            ret += String.format("> send request %s\n", allRentables[i].getId());
         }
         addUndo(this);
         return ret;

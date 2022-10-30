@@ -26,7 +26,7 @@ public abstract class Client{
     // public String getPassword() { return password; } // TODO: 这是哪个小可爱写的
     
     @Override
-    public String toString() { return String.format("%-40s%-8s", this.email, this.phoneNo); }
+    public String toString() { return String.format("%-25s%-10s", this.email, this.phoneNo); }
     
     public String toJSONString() { return "{\"email\":\""+email+"\",\"phoneNo\":\""+phoneNo+"\",\"password\":\""+password+"\"}";}
 }

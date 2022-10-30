@@ -32,8 +32,8 @@ public class requestBox implements IO{
 	public JPanel show() {
 		panel1 = new JPanel();
 		label1 = new JLabel("Request");
-		label2 = new JLabel("Enter the number of items you'd like to rent:");
-		label3 = new JLabel("Enter your rent duration (month):");
+		label2 = new JLabel("The number of items:");
+		label3 = new JLabel("Rent duration (month):");
 		jt1 = new JTextField();
 	    jt2 = new JTextField();
 	    jr1 = new JRadioButton("Box");
@@ -48,17 +48,17 @@ public class requestBox implements IO{
 		panel1.setBounds(0, 0, 450, 300);
 		panel1.setLayout(null);
 		label1.setBounds(160, 50, 150, 40);
-		label2.setBounds(110,100,100,40);
-	    label3.setBounds(110,140,100,40);
+		label2.setBounds(40,100,190,40);
+	    label3.setBounds(40,140,190,40);
 
-		jt1.setBounds(210,105,120,30);
-	    jt2.setBounds(210,145,120,30);
+		jt1.setBounds(230,105,120,30);
+	    jt2.setBounds(230,145,120,30);
 	    
 	    jr1.setBounds(150, 180, 100, 30);
         jr2.setBounds(260, 180, 100, 30);
 
-		btn1.setBounds(275,215,50,35);
-		btn2.setBounds(270,55,50,35);
+		btn1.setBounds(295,215,50,35);
+		btn2.setBounds(290,55,50,35);
 
 		label4 = new JLabel("[console log]:");
 		label4.setBounds(10,260,100,30);

@@ -43,9 +43,9 @@ public class ClientStorer{
 		return c;
 	}
 
-    public void readFromJson() throws IOException{
+    public void readFromJson(String filePathName) throws IOException{
     	list=new ArrayList<>();
-    	File file=new File("datasrc/ClientStorer.json");
+    	File file=new File(filePathName);
     	String jsonString=new String(Files.readAllBytes(Paths.get(file.getPath())));
     	JSONArray arr=new JSONArray(jsonString);
     	for(Object obj:arr)

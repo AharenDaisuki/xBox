@@ -92,20 +92,20 @@ public class RentableStorer implements XBoxStorer<Rentable>{
 		}
 		else status=null; //Exception needed
 		if(jsonObject.get("type").toString().equals("BAG"))
-			r=new Bag(jsonObject.get("id").toString().substring(3),status);
+			r=new Bag(jsonObject.get("id").toString(),status); // TODO: remove substring
 		else if(jsonObject.get("type").toString().equals("BOX"))
-			r=new Box(jsonObject.get("id").toString().substring(3),status);
+			r=new Box(jsonObject.get("id").toString(),status); // TODO: remove substring
 		else
 			r=null; //Exception needed
 		return r;
     }
 
-    public void readFromJson() throws IOException{
+    public void readFromJson(String filePathName) throws IOException{
         // TODO: duplicate initialization
     	manager=new HashMap<>();
         manager.put("BOX", new ArrayList<Rentable>());
         manager.put("BAG", new ArrayList<Rentable>());
-    	File file=new File("datasrc/RentableStorer.json");
+    	File file=new File(filePathName);
     	// File file = new File("datasrc/available_items.json"); // TODO: change filePathName
     	String jsonString=new String(Files.readAllBytes(Paths.get(file.getPath())));
     	JSONArray arr=new JSONArray(jsonString);
@@ -118,8 +118,8 @@ public class RentableStorer implements XBoxStorer<Rentable>{
     }
     
     
-    public void readJson() throws IOException {
-        File jsonFile = new File(System.getProperty("user.dir") + "/src/datasrc/available_items.json");
+    public void readJson(String filePathName) throws IOException {
+        File jsonFile = new File(filePathName);
         String jsonStr = FileUtils.readFileToString(jsonFile, "UTF-8");
         JSONArray arr = new JSONArray(jsonStr);
         for(Object obj : arr){

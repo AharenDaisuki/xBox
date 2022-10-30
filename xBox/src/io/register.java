@@ -37,7 +37,7 @@ public class register implements IO{
 		panel1.setLayout(null);
 		label1 = new JLabel("Email:");
 		label2 = new JLabel("Password:");
-		label3 = new JLabel("Register an account");
+		label3 = new JLabel("Register an account:");
 	    label5 = new JLabel("Phone number:");
 	    bg = new ButtonGroup();    
 
@@ -64,7 +64,7 @@ public class register implements IO{
 		jt2.setBounds(200, 120, 150,30);
         jt3.setBounds(200, 90, 150,30);
 
-		btn1.setBounds(290, 190, 60, 40);
+		btn1.setBounds(290, 190, 65, 40);
 		btn2.setBounds(300,20, 50, 35);
 		jr1.setBounds(120, 150, 130, 50);
 	    jr2.setBounds(250, 150, 140, 50);
@@ -72,8 +72,8 @@ public class register implements IO{
 		btn1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String type;
-            	System.out.println(jt1.getText());
-            	System.out.println(jt2.getText());
+            	// System.out.println(jt1.getText());
+            	// System.out.println(jt2.getText());
             	if(jr1.isSelected()) {
             	   type = "student";
             	}else {

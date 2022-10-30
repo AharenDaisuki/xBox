@@ -54,8 +54,8 @@ public class login implements IO{
 		
 		btn1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	System.out.println(jt1.getText());
-            	System.out.println(jt2.getText());
+            	// System.out.println(jt1.getText());
+            	// System.out.println(jt2.getText());
             	String[] cmdLine = {jt1.getText(),jt2.getText()};
             	try {
             	    String results = UserInterfaces.getInstance().login(cmdLine); // invoke

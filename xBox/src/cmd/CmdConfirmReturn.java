@@ -65,7 +65,7 @@ public class CmdConfirmReturn extends Undoable{
         RecordManager recordManager = RecordManager.getInstance();
         String ret = "";
         for(int i = 0; i < num; ++i) {
-            ret += String.format("> Cancel confirmation [%s]\n", allRentables[i].getId());
+            ret += String.format("> Confirm confirmation [%s]\n", allRentables[i].getId());
             allRentables[i].setStatus(allStatus[i]);
             recordManager.insert(allRecords[i]);
         }

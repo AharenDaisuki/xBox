@@ -37,13 +37,15 @@ public class Xbox {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-                System.out.println("saving datas");
+                // System.out.println("saving datas");
            }
         });
 		return jFrame;
 	}
 	public static JTextArea out(String a) {
 		JTextArea jt= new JTextArea();
+		Font x = new Font(Font.MONOSPACED, 0, 10);
+		jt.setFont(x);
 		jt.setText(a);
 		jt.setEditable(false);
 		jt.setOpaque(false);

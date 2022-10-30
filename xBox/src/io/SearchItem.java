@@ -27,7 +27,7 @@ public class SearchItem implements IO{
     public JPanel show() {
         panel1 = new JPanel();
         label1 = new JLabel("Search Item");
-        label2 = new JLabel("Enter Item ID:");
+        label2 = new JLabel("Item ID:");
         jt1 = new JTextField();
 
         
@@ -89,7 +89,7 @@ public class SearchItem implements IO{
 
     public static void load() {
         Xbox main = Xbox.getInstance();
-        storeBox page =new storeBox();
+        SearchItem page =new SearchItem();
         // System.out.println("Store page");
         main.show_page(page.show());
         return;

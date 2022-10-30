@@ -41,7 +41,8 @@ public class CmdConfirmPayment extends Undoable{
             ret += String.format(">%-5s\t$%.2f\n", rentable.getId(), price);
         }
         tot *= aClient.getDiscount();
-        ret += String.format("\t total:\t$.2f\n", tot);
+        ret += String.format("\t discount:\t %d off\n", (1-aClient.getDiscount()) * 100);
+        ret += String.format("\t total:\t$%.2f\n", tot);
         return ret;
     }
     
@@ -51,7 +52,7 @@ public class CmdConfirmPayment extends Undoable{
         RequestManager requestManager = RequestManager.getInstance();
         for(Request request : allRequests) {
             requestManager.newRequest(request);
-            ret += String.format("> recover request[%s] (unused)\n", request.getRentable().getId());
+            ret += String.format("> delete request[%s] (unused)\n", request.getRentable().getId());
         }
         return ret;
     }

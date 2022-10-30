@@ -56,7 +56,7 @@ public class Request {
 
 	@Override
 	public String toString(){
-	    return String.format("%-15s%-30s%tF", rentable.getId(), client.getEmail(), date);
+	    return String.format("%-15s%-25s%tF", rentable.getId(), client.getEmail(), date);
 	}
 	
 	public String toJSONString()

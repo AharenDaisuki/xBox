@@ -27,6 +27,7 @@ import xBox.UserInterfaces;
  */
 
 @FixMethodOrder(MethodSorters.JVM)
+@Deprecated
 public class TestUserInterfaces {
     // user interface
     private UserInterfaces system = UserInterfaces.getInstance();
@@ -180,6 +181,30 @@ public class TestUserInterfaces {
             assertEquals(RentableStatusOccupied.statusName, record.getRentable().getStatusStr());
         }
         System.out.println(String.format("***%s***\n", "Test Store2"));
+    }
+    
+    @Test 
+    public void TestStoreUndoRedo() {
+        // initial
+        Client client = clientSearcher.getInstance().searchByKeyword("dongjiajie@gmail.com");
+        ArrayList<Request> requestList = requestSearcher.searchAllByKeyword(client);
+        ArrayList<Record> recordList = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
+        assertEquals(0, requestList.size());
+        assertEquals(2, recordList.size());
+        // undo
+        String undoLog = system.undo();
+        // Client client = clientSearcher.getInstance().searchByKeyword("dongjiajie@gmail.com");
+        ArrayList<Request> requestListUndo = requestSearcher.searchAllByKeyword(client);
+        ArrayList<Record> recordListUndo = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
+        assertEquals(1, requestListUndo.size());
+        assertEquals(1, recordListUndo.size());
+        // redo
+        String redoLog = system.redo();
+        ArrayList<Request> requestListRedo = requestSearcher.searchAllByKeyword(client);
+        ArrayList<Record> recordListRedo = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
+        assertEquals(0, requestListRedo.size());
+        assertEquals(2, recordListRedo.size());
+        
     }
     
     @Test

@@ -101,7 +101,7 @@ public class UserInterfaces {
 	public String summary(String[] cmdLine) {
 	    String ret = "Summary:\n";
 	    
-	    ret += String.format("%-15s%-30s%-10s\n", "[ID]", "[STATUS]", "[DUE]");
+	    ret += String.format("%-15s%-15s%-10s\n", "[ID]", "[STATUS]", "[DUE]");
 	    // System.out.printf("%-7s%-50s\n", "[ID]", "[STATUS]");
 	    RequestSearcher requestSearcher = RequestSearcher.getInstance();
 	    RecordSearcher recordSearcher = RecordSearcher.getInstance();

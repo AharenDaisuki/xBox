@@ -57,7 +57,7 @@ public class returnBox implements IO{
 		btn1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                login_or_register.load();
-            	String[] cmdLine= {jt1.getText()};
+            	String[] cmdLine= jt1.getText().split(" ");
             	String results;
                 try {
                     results = UserInterfaces.getInstance().unload(cmdLine);

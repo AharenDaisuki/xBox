@@ -76,8 +76,8 @@ public class CmdStoreRentable extends Undoable{
                 continue;
             }
             allRentables[i].setStatus(allNewStatus[i]);
-            recordManager.insert(allRecords[i]);
-            requestManager.removeRequest(allRequests[i]);
+            recordManager.insert(allRecords[i]); // insert record
+            requestManager.removeRequest(allRequests[i]); // remove request
             ret += String.format("> store %s\n", allRentables[i].getId());
         }
         addUndo(this);
@@ -93,10 +93,10 @@ public class CmdStoreRentable extends Undoable{
             if(allRequests[i] == null) {
                 continue;
             }
-            requestManager.newRequest(allRequests[i]);
-            recordManager.insert(allRecords[i]);
+            requestManager.newRequest(allRequests[i]); // insert request
+            recordManager.delete(allRecords[i]); // remove record
             allRentables[i].setStatus(allStatus[i]);
-            ret += String.format("> store %s\n", allRentables[i]);
+            ret += String.format("> store %s\n", allRentables[i].getId());
         }
         addRedo(this);
         return ret;

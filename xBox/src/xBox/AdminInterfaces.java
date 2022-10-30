@@ -25,7 +25,7 @@ public class AdminInterfaces {
 		return instance;
 	}
 	
-	private Client admin;
+	// private Client admin;
 	
 	/*example*/
 	// public String help() {}
@@ -36,7 +36,7 @@ public class AdminInterfaces {
 	public String summaryAllItems() {
 	    // type
 	    String ret = "<Item Summary>:\n";
-	    ret += String.format("%-15s%-30s\n", "[ID]", "[STATUS]");
+	    ret += String.format("%-15s%-15s\n", "[ID]", "[STATUS]");
 	    RentableSearcher searcher = RentableSearcher.getInstance();
 	    for(Rentable rentable : searcher.searchAllByKeyword("BOX")) {
 	        ret += String.format("%s\n", rentable.toString());
@@ -48,8 +48,8 @@ public class AdminInterfaces {
 	}
 	
 	public String summaryAllClients() {
-	    String ret = "<Client Summary]>:\n";
-	    ret += String.format("%-30s%-10s\n", "[EMAIL]", "[TEL]");
+	    String ret = "<Client Summary>:\n";
+	    ret += String.format("%-25s%-10s\n", "[EMAIL]", "[TEL]");
 	    ClientSearcher searcher = ClientSearcher.getInstance();
 	    for(Client client : searcher.searchAll()) {
 	        ret += String.format("%s\n", client.toString());
@@ -60,7 +60,7 @@ public class AdminInterfaces {
 	// summary requests
 	public String summaryAllRequests() {
         String ret = "<Request Summary>:\n";
-        ret += String.format("%-15s%-30s%-10s\n", "[ID]", "[EMAIL]", "[DATE]");
+        ret += String.format("%-15s%-25s%-10s\n", "[ID]", "[EMAIL]", "[DATE]");
         RequestSearcher searcher = RequestSearcher.getInstance();
         for(Request request : searcher.searchAll()) {
             ret += String.format("%s\n", request.toString());
@@ -71,7 +71,7 @@ public class AdminInterfaces {
 	// summary records
 	public String summaryAllRecords() {
         String ret = "<Record Summary>:\n";
-        ret += String.format("%-15s%-15s%-30s%-10s\n", "[ID]", "[PAYMENT]", "[EMAIL]", "[DUE]");
+        ret += String.format("%-15s%-15s%-25s%-10s\n", "[ID]", "[PAYMENT]", "[EMAIL]", "[DUE]");
         RecordSearcher searcher = RecordSearcher.getInstance();
         for(Record record : searcher.searchAll()) {
             ret += String.format("%s\n", record.toString());
@@ -84,7 +84,7 @@ public class AdminInterfaces {
 	    String ret = "";
 	    ClientSearcher clientSearcher = ClientSearcher.getInstance();
 	    Client client = clientSearcher.searchByKeyword(cmdLine[0]);
-	    ret += String.format("%-30s%-10s\n", "[EMAIL]", "[TEL]");
+	    ret += String.format("%-25s%-10s\n", "[EMAIL]", "[TEL]");
 	    ret += String.format("%s\n", client.toString());
 	    return ret;
 	}
@@ -94,7 +94,7 @@ public class AdminInterfaces {
 	    String ret = "";
 	    RentableSearcher rentableSearcher = RentableSearcher.getInstance();
 	    Rentable rentable = rentableSearcher.searchByKeyword(cmdLine[0]);
-	    ret += String.format("%-15s%-30s\n", "[ID]", "[STATUS]");
+	    ret += String.format("%-15s%-15s\n", "[ID]", "[STATUS]");
 	    ret += String.format("%s\n", rentable.toString());
 	    return ret;
 	}

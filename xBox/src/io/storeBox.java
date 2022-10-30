@@ -25,7 +25,7 @@ public class storeBox implements IO{
 	@Override
 	public JPanel show() {
 		panel1 = new JPanel();
-		label1 = new JLabel("Request");
+		label1 = new JLabel("Store");
 		label2 = new JLabel("Enter Item ID:");
 		jt1 = new JTextField();
 
@@ -57,7 +57,7 @@ public class storeBox implements IO{
 		btn1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                login_or_register.load();
-            	String[] cmdLine= {jt1.getText()};
+            	String[] cmdLine= jt1.getText().split(" ");
             	String results;
                 try {
                     results = UserInterfaces.getInstance().store(cmdLine);
