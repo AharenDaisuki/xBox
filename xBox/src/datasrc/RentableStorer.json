@@ -1,1 +1,1 @@
-[null]
+[{"id":"BOX001","status":{"status":"Available"},"type":"BOX"},{"id":"BAG001","status":{"status":"Occupied","client":{"email":"abc@123.com","phoneNo":"12345678","password":"123456","type":"staff"},"due":12345},"type":"BAG"},{"id":"BAG002","status":{"status":"Requested","client":{"email":"abc@123.com","phoneNo":"12345678","password":"123456","type":"staff"}},"type":"BAG"},{"id":"BAG003","status":{"status":"Pending","client":{"email":"abc@123.com","phoneNo":"12345678","password":"123456","type":"staff"}},"type":"BAG"}]

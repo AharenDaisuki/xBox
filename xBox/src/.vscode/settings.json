@@ -1,0 +1,11 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "commons-io-2.11.0.jar",
+        "commons-io-2.11.0-javadoc.jar",
+        "commons-io-2.11.0-sources.jar",
+        "commons-io-2.11.0-test-sources.jar",
+        "commons-io-2.11.0-tests.jar",
+        "json-20220924.jar"
+    ]
+}

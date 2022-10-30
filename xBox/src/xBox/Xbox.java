@@ -8,6 +8,8 @@ import io.*;
 
 import java.awt.*;
 import data.Client;
+import data.Database;
+import java.io.*;
 
 public class Xbox {
 	private static Xbox instance;
@@ -27,6 +29,14 @@ public class Xbox {
 		JFrame jFrame = new JFrame();
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		Database db=Database.getInstance();
+		
+		try {
+			db.initialize();
+		} catch (Exception IOException) {
+			System.out.print(IOException.getMessage());	
+		}
+		
 		jFrame.setBounds(0, 0, 450, 550);
         jFrame.setLocation( (int) (width - jFrame.getWidth()) / 2,
         (int) (height - jFrame.getHeight()) / 2);
@@ -35,8 +45,13 @@ public class Xbox {
 		jFrame.setVisible(true);
 		jFrame.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(WindowEvent e){
                 super.windowClosing(e);
+				try {
+					db.storeUp();	
+				} catch (Exception IOException) {
+					System.out.print(IOException.getMessage());	
+				}
                 System.out.println("saving datas");
            }
         });

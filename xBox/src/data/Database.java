@@ -3,7 +3,7 @@ package data;
 import java.io.*;
 
 public class Database {
-    private static Database database;
+    private static Database database=new Database();
     
     private RentableStorer rentableStorer;
     private RecordStorer recordStorer; 
