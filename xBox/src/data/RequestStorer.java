@@ -86,7 +86,7 @@ public class RequestStorer implements XBoxStorer<Request>{
 			jsonObject=putRequestToJSONObject(r);
 			arr.put(jsonObject);
 		}
-	    File file = new File(System.getProperty("user.dir") + "/src/datasrc/RequestStorer.json","w");
+	    File file = new File(System.getProperty("user.dir") + "/src/datasrc/RequestStorer.json");
 		FileUtils.write(file, arr.toString(), "utf-8", false);
 	}	
 }

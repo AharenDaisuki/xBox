@@ -84,7 +84,7 @@ public class ClientStorer{
 			jsonObject=putClientToJSONObject(c);
 			arr.put(jsonObject);
 		}
-		File file = new File(System.getProperty("user.dir") + "/src/datasrc/ClientStorer.json","w");
+		File file = new File(System.getProperty("user.dir") + "/src/datasrc/ClientStorer.json");
 		FileUtils.write(file, arr.toString(), "utf-8", false);
     }
 }

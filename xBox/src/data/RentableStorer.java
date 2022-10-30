@@ -151,7 +151,7 @@ public class RentableStorer implements XBoxStorer<Rentable>{
 				arr.put(jsonObject);
 			}
 		}
-		File file = new File(System.getProperty("user.dir") + "/src/datasrc/RentableStorer.json","w");
+		File file = new File(System.getProperty("user.dir") + "/src/datasrc/RentableStorer.json");
 		FileUtils.write(file, arr.toString(), "utf-8", false);
     }
 }

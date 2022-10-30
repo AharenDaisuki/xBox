@@ -80,7 +80,7 @@ public class RecordStorer implements XBoxStorer<Record>{
 			jsonObject=putRecordToJSONObject(r);
 			arr.put(jsonObject);
 		}
-		File file = new File(System.getProperty("user.dir") + "/src/datasrc/RecordStorer.json","w");
+		File file = new File(System.getProperty("user.dir") + "/src/datasrc/RecordStorer.json");
 		FileUtils.write(file, arr.toString(), "utf-8", false);
     }
 }
