@@ -69,7 +69,7 @@ public class RequestStorer implements XBoxStorer<Request>{
 
     public void readFromJson() throws IOException {
     	requestList=new ArrayList<>();
-    	File file = new File(System.getProperty("user.dir") + "/src/datasrc/RequestStorer.json");
+    	File file = new File(System.getProperty("user.dir") + "/xBox/src/datasrc/RequestStorer.json");
     	String jsonString=new String(Files.readAllBytes(Paths.get(file.getPath())));
     	JSONArray arr=new JSONArray(jsonString);
     	for(Object obj:arr)
@@ -86,7 +86,7 @@ public class RequestStorer implements XBoxStorer<Request>{
 			jsonObject=putRequestToJSONObject(r);
 			arr.put(jsonObject);
 		}
-	    File file = new File(System.getProperty("user.dir") + "/src/datasrc/RequestStorer.json");
+	    File file = new File(System.getProperty("user.dir") + "/xBox/src/datasrc/RequestStorer.json");
 		FileUtils.write(file, arr.toString(), "utf-8", false);
 	}	
 }

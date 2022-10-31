@@ -62,7 +62,7 @@ public class RecordStorer implements XBoxStorer<Record>{
 
     public void readFromJson() throws IOException {
     	recordList=new ArrayList<>();
-    	File file = new File(System.getProperty("user.dir") + "/src/datasrc/RecordStorer.json");
+    	File file = new File(System.getProperty("user.dir") + "/xBox/src/datasrc/RecordStorer.json");
     	String jsonString=new String(Files.readAllBytes(Paths.get(file.getPath())));
     	JSONArray arr=new JSONArray(jsonString);
     	for(Object obj:arr)
@@ -80,7 +80,7 @@ public class RecordStorer implements XBoxStorer<Record>{
 			jsonObject=putRecordToJSONObject(r);
 			arr.put(jsonObject);
 		}
-		File file = new File(System.getProperty("user.dir") + "/src/datasrc/RecordStorer.json");
+		File file = new File(System.getProperty("user.dir") + "/xBox/src/datasrc/RecordStorer.json");
 		FileUtils.write(file, arr.toString(), "utf-8", false);
     }
 }

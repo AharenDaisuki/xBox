@@ -129,7 +129,7 @@ public class RentableStorer implements XBoxStorer<Rentable>{
     	manager=new HashMap<>();
         manager.put("BOX", new ArrayList<Rentable>());
         manager.put("BAG", new ArrayList<Rentable>());
-        File file = new File(System.getProperty("user.dir") + "/src/datasrc/RentableStorer.json");
+        File file = new File(System.getProperty("user.dir") + "/xBox/src/datasrc/RentableStorer.json");
     	String jsonString=new String(Files.readAllBytes(Paths.get(file.getPath())));
     	JSONArray arr=new JSONArray(jsonString);
     	for(Object obj:arr)
@@ -151,7 +151,7 @@ public class RentableStorer implements XBoxStorer<Rentable>{
 				arr.put(jsonObject);
 			}
 		}
-		File file = new File(System.getProperty("user.dir") + "/src/datasrc/RentableStorer.json");
+		File file = new File(System.getProperty("user.dir") + "/xBox/src/datasrc/RentableStorer.json");
 		FileUtils.write(file, arr.toString(), "utf-8", false);
     }
 }
