@@ -6,7 +6,7 @@ public class Record {
 	private Client client;
 	private Rentable rentable;
 	private Date dueDate;
-	private boolean isPaid;
+	private boolean isPaid = false;
 
 	public Record(){}
 	
@@ -37,9 +37,10 @@ public class Record {
 	
 	public void setPaymentStatus(boolean isPaid_) { this.isPaid = isPaid_; }
 
+	public boolean getPaymentStatus() { return this.isPaid; }
 	@Override
 	public String toString(){
-	    return String.format("%-15s%-15s%-25%tF", rentable.getId(), (isPaid ? "paid" : "unpaid"), client.getEmail(), dueDate);
+	    return String.format("%-15s%-15s%-25s%tF", rentable.getId(), (isPaid ? "paid" : "unpaid"), client.getEmail(), dueDate);
 	}
 	
 	public String toJSONString()

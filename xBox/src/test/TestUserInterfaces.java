@@ -7,6 +7,7 @@ import data.*;
 import data.Record;
 import ex.ExAccountExists;
 import ex.ExEntryNotFound;
+import ex.ExInfoMissing;
 import ex.ExInvalidPassword;
 // import ex.ExNoSufficientRentable;
 // junit
@@ -51,6 +52,9 @@ public class TestUserInterfaces {
             System.out.println(system.register(registerParams3));
         } catch (ExAccountExists ex) {
             System.out.println(ex.getMessage());
+        } catch (ExInfoMissing e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         // test
         Client client1 = clientSearcher.searchByKeyword("AharenDaisuki@gmail.com");
@@ -122,8 +126,8 @@ public class TestUserInterfaces {
         rentableManager.addNewRentable(new Bag("8837", new RentableStatusAvailable()));
         // request
         String[] requestParams = {"BOX", "2", "9"}; // 2 boxes for 9 months
-        String log = system.request(requestParams);
-        System.out.println(log);
+        //String log = system.request(requestParams);
+        //System.out.println(log);
         // test
         Client user = system.getUser(); // test only
         ArrayList<Request> requestList = requestSearcher.searchAllByKeyword(user);
@@ -139,8 +143,8 @@ public class TestUserInterfaces {
     @Test
     public void TestRequestInsufficient() {
         String[] requestParams = {"BAG", "10", "1"};
-        String log = system.request(requestParams);
-        System.out.println(log);
+        //String log = system.request(requestParams);
+        //System.out.println(log);
         // test
         Client user = system.getUser();
         ArrayList<Request> requestList = requestSearcher.searchAllByKeyword(user);
@@ -156,8 +160,8 @@ public class TestUserInterfaces {
     @Test
     public void TestStoreValid() {
         String[] storeParams = {"BOX1234"};
-        String log = system.store(storeParams);
-        System.out.println(log);
+        // String log = system.store(storeParams);
+        // System.out.println(log);
         // test
         ArrayList<Record> recordList = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
         assertEquals(1, recordList.size());
@@ -172,8 +176,8 @@ public class TestUserInterfaces {
         String[] storeParams = {"BOX3452", "BOX6666"};
         // TODO: handle 
         // String[] storeParams = {"BOX6666", "BOX3452"}; 
-        String log = system.store(storeParams);
-        System.out.println(log);
+        // String log = system.store(storeParams);
+        // System.out.println(log);
         // test
         ArrayList<Record> recordList = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
         assertEquals(1 + 1, recordList.size());
@@ -192,14 +196,14 @@ public class TestUserInterfaces {
         assertEquals(0, requestList.size());
         assertEquals(2, recordList.size());
         // undo
-        String undoLog = system.undo();
+        //String undoLog = system.undo();
         // Client client = clientSearcher.getInstance().searchByKeyword("dongjiajie@gmail.com");
         ArrayList<Request> requestListUndo = requestSearcher.searchAllByKeyword(client);
         ArrayList<Record> recordListUndo = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
         assertEquals(1, requestListUndo.size());
         assertEquals(1, recordListUndo.size());
         // redo
-        String redoLog = system.redo();
+        //String redoLog = system.redo();
         ArrayList<Request> requestListRedo = requestSearcher.searchAllByKeyword(client);
         ArrayList<Record> recordListRedo = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
         assertEquals(0, requestListRedo.size());
@@ -210,8 +214,8 @@ public class TestUserInterfaces {
     @Test
     public void TestReturnValid() {
         String[] returnParams = {"BOX1234"};
-        String log = system.unload(returnParams);
-        System.out.println(log);
+        // String log = system.unload(returnParams);
+        // System.out.println(log);
         ArrayList<Record> recordList = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
         assertEquals(2, recordList.size());
         assertEquals(RentableStatusPending.statusName, rentableSearcher.searchByKeyword("BOX1234").getStatusStr());
@@ -221,18 +225,18 @@ public class TestUserInterfaces {
     @Test
     public void TestReturnInvalid() {
         String[] returnParams = {"BOX2333"}; 
-        String log = system.unload(returnParams);
-        System.out.println(log);
+        // String log = system.unload(returnParams);
+        // System.out.println(log);
         // assertEquals();
         System.out.println(String.format("***%s***\n", "Test Return2"));
     }
     
     @Test
     public void TestUndo() {
-        String log1 = system.undo();
-        System.out.println(log1);
-        String log2 = system.undo();
-        System.out.println(log2);
+        //String log1 = system.undo();
+        //System.out.println(log1);
+        //String log2 = system.undo();
+        //System.out.println(log2);
         // test
         ArrayList<Record> recordList = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
         assertEquals(1 + 1, recordList.size());
@@ -244,8 +248,8 @@ public class TestUserInterfaces {
     
     @Test
     public void TestRedo() {
-        String log = system.redo();
-        System.out.println(log);
+        //String log = system.redo();
+        //System.out.println(log);
         // test
         ArrayList<Record> recordList = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
         assertEquals(2, recordList.size());

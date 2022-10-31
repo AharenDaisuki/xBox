@@ -22,9 +22,9 @@ public class CmdStoreRentable extends Undoable{
     private final RentableStatus[] allNewStatus = new RentableStatus[size];
     // private Client client; // TODO: remove
     // private final Date[] allDates = new Date[size];
-    private int number;
+    private int number = 0;
     
-    public String execute(String[] cmdLine,Client aClient){
+    public String execute(String[] cmdLine,Client aClient) throws ExEntryNotFound{
         /*
          * [0:n-1 rentableId]
         */
@@ -34,13 +34,20 @@ public class CmdStoreRentable extends Undoable{
         
         String ret = "[stored list]\n";
         
-        this.number = cmdLine.length; // {id0, id1}
+        int len = cmdLine.length; // {id0, id1}
         // used
         
-        try {
-            for (int i = 0; i < number; ++i){
+        //try {
+            for (int i = 0; i < len; ++i){
                 // remember status
                 allRequests[i] = requestSearcher.searchByKeyword(cmdLine[i]); // TODO: no such request
+                if(allRequests[i] == null || allRequests[i].getClient() != aClient) {
+                    throw new ExEntryNotFound(String.format("Request[%s] is not found", cmdLine[i]));
+                }
+                if(allRequests[i].getRentable().getStatusStr().equals(RentableStatusOccupied.statusName)) {
+                    throw new ExEntryNotFound(String.format("%s has been stored for <%s>", cmdLine[i], aClient.getEmail()));
+                }
+                this.number++;
                 // allDates[i] = allRequests[i].getDue();
                 allRentables[i] = allRequests[i].getRentable();
                 allRecords[i] = new Record(aClient, allRentables[i], allRequests[i].getDue());
@@ -52,9 +59,9 @@ public class CmdStoreRentable extends Undoable{
                 requestManager.removeRequest(allRequests[i]);
                 ret += String.format("> %s will be stored for %s\n", allRentables[i].getId(), aClient.getEmail());
             }
-        }catch(ExEntryNotFound ex) {
-            ret += ex.getMessage() + "\n";
-        }
+        //}catch(ExEntryNotFound ex) {
+        //    ret += ex.getMessage() + "\n";
+        //}
         // not used
         ret += "[unused list]\n";
         ArrayList<Request> allNotUsed = requestSearcher.searchAllByKeyword(aClient);
@@ -68,13 +75,13 @@ public class CmdStoreRentable extends Undoable{
 	
     @Override
     public String redo(){
-        String ret = "";
+        String ret = "[Redo]\n";
         RecordManager recordManager = RecordManager.getInstance();
         RequestManager requestManager = RequestManager.getInstance();
-        for(int i = 0; i < number; ++i) {
-            if(allRequests[i] == null) {
-                continue;
-            }
+        for(int i = 0; i < this.number; ++i) {
+            // if(allRequests[i] == null) {
+            //    continue;
+            //}
             allRentables[i].setStatus(allNewStatus[i]);
             recordManager.insert(allRecords[i]); // insert record
             requestManager.removeRequest(allRequests[i]); // remove request
@@ -86,13 +93,13 @@ public class CmdStoreRentable extends Undoable{
     
     @Override
     public String undo(){
-        String ret = "";
+        String ret = "[Undo]\n";
         RecordManager recordManager = RecordManager.getInstance();
         RequestManager requestManager = RequestManager.getInstance();
-        for(int i = 0; i < number; ++i) {
-            if(allRequests[i] == null) {
-                continue;
-            }
+        for(int i = 0; i < this.number; ++i) {
+            //if(allRequests[i] == null) {
+            //    continue;
+            //}
             requestManager.newRequest(allRequests[i]); // insert request
             recordManager.delete(allRecords[i]); // remove record
             allRentables[i].setStatus(allStatus[i]);

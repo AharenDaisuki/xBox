@@ -13,7 +13,7 @@ import ex.ExEntryNotFound;
  * */
 
 public class CmdConfirmReturn extends Undoable{
-    private int num;
+    private int num = 0;
     private final int size = 100;
     private final Rentable[] allRentables = new Rentable[size];
     private final RentableStatus[] allStatus = new RentableStatus[size];
@@ -28,16 +28,21 @@ public class CmdConfirmReturn extends Undoable{
         RecordSearcher recordSearcher = RecordSearcher.getInstance();
         RecordManager recordManager = RecordManager.getInstance();
         
-        this.num = cmdLine.length;
+        int len = cmdLine.length;
         String ret = "[Checkin list]\n";
         
-        for(int i = 0; i < num; ++i) {
+        for(int i = 0; i < len; ++i) {
             String rentableId = cmdLine[i];
             Record record = recordSearcher.searchByKeyword(rentableId);
+            if(record == null) {
+                throw new ExEntryNotFound(String.format("Record[%s] is not found!", rentableId));
+            }
             allRentables[i] = record.getRentable();
             if(!allRentables[i].getStatusStr().equals(RentableStatusPending.statusName)) {
-                throw new ExEntryNotFound(String.format("[Error] Checkin notification [%s] not found", rentableId));
+                throw new ExEntryNotFound(String.format("[Error] Checkin notification [%s] not found!", rentableId));
             }
+            this.num++;
+            ret += String.format("> %s\n", rentableId);
             allStatus[i] = allRentables[i].getStatus();
             allNewStatus[i] = new RentableStatusAvailable();
             allRentables[i].setStatus(allNewStatus[i]);
@@ -65,7 +70,7 @@ public class CmdConfirmReturn extends Undoable{
         RecordManager recordManager = RecordManager.getInstance();
         String ret = "";
         for(int i = 0; i < num; ++i) {
-            ret += String.format("> Confirm confirmation [%s]\n", allRentables[i].getId());
+            ret += String.format("> Confirm checkin [%s]\n", allRentables[i].getId());
             allRentables[i].setStatus(allStatus[i]);
             recordManager.insert(allRecords[i]);
         }

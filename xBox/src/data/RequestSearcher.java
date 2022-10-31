@@ -26,13 +26,13 @@ public class RequestSearcher {
         return result;
     }
 
-    public Request searchByKeyword(String aID) throws ExEntryNotFound{
+    public Request searchByKeyword(String aID) {
         for(Request request : storer.getList()){
             if(request.getRentable().getId().equals(aID)){
                 return request;
             }
         }
-        throw new ExEntryNotFound(String.format("Request[%s] is not found", aID));
-        // return null;
+        //throw new ExEntryNotFound(String.format("Request[%s] is not found", aID));
+        return null;
     }
 }
