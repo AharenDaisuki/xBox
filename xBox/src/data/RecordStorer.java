@@ -53,9 +53,9 @@ public class RecordStorer implements XBoxStorer<Record>{
 	public static JSONObject putRecordToJSONObject(Record r)
 	{
 		JSONObject jo=new JSONObject();
-		jo.put("client", r.getClient());
-		jo.put("rentable", r.getRentable());
-		jo.put("dueDate", r.getDue());
+		jo.put("client", new JSONObject(r.getClient().toJSONString()));
+		jo.put("rentable", new JSONObject(r.getRentable().toJSONString()));
+		jo.put("dueDate", r.getDue().getTime());
 		jo.put("isPaid", r.getPaymentStatus());
 		return jo;
 	}

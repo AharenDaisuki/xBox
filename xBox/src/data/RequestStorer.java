@@ -61,9 +61,9 @@ public class RequestStorer implements XBoxStorer<Request>{
 	public static JSONObject putRequestToJSONObject(Request r)
 	{
 		JSONObject jo=new JSONObject();
-		jo.put("client", r.getClient());
-		jo.put("rentable", r.getRentable());
-		jo.put("dueDate", r.getDue());
+		jo.put("client", new JSONObject(r.getClient().toJSONString()));
+		jo.put("rentable", new JSONObject(r.getRentable().toJSONString()));
+		jo.put("dueDate", r.getDue().getTime());
 		return jo;
 	}
 

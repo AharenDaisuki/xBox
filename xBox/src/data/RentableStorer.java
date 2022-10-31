@@ -100,24 +100,24 @@ public class RentableStorer implements XBoxStorer<Rentable>{
 	{
 		JSONObject jo=new JSONObject();
 		RentableStatus status;
-		if(r.getStatus().equals("Available")){
+		if(r.getStatusStr().equals("Available")){
 		 	jo.put("id", r.getId());
-			jo.put("status", new RentableStatusAvailable());
+			 jo.put("status", new JSONObject(r.getStatus().toJSONString()));
 			jo.put("type", r.getType());
 		}
-		else if(r.getStatus().equals("Occupied")){
+		else if(r.getStatusStr().equals("Occupied")){
 			jo.put("id", r.getId());
-			jo.put("status", r.getStatus());
+			jo.put("status", new JSONObject(r.getStatus().toJSONString()));
 			jo.put("type", r.getType());
 		}
-		else if(r.getStatus().equals("Requested")){
+		else if(r.getStatusStr().equals("Requested")){
 			jo.put("id", r.getId());
-			jo.put("status", r.getStatus());
+			jo.put("status", new JSONObject(r.getStatus().toJSONString()));
 			jo.put("type", r.getType());
 		}
-		else if(r.getStatus().equals("Pending")){
+		else if(r.getStatusStr().equals("Pending")){
 			jo.put("id", r.getId());
-			jo.put("status", r.getStatus());
+			jo.put("status", new JSONObject(r.getStatus().toJSONString()));
 			jo.put("type", r.getType());
 		}
 		else
@@ -138,6 +138,7 @@ public class RentableStorer implements XBoxStorer<Rentable>{
     		Rentable r=getRentableByJSONObject(jsonObject);
     		manager.get(r.getType()).add(r);
     	}
+
     }
 
 	public void writeToJson() throws IOException{
@@ -146,8 +147,7 @@ public class RentableStorer implements XBoxStorer<Rentable>{
 		{
 			for (Rentable r:Rarr)
 			{
-				JSONObject jsonObject = new JSONObject();
-				jsonObject=putRentableToJSONObject(r);
+				JSONObject jsonObject = putRentableToJSONObject(r);
 				arr.put(jsonObject);
 			}
 		}
