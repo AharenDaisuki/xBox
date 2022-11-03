@@ -43,7 +43,7 @@ public class UserInterfaces {
 	/*User Interface*/
 	
 	// register TODO: DONE
-	public String register(String[] cmdLine) throws ExAccountExists{
+	public String register(String[] cmdLine) throws ExAccountExists, ExInfoMissing{
 	    // email = user name
 	    // phone number
 	    // password
@@ -55,6 +55,9 @@ public class UserInterfaces {
 	    ClientSearcher searcher = ClientSearcher.getInstance();
 	    ClientManager manager = ClientManager.getInstance();
 	    Client newClient = null;
+	    if(email.equals("") || phoneNo.equals("") || password.equals("")) {
+	        throw new ExInfoMissing();
+	    }
 	    if(searcher.searchByKeyword(email) == null) {
 	        // TODO: The email is available
 	        // TODO: hide
@@ -121,35 +124,47 @@ public class UserInterfaces {
 	}
 	
 	// undo
-	public String undo() {
+	public String undo() throws ExEmptyVector {
 	    String ret = ">> Undo the following operations?\n";
-	    ret += Undoable.undoCmd();
+	    //try {
+            ret += Undoable.undoCmd();
+        //} catch (ExEmptyVector ex) {
+            // TODO Auto-generated catch block
+            // e.printStackTrace();
+        //    System.out.println(ex.getMessage());
+        //}
 	    return ret;
 	}
 	
 	// redo
-	public String redo() {
+	public String redo() throws ExEmptyVector {
 	    String ret = ">> Redo the following operations?\n";
-	    ret += Undoable.redoCmd();
+	    //try {
+            ret += Undoable.redoCmd();
+        //} catch (ExEmptyVector ex) {
+            // TODO Auto-generated catch block
+            // e.printStackTrace();
+        //    System.out.println(ex.getMessage());
+        //}
 	    return ret;
 	}
 	
 	// request rentable
-	public String request(String[] cmdLine) {
+	public String request(String[] cmdLine) throws ExNoSufficientRentable {
         String ret = (new CmdRequestRentable()).execute(cmdLine, user) + "\n";
         ret += summary(null);
         return ret; // TODO: sorting options
 	}
 	
 	// store rentable
-	public String store(String[] cmdLine) {
+	public String store(String[] cmdLine) throws ExEntryNotFound {
 	    String ret = (new CmdStoreRentable()).execute(cmdLine, user) + "\n";
 	    ret += summary(null);
 	    return ret;
 	}
 	
 	// return rentable
-	public String unload(String[] cmdLine) {
+	public String unload(String[] cmdLine) throws ExEntryNotFound {
 	    String ret = (new CmdRequestReturn()).execute(cmdLine, user) + "\n";
 	    ret += summary(null);
 	    return ret;

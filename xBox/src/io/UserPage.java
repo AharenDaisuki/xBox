@@ -32,7 +32,7 @@ public class UserPage implements IO{
 		label1 = new JLabel("Select one command");
 		label2 = new JLabel("[console log]:");
 
-		btn0=new JButton("Back");
+		btn0=new JButton("Quit");
 		btn1=new JButton("Request");
 		btn2=new JButton("Store");
 		btn3=new JButton("Return");
@@ -57,6 +57,7 @@ public class UserPage implements IO{
 		
 		btn0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Undoable.clearList(); // clear list
                 login_or_register.load();
             }
         });	

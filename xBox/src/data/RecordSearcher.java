@@ -12,26 +12,26 @@ public class RecordSearcher{
 		return searcher;
 	}
 	// search by rentable id
-	public Record searchByKeyword(String rentableId) throws ExEntryNotFound{
+	public Record searchByKeyword(String rentableId) {
 	    RecordStorer storer = RecordStorer.getInstance();
 	    for(Record record : storer.getList()) {
 	        if(record.getRentable().getId().equals(rentableId)) {
 	            return record;
 	        }
 	    }
-	    throw new ExEntryNotFound(String.format("Record[%s] is not found", rentableId));
-	    // return null;
+	    //throw new ExEntryNotFound(String.format("Record[%s] is not found", rentableId));
+	    return null;
 	}
 	// search by rentable 
-	public Record searchByKeyword(Rentable rentable) throws ExEntryNotFound{
+	public Record searchByKeyword(Rentable rentable) {
 	       RecordStorer storer = RecordStorer.getInstance();
 	        for(Record record : storer.getList()) {
 	            if(record.getRentable().equals(rentable)) {
 	                return record;
 	            }
 	        }
-	        throw new ExEntryNotFound(String.format("Record[%s] is not found", rentable.getId()));
-	        // return null;
+	        //throw new ExEntryNotFound(String.format("Record[%s] is not found", rentable.getId()));
+	        return null;
 	}
 	// search client email
 	public ArrayList<Record> searchAllByKeyword(String email){

@@ -31,7 +31,7 @@ public class AdminPage implements IO{
 		label1 = new JLabel("Select one command");
 		label2 = new JLabel("[console log]:");
 
-		btn0=new JButton("Back");
+		btn0=new JButton("Quit");
 		btn1=new JButton("Confirm Payment");
 		btn2=new JButton("Confirm Return");
 		btn3=new JButton("Search Items");
@@ -54,13 +54,9 @@ public class AdminPage implements IO{
 		btn5.setBounds(80,160,135,40);
 		btn6.setBounds(230,160,135,40);
 		
-		// String ret = "";
-		// ret += AdminInterfaces.getInstance().summaryAllClients();
-		// ret += AdminInterfaces.getInstance().summaryAllItems();
-		// Xbox.output(ret);
-		
 		btn0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Undoable.clearList(); // clear list
                 login_or_register.load();
             }
         });	

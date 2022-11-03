@@ -33,38 +33,47 @@ public abstract class Undoable implements Command {
 		redoList.add(cmd);
 	}
 	
-	protected static void clearList() {
+	public static void clearList() {
 		redoList.clear();
 	}
 	
 	// fetch undoable and execute undo or redo function
-	public static String undoCmd() {
-		try {
-			if(undoList.isEmpty()) {
-				throw new ExEmptyVector("[Error] Nothing to undo");
-			}
+	public static String undoCmd() throws ExEmptyVector {
+		// try {
+		//	if(undoList.isEmpty()) {
+		//		throw new ExEmptyVector("[Error] Nothing to undo");
+		//	}
 			// undo from the top of the stack
-			return undoList.remove(undoList.size()-1).undo();
-		} catch(ExEmptyVector ex) {
-			if(DebugConfig.CMD_UNDOABLE_DEBUG_FLAG) {
-				System.out.println(ex.getMessage());
-			}
-		}
-		return null;
+		//	return undoList.remove(undoList.size()-1).undo();
+		//} catch(ExEmptyVector ex) {
+		//	if(DebugConfig.CMD_UNDOABLE_DEBUG_FLAG) {
+		//		System.out.println(ex.getMessage());
+		//	}
+		//}
+        if(undoList.isEmpty()) {
+            throw new ExEmptyVector("[Error] Nothing to undo!");
+        }
+        return undoList.remove(undoList.size()-1).undo();
+		// return null;
 	}
 	
-	public static String redoCmd() {
-		try {
-			if(redoList.isEmpty()) {
-				throw new ExEmptyVector("[dev Error] empty vector => {redoCmd}");
-			}
+	public static String redoCmd() throws ExEmptyVector {
+		//try {
+		//	if(redoList.isEmpty()) {
+		//		throw new ExEmptyVector("[dev Error] empty vector => {redoCmd}");
+		//	}
 			// redo from the top of the stack
-			return redoList.remove(redoList.size()-1).redo();
-		} catch(ExEmptyVector ex) {
-			if(DebugConfig.CMD_UNDOABLE_DEBUG_FLAG) {
-				System.out.println(ex.getMessage());
-			}
-		}
-		return null;
+		//	return redoList.remove(redoList.size()-1).redo();
+		//} catch(ExEmptyVector ex) {
+		//	if(DebugConfig.CMD_UNDOABLE_DEBUG_FLAG) {
+		//		System.out.println(ex.getMessage());
+		//	}
+		//}
+        if(redoList.isEmpty()) {
+            throw new ExEmptyVector("[Error] Nothing to redo!");
+        }
+        // redo from the top of the stack
+        return redoList.remove(redoList.size()-1).redo();
+		//return null;
 	}
 }

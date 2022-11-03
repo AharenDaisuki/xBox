@@ -20,13 +20,13 @@ public class CmdRequestRentable extends Undoable{
     // save data for undo & redo
     private Client user;
     //private String rentableType;
-    private int requestN;
+    private int requestN = 0;
     //private String monthN;
     private final Rentable[] allRentables = new Rentable[size];
     private final Request[] allRequests = new Request[size];
     private final RentableStatus[] allStatus = new RentableStatus[size];
     
-    public String execute(String[] cmdLine, Client aClient) {
+    public String execute(String[] cmdLine, Client aClient) throws ExNoSufficientRentable {
         /*
          * [0:type] [1:number] [2:month] 
         */
@@ -36,15 +36,19 @@ public class CmdRequestRentable extends Undoable{
             
         this.user = aClient;
         String rentableType = cmdLine[0];
-        this.requestN = Integer.parseInt(cmdLine[1]);
+        int len = Integer.parseInt(cmdLine[1]);
+        if(len > aClient.getMaxBorrowedCount()) {
+            throw new ExNoSufficientRentable(String.format("[Error] No more than %d %s per user!", aClient.getMaxBorrowedCount(), rentableType));
+        }
         String monthN = cmdLine[2]; 
         String ret = "[request list]\n";
         Date dueDate = systemDate.getDayAfterNMonth(monthN);
         
-        try {
-            for(int i = 0; i < requestN; ++i){
+        //try {
+            for(int i = 0; i < len; ++i){
                 // return rentable
                 allRentables[i] = rentableAllocator.borrowRentable(user, rentableType);
+                this.requestN++;
                 allStatus[i] = new RentableStatusRequested(user);
                 // set status
                 allRentables[i].setStatus(allStatus[i]);
@@ -53,9 +57,9 @@ public class CmdRequestRentable extends Undoable{
                 requestManager.newRequest(allRequests[i]);
                 ret += String.format("> %-10s%tF\n", allRentables[i].getId(), allRequests[i].getDue());
             }
-        }catch(ExNoSufficientRentable ex) {
-            ret += ex.getMessage() + "\n";
-        }
+        //}catch(ExNoSufficientRentable ex) {
+        //    ret += ex.getMessage() + "\n";
+        //}
         addUndo(this);
         clearList();
         return ret;
@@ -87,7 +91,7 @@ public class CmdRequestRentable extends Undoable{
         String ret = "[Redo]\n";
         RequestManager requestManager = RequestManager.getInstance();
         // redo current command
-        for(int i = 0; i < requestN; ++i) {
+        for(int i = 0; i < this.requestN; ++i) {
             // TODO: skip empty slots
             if(allRequests[i] == null) {
                 continue;
