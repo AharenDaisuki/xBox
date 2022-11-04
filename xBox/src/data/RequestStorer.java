@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -47,28 +48,47 @@ public class RequestStorer implements XBoxStorer<Request>{
     }
     
     public static Request getRequestByJSONObject(JSONObject jsonObject)
-	{
-		Client client;
-		Rentable rentable;
-		Date dueDate=new Date();
-		client=ClientStorer.getClientByJSONObject(new JSONObject(jsonObject.get("client").toString()));
-		rentable=RentableStorer.getRentableByJSONObject(new JSONObject(jsonObject.get("rentable").toString()));
-		dueDate.setTime(Integer.parseInt(jsonObject.get("dueDate").toString()));
-		return new Request(client,rentable,dueDate);
-	}
-
-    public void readFromJson() throws IOException {
-    	requestList=new ArrayList<>();
-    	File file=new File("datasrc/RequestStorer.json");
-    	String jsonString=new String(Files.readAllBytes(Paths.get(file.getPath())));
-    	JSONArray arr=new JSONArray(jsonString);
-    	for(Object obj:arr)
-    	{
-    		JSONObject jsonObject=new JSONObject(obj.toString());
-    		requestList.add(getRequestByJSONObject(jsonObject));
-    	}
+    {
+        Client client;
+        Rentable rentable;
+        Date dueDate=new Date();
+        client=ClientStorer.getClientByJSONObject(new JSONObject(jsonObject.get("client").toString()));
+        rentable=RentableStorer.getRentableByJSONObject(new JSONObject(jsonObject.get("rentable").toString()));
+        dueDate.setTime(Integer.parseInt(jsonObject.get("dueDate").toString()));
+        return new Request(client,rentable,dueDate);
     }
 
-    public void writeToJson() {
+    public static JSONObject putRequestToJSONObject(Request r)
+    {
+        JSONObject jo=new JSONObject();
+        jo.put("client", new JSONObject(r.getClient().toJSONString()));
+        jo.put("rentable", new JSONObject(r.getRentable().toJSONString()));
+        jo.put("dueDate", r.getDue().getTime());
+        return jo;
+    }
+
+    public void readFromJson(String filePathName) throws IOException {
+        requestList=new ArrayList<>();
+        File file = new File(filePathName);
+        // File file = new File(System.getProperty("user.dir") + "/xBox/src/datasrc/RequestStorer.json");
+        String jsonString=new String(Files.readAllBytes(Paths.get(file.getPath())));
+        JSONArray arr=new JSONArray(jsonString);
+        for(Object obj:arr)
+        {
+            JSONObject jsonObject=new JSONObject(obj.toString());
+            requestList.add(getRequestByJSONObject(jsonObject));
+        }
+    }
+    public void writeToJson(String filePathName) throws IOException{
+        JSONArray arr=new JSONArray();
+        for(Request r:requestList)
+        {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject=putRequestToJSONObject(r);
+            arr.put(jsonObject);
+        }
+        File file = new File(filePathName);
+        // File file = new File(System.getProperty("user.dir") + "/xBox/src/datasrc/RequestStorer.json");
+        FileUtils.write(file, arr.toString(), "utf-8", false);
     }
 }

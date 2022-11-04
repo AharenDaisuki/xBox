@@ -61,63 +61,107 @@ public class RentableStorer implements XBoxStorer<Rentable>{
     
     public static Rentable getRentableByJSONObject(JSONObject jsonObject)
     {
-		Rentable r;
-		RentableStatus status;
-		String statusJSONString=jsonObject.get("status").toString();
-		JSONObject statusJSONObject=new JSONObject(statusJSONString);
-		if(statusJSONObject.get("status").toString().equals("Available"))
-			status=new RentableStatusAvailable();
-		else if(statusJSONObject.get("status").toString().equals("Occupied"))
-		{
-			String clientString=statusJSONObject.get("client").toString();
-			long dueNum=statusJSONObject.getBigInteger("due").longValue();
-			JSONObject clientJSONObject=new JSONObject(clientString);
-			Client client=ClientStorer.getClientByJSONObject(clientJSONObject);
-			Date due=new Date(dueNum);
-			status=new RentableStatusOccupied(due,client);
-		}
-		else if(statusJSONObject.get("status").toString().equals("Requested"))
-		{
-			String clientString=statusJSONObject.get("client").toString();
-			JSONObject clientJSONObject=new JSONObject(clientString);
-			Client client=ClientStorer.getClientByJSONObject(clientJSONObject);
-			status=new RentableStatusRequested(client);
-		}
-		else if(statusJSONObject.get("status").toString().equals("Pending"))
-		{
-			String clientString=statusJSONObject.get("client").toString();
-			JSONObject clientJSONObject=new JSONObject(clientString);
-			Client client=ClientStorer.getClientByJSONObject(clientJSONObject);
-			status=new RentableStatusPending(client);
-		}
-		else status=null; //Exception needed
-		if(jsonObject.get("type").toString().equals("BAG"))
-			r=new Bag(jsonObject.get("id").toString(),status); // TODO: remove substring
-		else if(jsonObject.get("type").toString().equals("BOX"))
-			r=new Box(jsonObject.get("id").toString(),status); // TODO: remove substring
-		else
-			r=null; //Exception needed
-		return r;
+        Rentable r;
+        RentableStatus status;
+        String statusJSONString=jsonObject.get("status").toString();
+        JSONObject statusJSONObject=new JSONObject(statusJSONString);
+        if(statusJSONObject.get("status").toString().equals("Available"))
+            status=new RentableStatusAvailable();
+        else if(statusJSONObject.get("status").toString().equals("Occupied"))
+        {
+            String clientString=statusJSONObject.get("client").toString();
+            long dueNum=statusJSONObject.getBigInteger("due").longValue();
+            JSONObject clientJSONObject=new JSONObject(clientString);
+            Client client=ClientStorer.getClientByJSONObject(clientJSONObject);
+            Date due=new Date(dueNum);
+            status=new RentableStatusOccupied(due,client);
+        }
+        else if(statusJSONObject.get("status").toString().equals("Requested"))
+        {
+            String clientString=statusJSONObject.get("client").toString();
+            JSONObject clientJSONObject=new JSONObject(clientString);
+            Client client=ClientStorer.getClientByJSONObject(clientJSONObject);
+            status=new RentableStatusRequested(client);
+        }
+        else if(statusJSONObject.get("status").toString().equals("Pending"))
+        {
+            String clientString=statusJSONObject.get("client").toString();
+            JSONObject clientJSONObject=new JSONObject(clientString);
+            Client client=ClientStorer.getClientByJSONObject(clientJSONObject);
+            status=new RentableStatusPending(client);
+        }
+        else status=null; //Exception needed
+        if(jsonObject.get("type").toString().equals("BAG"))
+            r=new Bag(jsonObject.get("id").toString().substring(3),status);
+        else if(jsonObject.get("type").toString().equals("BOX"))
+            r=new Box(jsonObject.get("id").toString().substring(3),status);
+        else
+            r=null; //Exception needed
+        return r;
+    }
+
+    public static JSONObject putRentableToJSONObject(Rentable r)
+    {
+        JSONObject jo=new JSONObject();
+        RentableStatus status;
+        if(r.getStatusStr().equals("Available")){
+            jo.put("id", r.getId());
+             jo.put("status", new JSONObject(r.getStatus().toJSONString()));
+            jo.put("type", r.getType());
+        }
+        else if(r.getStatusStr().equals("Occupied")){
+            jo.put("id", r.getId());
+            jo.put("status", new JSONObject(r.getStatus().toJSONString()));
+            jo.put("type", r.getType());
+        }
+        else if(r.getStatusStr().equals("Requested")){
+            jo.put("id", r.getId());
+            jo.put("status", new JSONObject(r.getStatus().toJSONString()));
+            jo.put("type", r.getType());
+        }
+        else if(r.getStatusStr().equals("Pending")){
+            jo.put("id", r.getId());
+            jo.put("status", new JSONObject(r.getStatus().toJSONString()));
+            jo.put("type", r.getType());
+        }
+        else
+            jo=null;//exception needed
+        return jo;
     }
 
     public void readFromJson(String filePathName) throws IOException{
-        // TODO: duplicate initialization
-    	manager=new HashMap<>();
+        manager=new HashMap<>();
         manager.put("BOX", new ArrayList<Rentable>());
         manager.put("BAG", new ArrayList<Rentable>());
-    	File file=new File(filePathName);
-    	// File file = new File("datasrc/available_items.json"); // TODO: change filePathName
-    	String jsonString=new String(Files.readAllBytes(Paths.get(file.getPath())));
-    	JSONArray arr=new JSONArray(jsonString);
-    	for(Object obj:arr)
-    	{
-    		JSONObject jsonObject=new JSONObject(obj.toString());
-    		Rentable r=getRentableByJSONObject(jsonObject);
-    		manager.get(r.getType()).add(r);
-    	}
+        File file = new File(filePathName);
+        // File file = new File(System.getProperty("user.dir") + "/xBox/src/datasrc/RentableStorer.json");
+        String jsonString=new String(Files.readAllBytes(Paths.get(file.getPath())));
+        JSONArray arr=new JSONArray(jsonString);
+        for(Object obj:arr)
+        {
+            JSONObject jsonObject=new JSONObject(obj.toString());
+            Rentable r=getRentableByJSONObject(jsonObject);
+            manager.get(r.getType()).add(r);
+        }
+
+    }
+
+    public void writeToJson(String filePathName) throws IOException{
+        JSONArray arr=new JSONArray();
+        for(ArrayList<Rentable> Rarr:manager.values())
+        {
+            for (Rentable r:Rarr)
+            {
+                JSONObject jsonObject = putRentableToJSONObject(r);
+                arr.put(jsonObject);
+            }
+        }
+        File file = new File(filePathName);
+        //File file = new File(System.getProperty("user.dir") + "/xBox/src/datasrc/RentableStorer.json");
+        FileUtils.write(file, arr.toString(), "utf-8", false);
     }
     
-    
+    /*
     public void readJson(String filePathName) throws IOException {
         File jsonFile = new File(filePathName);
         String jsonStr = FileUtils.readFileToString(jsonFile, "UTF-8");
@@ -154,8 +198,5 @@ public class RentableStorer implements XBoxStorer<Rentable>{
             addEntry(rentable);
             // System.out.println(rentable.toString());
         }
-    }
-
-    public void writeToJson() {
-    }
+    }*/
 }
