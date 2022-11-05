@@ -12,6 +12,13 @@ import java.awt.*;
 import data.Client;
 import data.Database;
 
+/**
+ * 
+ * @brief xBox UI Interface
+ * 
+ * provide UI interface for users and handle data base initialization and json file operation
+ */
+
 public class Xbox {
 	private static Xbox instance;
 

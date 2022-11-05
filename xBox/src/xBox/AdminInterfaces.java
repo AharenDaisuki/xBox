@@ -10,12 +10,13 @@ import cmd.CmdConfirmPayment;
 import cmd.CmdConfirmReturn;
 
 /**
- * @author xyli45
+ * @author lixiaoyang
  * 
- * Description:
- * User interfaces are provided here. 
+ * @brief Admin Interface
  * 
+ * Admin interfaces are defined here
  */
+
 public class AdminInterfaces {
 	private static AdminInterfaces instance = new AdminInterfaces();
 	
@@ -32,6 +33,12 @@ public class AdminInterfaces {
 	// int login(String[] params); // return uid
 	// int register(String[] params); // return uid
 	
+    /**
+    * 
+    * @brief summaryAllItems()
+    * 
+    * summary of all items for admin
+    */
 	
 	public String summaryAllItems() {
 	    // type
@@ -47,6 +54,13 @@ public class AdminInterfaces {
 	    return ret + "\n";
 	}
 	
+    /**
+    * 
+    * @brief summaryAllClients()
+    * 
+    * summary of all clients for admin
+    */
+	
 	public String summaryAllClients() {
 	    String ret = "<Client Summary>:\n";
 	    ret += String.format("%-25s%-10s\n", "[EMAIL]", "[TEL]");
@@ -57,7 +71,13 @@ public class AdminInterfaces {
 	    return ret + "\n";
 	}
 	
-	// summary requests
+    /**
+    * 
+    * @brief summaryAllRequests()
+    * 
+    * summary of all requests for admin
+    */
+	
 	public String summaryAllRequests() {
         String ret = "<Request Summary>:\n";
         ret += String.format("%-15s%-25s%-10s\n", "[ID]", "[EMAIL]", "[DATE]");
@@ -68,7 +88,12 @@ public class AdminInterfaces {
 	    return ret;
 	}
 	
-	// summary records
+    /**
+    * 
+    * @brief summaryAllRecords()
+    * 
+    * summary of all records for admin
+    */
 	public String summaryAllRecords() {
         String ret = "<Record Summary>:\n";
         ret += String.format("%-15s%-15s%-25s%-10s\n", "[ID]", "[PAYMENT]", "[EMAIL]", "[DUE]");
@@ -78,6 +103,13 @@ public class AdminInterfaces {
         }
         return ret;
 	}
+	
+    /**
+    * 
+    * @brief summaryClient()
+    * 
+    * summary of one certain client for admin
+    */
 	
 	public String summaryClient(String[] cmdLine) {
 	    // email
@@ -89,6 +121,13 @@ public class AdminInterfaces {
 	    return ret;
 	}
 	
+    /**
+    * 
+    * @brief summaryItem()
+    * 
+    * summary of one certain item for admin
+    */
+	
 	public String summaryItem(String[] cmdLine) {
 	    // id
 	    String ret = "";
@@ -99,6 +138,13 @@ public class AdminInterfaces {
 	    return ret;
 	}
 	
+    /**
+    * 
+    * @brief confirmPayment()
+    * 
+    * payment confirming interface for admin
+    */
+	
 	public String confirmPayment(String[] cmdLine) {
 	    // email
 	    ClientSearcher clientSearcher = ClientSearcher.getInstance();
@@ -106,6 +152,15 @@ public class AdminInterfaces {
 	    String ret = (new CmdConfirmPayment()).execute(cmdLine, client);
 	    return ret;
 	}
+	
+    /**
+    * 
+    * @brief confirmReturn()
+    * 
+    * checkin request confirming interface for admin
+    * 
+    * @exception entry not found
+    */
 	
 	public String confirmReturn(String[] cmdLine) throws ExEntryNotFound {
 	    // email

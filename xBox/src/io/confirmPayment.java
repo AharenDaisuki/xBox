@@ -12,6 +12,13 @@ import xBox.Xbox;
 
 import java.awt.*;
 
+/**
+ * @author dongjiajie
+ * @brief confirm payment
+ * 
+ * UI Interface for admin function [confirmPayment]
+ */
+
 public class confirmPayment implements IO{
 	private JPanel panel1;
 	private JLabel label1;

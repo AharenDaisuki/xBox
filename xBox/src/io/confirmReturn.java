@@ -12,6 +12,13 @@ import xBox.Xbox;
 
 import java.awt.*;
 
+/**
+ * @author dongjiajie
+ * @brief ConfirmReturn
+ * 
+ * UI Interface for admin function [confirmReturn]
+ */
+
 public class confirmReturn implements IO{
 	private JPanel panel1;
 	private JLabel label1;

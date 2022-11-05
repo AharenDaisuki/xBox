@@ -12,6 +12,13 @@ import xBox.Xbox;
 
 import java.awt.*;
 
+/**
+ * @author dongjiajie
+ * @brief UserPage
+ * 
+ * UI Interface for user page
+ */
+
 public class UserPage implements IO{
 	private JPanel panel1;
 	private JLabel label1;

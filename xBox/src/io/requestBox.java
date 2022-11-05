@@ -11,6 +11,13 @@ import xBox.Xbox;
 
 import java.awt.*;
 
+/**
+ * @author dongjiajie
+ * @brief request
+ * 
+ * UI Interface for user function [request]
+ */
+
 public class requestBox implements IO{
 	private JPanel panel1;
 	private JLabel label1;

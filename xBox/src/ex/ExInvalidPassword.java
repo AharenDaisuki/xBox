@@ -5,7 +5,9 @@ package ex;
 
 /**
  * @author lixiaoyang
- *
+ * @brief ExInvalidPassword
+ * 
+ * Exception for invalid password
  */
 public class ExInvalidPassword extends Exception{
     private static final long serialVersionUID = 4L;

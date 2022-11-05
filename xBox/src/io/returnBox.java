@@ -11,6 +11,13 @@ import xBox.Xbox;
 
 import java.awt.*;
 
+/**
+ * @author dongjiajie
+ * @brief return
+ * 
+ * UI Interface for user function [return]
+ */
+
 public class returnBox implements IO{
 	private JPanel panel1;
 	private JLabel label1;

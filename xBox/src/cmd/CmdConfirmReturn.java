@@ -7,10 +7,14 @@ import data.Record;
 
 import ex.ExEntryNotFound;
 
-/*
- * Admin command [Confirm checkin *]
- * 
- * */
+/**
+*
+* @brief admin command: confirm return request
+* 
+* This class implements request confirming operation of item returning for admin interface.
+*  
+* 
+*/
 
 public class CmdConfirmReturn extends Undoable{
     private int num = 0;
@@ -20,10 +24,15 @@ public class CmdConfirmReturn extends Undoable{
     private final RentableStatus[] allNewStatus = new RentableStatus[size];
     private final Record[] allRecords = new Record[size];
     
+    /**
+    * 
+    * @param cmdLine command parameters [0:n-1 item Id]
+    * 
+    * @param aClient the active client
+    *  
+    * @return string, log to be output
+    */
     public String execute(String[] cmdLine,Client aClient) throws ExEntryNotFound{
-        /*
-         * [0:n-1 rentableId]
-        */
         
         RecordSearcher recordSearcher = RecordSearcher.getInstance();
         RecordManager recordManager = RecordManager.getInstance();

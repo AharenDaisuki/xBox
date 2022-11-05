@@ -5,14 +5,19 @@ import java.util.ArrayList;
 import data.*;
 import data.Record;
 
-/*
- * Admin command [Confirm payment *]
- * 
- * */
+/**
+*
+* @brief admin command: confirm item request
+* 
+* This class implements request confirming operation of item for admin interface.
+*  
+* 
+*/
 
 public class CmdConfirmPayment extends Undoable{
     private final int size = 100;
     private final Request[] allRequests = new Request[size]; 
+    
     public String execute(String[] cmdLine, Client aClient){
         /*
          * email

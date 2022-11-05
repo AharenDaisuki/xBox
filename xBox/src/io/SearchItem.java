@@ -12,6 +12,13 @@ import xBox.AdminInterfaces;
 // import xBox.UserInterfaces;
 import xBox.Xbox;
 
+/**
+ * @author dongjiajie
+ * @brief Search Item
+ * 
+ * UI Interface for admin function [SearchItem]
+ */
+
 public class SearchItem implements IO{
     private JPanel panel1;
     private JLabel label1;

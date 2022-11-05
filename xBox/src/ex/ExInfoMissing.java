@@ -5,7 +5,9 @@ package ex;
 
 /**
  * @author lixiaoyang
- *
+ * @brief ExInfoMissing
+ * 
+ * Exception for the missing personal info when signing in
  */
 public class ExInfoMissing extends Exception{
     private static final long serialVersionUID = 6L;

@@ -11,6 +11,13 @@ import xBox.*;
 
 import java.awt.*;
 
+/**
+ * @author dongjiajie
+ * @brief AdminPage
+ * 
+ * UI Interface for admin page
+ */
+
 public class AdminPage implements IO{
 	private JPanel panel1;
 	private JLabel label1;

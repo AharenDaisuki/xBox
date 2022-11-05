@@ -4,10 +4,11 @@
 package cmd;
 
 /**
- * @author xyli45
+ * @author lixiaoyang
  * 
- * Description: 
- * command interface, extended by undoable.
+ * @brief Description for Command.java
+ * 
+ * Command interface for specific command classes to implement, providing execute() function
  *
  */
 import data.Client;

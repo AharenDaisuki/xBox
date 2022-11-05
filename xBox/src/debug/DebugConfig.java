@@ -4,9 +4,11 @@
 package debug;
 
 /**
- * @author xyli45
+ * @author lixiaoyang
  * 
- * This is for debug configuration. Define your debug flag here.
+ * @file debug configuration
+ * 
+ * The file defines debug configurations for development and debug purpose.
  *
  */
 public class DebugConfig {

@@ -13,6 +13,14 @@ import cmd.CmdStoreRentable;
 import cmd.CmdRequestReturn;
 import cmd.CmdRequestRentable;
 
+/**
+ * @author lixiaoyang
+ * 
+ * @brief User Interface
+ * 
+ * User interfaces are defined here
+ */
+
 public class UserInterfaces {
 	// singleton
     private static UserInterfaces instance = new UserInterfaces();
@@ -42,7 +50,17 @@ public class UserInterfaces {
 	
 	/*User Interface*/
 	
-	// register TODO: DONE
+
+    /**
+    * 
+    * @param cmdLine interface parameters [0:email] [1:phoneNo] [2:password] [3:type]
+    * 
+    * @exception Account exists
+    * @exception Info missing
+    *  
+    * @return string, log to be output
+    */
+	
 	public String register(String[] cmdLine) throws ExAccountExists, ExInfoMissing{
 	    // email = user name
 	    // phone number
@@ -77,7 +95,16 @@ public class UserInterfaces {
 	    }
 	}
 	
-	// login TODO: DONE
+    /**
+    * 
+    * @param cmdLine interface parameters [0:email] [1:password]
+    * 
+    * @exception entry not found
+    * @exception invalid password
+    * 
+    * @return string, log to be output
+    */
+	
 	public String login(String[] cmdLine) throws ExEntryNotFound, ExInvalidPassword{
 	    // email
 	    // password
@@ -100,7 +127,14 @@ public class UserInterfaces {
 	    return String.format("Login Success <%s>", email);
 	}
 	
-	// summary all rentables
+	
+    /**
+    * 
+    * @brief summary
+    * 
+    * summary all items
+    */
+	
 	public String summary(String[] cmdLine) {
 	    String ret = "Summary:\n";
 	    
@@ -123,7 +157,13 @@ public class UserInterfaces {
 	    return ret;
 	}
 	
-	// undo
+    /**
+    * 
+    * @brief undo
+    * 
+    * undo the very last command
+    */
+	
 	public String undo() throws ExEmptyVector {
 	    String ret = ">> Undo the following operations?\n";
 	    //try {
@@ -136,7 +176,14 @@ public class UserInterfaces {
 	    return ret;
 	}
 	
-	// redo
+    /**
+    * 
+    * @brief redo
+    * 
+    * redo the very last command
+    * 
+    */
+	
 	public String redo() throws ExEmptyVector {
 	    String ret = ">> Redo the following operations?\n";
 	    //try {
@@ -149,21 +196,39 @@ public class UserInterfaces {
 	    return ret;
 	}
 	
-	// request rentable
+    /**
+    * 
+    * @brief request
+    * 
+    * user interface for requesting items
+    */
+	
 	public String request(String[] cmdLine) throws ExNoSufficientRentable {
         String ret = (new CmdRequestRentable()).execute(cmdLine, user) + "\n";
         ret += summary(null);
         return ret; // TODO: sorting options
 	}
 	
-	// store rentable
+    /**
+    * 
+    * @brief store
+    * 
+    * user interface for storing items
+    */
+	
 	public String store(String[] cmdLine) throws ExEntryNotFound {
 	    String ret = (new CmdStoreRentable()).execute(cmdLine, user) + "\n";
 	    ret += summary(null);
 	    return ret;
 	}
 	
-	// return rentable
+    /**
+    * 
+    * @brief return
+    * 
+    * user interface for returning items
+    */
+	
 	public String unload(String[] cmdLine) throws ExEntryNotFound {
 	    String ret = (new CmdRequestReturn()).execute(cmdLine, user) + "\n";
 	    ret += summary(null);
