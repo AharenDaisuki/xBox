@@ -2,26 +2,26 @@ package test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.Date;
 
 import org.junit.Test;
 
 import data.Box;
 import data.Client;
-import data.ClientManager;
-import data.ClientStorer;
+//import data.ClientManager;
+//import data.ClientStorer;
 import data.ClientStudent;
-import data.Day;
-import data.RecordStorer;
+//import data.Day;
+//import data.RecordStorer;
 import data.Rentable;
-import data.RentableManager;
-import data.RentableStorer;
+//import data.RentableManager;
+//import data.RentableStorer;
 import data.RentableStatusOccupied;
 import data.Request;
 import data.RequestManager;
 import data.RequestStorer;
-import data.Record;
+//import data.Record;
 
 public class TestStorer {
 
