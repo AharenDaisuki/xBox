@@ -40,6 +40,7 @@ public class AdminInterfaces {
     * summary of all items for admin
     */
 	
+	
 	public String summaryAllItems() {
 	    // type
 	    String ret = "<Item Summary>:\n";
@@ -106,16 +107,22 @@ public class AdminInterfaces {
 	
     /**
     * 
+    * @throws ExEntryNotFound 
     * @brief summaryClient()
     * 
     * summary of one certain client for admin
+    * 
+    * @exception client not found
     */
 	
-	public String summaryClient(String[] cmdLine) {
+	public String summaryClient(String[] cmdLine) throws ExEntryNotFound {
 	    // email
 	    String ret = "";
 	    ClientSearcher clientSearcher = ClientSearcher.getInstance();
 	    Client client = clientSearcher.searchByKeyword(cmdLine[0]);
+	    if(client == null) {
+	        throw new ExEntryNotFound(String.format("[Error] <%s> not found!", cmdLine[0]));
+	    }
 	    ret += String.format("%-25s%-10s\n", "[EMAIL]", "[TEL]");
 	    ret += String.format("%s\n", client.toString());
 	    return ret;
@@ -123,16 +130,22 @@ public class AdminInterfaces {
 	
     /**
     * 
-    * @brief summaryItem()
+    * @throws ExEntryNotFound 
+     * @brief summaryItem()
     * 
     * summary of one certain item for admin
+    * 
+    * @exception item not found
     */
 	
-	public String summaryItem(String[] cmdLine) {
+	public String summaryItem(String[] cmdLine) throws ExEntryNotFound {
 	    // id
 	    String ret = "";
 	    RentableSearcher rentableSearcher = RentableSearcher.getInstance();
 	    Rentable rentable = rentableSearcher.searchByKeyword(cmdLine[0]);
+	    if(rentable == null) {
+	         throw new ExEntryNotFound(String.format("[Error] %s not found!", cmdLine[0]));
+	    }
 	    ret += String.format("%-15s%-15s\n", "[ID]", "[STATUS]");
 	    ret += String.format("%s\n", rentable.toString());
 	    return ret;
@@ -140,15 +153,19 @@ public class AdminInterfaces {
 	
     /**
     * 
-    * @brief confirmPayment()
+    * @throws ExEntryNotFound 
+     * @brief confirmPayment()
     * 
     * payment confirming interface for admin
     */
 	
-	public String confirmPayment(String[] cmdLine) {
+	public String confirmPayment(String[] cmdLine) throws ExEntryNotFound {
 	    // email
 	    ClientSearcher clientSearcher = ClientSearcher.getInstance();
 	    Client client = clientSearcher.searchByKeyword(cmdLine[0]);
+	    if(client == null) {
+	        throw new ExEntryNotFound(String.format("[Error] <%s> not found!", cmdLine[0]));
+	    }
 	    String ret = (new CmdConfirmPayment()).execute(cmdLine, client);
 	    return ret;
 	}
@@ -166,6 +183,9 @@ public class AdminInterfaces {
 	    // email
         ClientSearcher clientSearcher = ClientSearcher.getInstance();
         Client client = clientSearcher.searchByKeyword(cmdLine[0]);
+        if(client == null) {
+            throw new ExEntryNotFound(String.format("[Error] <%s> not found!", cmdLine[0]));
+        }
 	    String ret = (new CmdConfirmReturn()).execute(cmdLine, client);
 	    return ret;
 	}
