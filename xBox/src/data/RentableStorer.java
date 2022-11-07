@@ -92,9 +92,11 @@ public class RentableStorer implements XBoxStorer<Rentable>{
         }
         else status=null; //Exception needed
         if(jsonObject.get("type").toString().equals("BAG"))
-            r=new Bag(jsonObject.get("id").toString().substring(3),status);
+            //r=new Bag(jsonObject.get("id").toString().substring(3),status);
+            r=new Bag(jsonObject.get("id").toString(),status);
         else if(jsonObject.get("type").toString().equals("BOX"))
-            r=new Box(jsonObject.get("id").toString().substring(3),status);
+            //r=new Box(jsonObject.get("id").toString().substring(3),status);
+            r=new Box(jsonObject.get("id").toString(),status);
         else
             r=null; //Exception needed
         return r;
@@ -104,6 +106,33 @@ public class RentableStorer implements XBoxStorer<Rentable>{
     {
         JSONObject jo=new JSONObject();
         RentableStatus status;
+        // id
+        jo.put("id", r.getId().substring(3));
+        // status
+        if(r.getStatusStr().equals("Available")){
+            //jo.put("id", r.getId());
+            jo.put("status", new JSONObject(r.getStatus().toJSONString()));
+            //jo.put("type", r.getType());
+        }
+        else if(r.getStatusStr().equals("Occupied")){
+            //jo.put("id", r.getId());
+            jo.put("status", new JSONObject(r.getStatus().toJSONString()));
+            //jo.put("type", r.getType());
+        }
+        else if(r.getStatusStr().equals("Requested")){
+            //jo.put("id", r.getId());
+            jo.put("status", new JSONObject(r.getStatus().toJSONString()));
+            //jo.put("type", r.getType());
+        }
+        else if(r.getStatusStr().equals("Pending")){
+            //jo.put("id", r.getId());
+            jo.put("status", new JSONObject(r.getStatus().toJSONString()));
+            //jo.put("type", r.getType());
+        }
+        // type
+        jo.put("type", r.getType());
+        
+        /*
         if(r.getStatusStr().equals("Available")){
             jo.put("id", r.getId());
              jo.put("status", new JSONObject(r.getStatus().toJSONString()));
@@ -126,6 +155,8 @@ public class RentableStorer implements XBoxStorer<Rentable>{
         }
         else
             jo=null;//exception needed
+        */
+        
         return jo;
     }
 

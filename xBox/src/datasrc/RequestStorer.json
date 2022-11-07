@@ -1,1 +1,1 @@
-[{"rentable":{"id":"BAG001","type":"BAG","status":{"due":12345,"client":{"password":"123456","type":"staff","email":"abc@123.com","phoneNo":"12345678"},"status":"Occupied"}},"dueDate":12345,"client":{"password":"123456","type":"staff","email":"abc@123.com","phoneNo":"12345678"}}]
+[]

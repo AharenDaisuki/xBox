@@ -40,7 +40,7 @@ public class CmdConfirmReturn extends Undoable{
         int len = cmdLine.length;
         String ret = "[Checkin list]\n";
         
-        for(int i = 0; i < len; ++i) {
+        for(int i = 1; i < len; ++i) {
             String rentableId = cmdLine[i];
             Record record = recordSearcher.searchByKeyword(rentableId);
             if(record == null) {

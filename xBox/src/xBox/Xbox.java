@@ -36,7 +36,7 @@ public class Xbox {
 	private JFrame init(){
 	    Database db = Database.getInstance();
 	    String[] files = {
-	      System.getProperty("user.dir") + "/src/datasrc/available_items.json", // TODO: to be modified
+	      System.getProperty("user.dir") + "/src/datasrc/RentableStorer.json", // TODO: to be modified
 	      System.getProperty("user.dir") + "/src/datasrc/RecordStorer.json",
 	      System.getProperty("user.dir") + "/src/datasrc/ClientStorer.json",
 	      System.getProperty("user.dir") + "/src/datasrc/RequestStorer.json"
@@ -61,11 +61,11 @@ public class Xbox {
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
                 // store up
-                try {
-                    db.storeUp(files);
-                } catch (IOException ex) {
-                    System.out.println("Fail to save json file!");
-                }
+                //try {
+                //    db.storeUp(files);
+                //} catch (IOException ex) {
+                //    System.out.println("Fail to save json file!");
+                //}
            }
         });
 		return jFrame;

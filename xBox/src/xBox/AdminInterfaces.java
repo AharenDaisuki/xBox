@@ -180,7 +180,8 @@ public class AdminInterfaces {
     */
 	
 	public String confirmReturn(String[] cmdLine) throws ExEntryNotFound {
-	    // email
+	    // email [0]
+	    // rentable id [1:n]
         ClientSearcher clientSearcher = ClientSearcher.getInstance();
         Client client = clientSearcher.searchByKeyword(cmdLine[0]);
         if(client == null) {
