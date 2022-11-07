@@ -8,12 +8,13 @@ import utils.XBoxDate;
 import ex.ExNoSufficientRentable;
 
 /**
- * 
- *
- * User command: [Request *]
- * 
- *  
- */
+*
+* @brief user command: item request
+* 
+* This class implements request operation of item for user interface.
+*  
+* 
+*/
 
 public class CmdRequestRentable extends Undoable{
     private final int size = 100;
@@ -25,6 +26,15 @@ public class CmdRequestRentable extends Undoable{
     private final Rentable[] allRentables = new Rentable[size];
     private final Request[] allRequests = new Request[size];
     private final RentableStatus[] allStatus = new RentableStatus[size];
+    
+    /**
+    * 
+    * @param cmdLine command parameters [0: type] [1: quantity] [2: rent duration]
+    * 
+    * @param aClient the active client
+    *  
+    * @return string, log to be output
+    */
     
     public String execute(String[] cmdLine, Client aClient) throws ExNoSufficientRentable {
         /*

@@ -11,6 +11,13 @@ import javax.swing.JTextField;
 import xBox.AdminInterfaces;
 import xBox.Xbox;
 
+/**
+ * @author dongjiajie
+ * @brief Search Client
+ * 
+ * UI Interface for admin function [searchClient]
+ */
+
 public class SearchClient implements IO{
     private JPanel panel1;
     private JLabel label1;

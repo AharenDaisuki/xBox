@@ -2,12 +2,22 @@ package xBox;
 
 import java.util.*;
 import javax.swing.*;
-import java.awt.event.*;  
+import java.awt.event.*;
+import java.io.IOException;
+
 import ex.*;
 import io.*;
 
 import java.awt.*;
 import data.Client;
+import data.Database;
+
+/**
+ * 
+ * @brief xBox UI Interface
+ * 
+ * provide UI interface for users and handle data base initialization and json file operation
+ */
 
 public class Xbox {
 	private static Xbox instance;
@@ -24,6 +34,19 @@ public class Xbox {
 	private String data =null;
 	
 	private JFrame init(){
+	    Database db = Database.getInstance();
+	    String[] files = {
+	      System.getProperty("user.dir") + "/src/datasrc/RentableStorer.json", // TODO: to be modified
+	      System.getProperty("user.dir") + "/src/datasrc/RecordStorer.json",
+	      System.getProperty("user.dir") + "/src/datasrc/ClientStorer.json",
+	      System.getProperty("user.dir") + "/src/datasrc/RequestStorer.json"
+	    };
+	    // initialization
+	    try {
+            db.initialize(files);
+        } catch (IOException ex) {
+            System.out.println("[Error] Fail to read json file!");
+        }
 		JFrame jFrame = new JFrame();
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
@@ -37,7 +60,12 @@ public class Xbox {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-                // System.out.println("saving datas");
+                // store up
+                //try {
+                //    db.storeUp(files);
+                //} catch (IOException ex) {
+                //    System.out.println("Fail to save json file!");
+                //}
            }
         });
 		return jFrame;

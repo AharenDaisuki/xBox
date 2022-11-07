@@ -7,7 +7,9 @@ import java.lang.Exception;
 
 /**
  * @author lixiaoyang
- *
+ * @brief ExInvalidFileFormat
+ * 
+ * Exception for invalid file format
  */
 public class ExInvalidFileFormat extends Exception{
 	private static final long serialVersionUID = 2L;

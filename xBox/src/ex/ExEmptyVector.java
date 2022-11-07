@@ -6,11 +6,10 @@ package ex;
 import java.lang.Exception;
 
 /**
- * @author xyli45
+ * @author lixiaoyang
+ * @brief ExEmptyVector
  * 
- * Description:
- * empty vector(?) exception: // add comment here
- *
+ * Exception in developer level for illegal memory access
  */
 public class ExEmptyVector extends Exception{
 	/**

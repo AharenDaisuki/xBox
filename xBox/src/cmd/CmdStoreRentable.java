@@ -8,9 +8,14 @@ import ex.ExEntryNotFound;
 
 import java.util.Date;
 
-/*
- * User command [Store *]
- * */
+/**
+ *
+ * @brief user command: store
+ * 
+ * This class implements store operation for user interface.
+ *  
+ * 
+ */
 
 public class CmdStoreRentable extends Undoable{
     private final int size = 100;
@@ -24,6 +29,15 @@ public class CmdStoreRentable extends Undoable{
     // private final Date[] allDates = new Date[size];
     private int number = 0;
     
+    
+    /**
+    * 
+    * @param cmdLine command parameters [0:n-1 item Id]
+    * 
+    * @param aClient the active client
+    *  
+    * @return string, log to be output
+    */
     public String execute(String[] cmdLine,Client aClient) throws ExEntryNotFound{
         /*
          * [0:n-1 rentableId]

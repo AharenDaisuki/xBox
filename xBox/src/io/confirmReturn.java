@@ -12,6 +12,13 @@ import xBox.Xbox;
 
 import java.awt.*;
 
+/**
+ * @author dongjiajie
+ * @brief ConfirmReturn
+ * 
+ * UI Interface for admin function [confirmReturn]
+ */
+
 public class confirmReturn implements IO{
 	private JPanel panel1;
 	private JLabel label1;
@@ -58,7 +65,7 @@ public class confirmReturn implements IO{
 		btn1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                login_or_register.load();
-            	String[] cmdLine= {jt1.getText()};
+            	String[] cmdLine= jt1.getText().split(" ");
             	String results;
                 try {
                     results = AdminInterfaces.getInstance().confirmReturn(cmdLine);
