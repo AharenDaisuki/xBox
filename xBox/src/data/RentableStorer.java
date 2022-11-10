@@ -5,8 +5,6 @@ import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import jdk.incubator.vector.VectorOperators.Test;
-
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -70,7 +68,7 @@ public class RentableStorer implements XBoxStorer<Rentable>{
         else if(statusJSONObject.get("status").toString().equals("Occupied"))
         {
             String clientString=statusJSONObject.get("client").toString();
-            long dueNum=statusJSONObject.getBigInteger("due").longValue();
+            long dueNum=statusJSONObject.getLong("due");
             JSONObject clientJSONObject=new JSONObject(clientString);
             Client client=ClientStorer.getClientByJSONObject(clientJSONObject);
             Date due=new Date(dueNum);
