@@ -31,7 +31,7 @@ public class CmdConfirmPayment extends Undoable{
         RecordSearcher recordSearcher = RecordSearcher.getInstance();
         RequestManager requestManager = RequestManager.getInstance();
         
-        ArrayList<Request> requestList = requestSearcher.searchAllByKeyword(aClient);
+        ArrayList<Request> requestList = requestSearcher.searchAllByKeyword(aClient.getEmail());
         ArrayList<Record> recordList = recordSearcher.searchAllByKeyword(aClient.getEmail());
         
         String ret = "[Payment]\n";

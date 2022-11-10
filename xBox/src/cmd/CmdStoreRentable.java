@@ -78,7 +78,7 @@ public class CmdStoreRentable extends Undoable{
         //}
         // not used
         ret += "[unused list]\n";
-        ArrayList<Request> allNotUsed = requestSearcher.searchAllByKeyword(aClient);
+        ArrayList<Request> allNotUsed = requestSearcher.searchAllByKeyword(aClient.getEmail());
         for(Request request : allNotUsed) {
             ret += String.format("> %s is requested but not used\n", request.getRentable().getId());
         }
