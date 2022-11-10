@@ -54,7 +54,7 @@ public class RequestStorer implements XBoxStorer<Request>{
         Date dueDate=new Date();
         client=ClientStorer.getClientByJSONObject(new JSONObject(jsonObject.get("client").toString()));
         rentable=RentableStorer.getRentableByJSONObject(new JSONObject(jsonObject.get("rentable").toString()));
-        dueDate.setTime(Integer.parseInt(jsonObject.get("dueDate").toString()));
+        dueDate.setTime(jsonObject.getLong("dueDate"));
         return new Request(client,rentable,dueDate);
     }
 
