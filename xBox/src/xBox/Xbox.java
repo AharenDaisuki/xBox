@@ -61,11 +61,11 @@ public class Xbox {
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
                 // store up
-                //try {
-                //    db.storeUp(files);
-                //} catch (IOException ex) {
-                //    System.out.println("Fail to save json file!");
-                //}
+                try {
+                    db.storeUp(files);
+                } catch (IOException ex) {
+                    System.out.println("Fail to save json file!");
+                }
            }
         });
 		return jFrame;

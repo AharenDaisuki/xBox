@@ -16,10 +16,10 @@ public class RequestSearcher {
 	    return storer.getList();
 	}
 
-    public ArrayList<Request> searchAllByKeyword(Client aClient){
+    public ArrayList<Request> searchAllByKeyword(String email){
         ArrayList<Request> result = new ArrayList<>();
         for(Request request:storer.getList()){
-            if(request.getClient() == aClient) {
+            if(request.getClient().getEmail().equals(email)) {
                 result.add(request);
             }
         }

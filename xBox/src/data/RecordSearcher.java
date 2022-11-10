@@ -22,7 +22,8 @@ public class RecordSearcher{
 	    //throw new ExEntryNotFound(String.format("Record[%s] is not found", rentableId));
 	    return null;
 	}
-	// search by rentable 
+	// search by rentable
+	/*
 	public Record searchByKeyword(Rentable rentable) {
 	       RecordStorer storer = RecordStorer.getInstance();
 	        for(Record record : storer.getList()) {
@@ -32,7 +33,7 @@ public class RecordSearcher{
 	        }
 	        //throw new ExEntryNotFound(String.format("Record[%s] is not found", rentable.getId()));
 	        return null;
-	}
+	}*/
 	// search client email
 	public ArrayList<Record> searchAllByKeyword(String email){
 		RecordStorer storer = RecordStorer.getInstance();

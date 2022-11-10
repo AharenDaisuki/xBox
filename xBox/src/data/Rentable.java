@@ -32,6 +32,6 @@ public abstract class Rentable{
     
     public String toJSONString()
     {
-    	return "{\"id\":\""+id+"\",\"status\":"+status.toJSONString()+"}";
+    	return "{\"id\":\""+id.substring(3)+"\",\"status\":"+status.toJSONString()+"}";
     }
 }

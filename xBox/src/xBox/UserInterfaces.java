@@ -143,7 +143,7 @@ public class UserInterfaces {
 	    RequestSearcher requestSearcher = RequestSearcher.getInstance();
 	    RecordSearcher recordSearcher = RecordSearcher.getInstance();
 	    
-	    ArrayList<Request> allRequests = requestSearcher.searchAllByKeyword(user);
+	    ArrayList<Request> allRequests = requestSearcher.searchAllByKeyword(user.getEmail());
 	    //ret += "My requests:\n";
 	    for(Request request : allRequests) {
 	        ret += String.format("%s%tF\n", request.getRentable().toString(), request.getDue());
