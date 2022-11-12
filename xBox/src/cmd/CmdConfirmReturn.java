@@ -40,11 +40,11 @@ public class CmdConfirmReturn extends Undoable{
         int len = cmdLine.length;
         String ret = "[Checkin list]\n";
         
-        for(int i = 1; i < len; ++i) {
-            String rentableId = cmdLine[i];
+        for(int i = 0; i < len-1; ++i) {
+            String rentableId = cmdLine[i+1];
             Record record = recordSearcher.searchByKeyword(rentableId);
             if(record == null) {
-                throw new ExEntryNotFound(String.format("Record[%s] is not found!", rentableId));
+                throw new ExEntryNotFound(String.format("Record [%s] is not found!", rentableId));
             }
             allRentables[i] = record.getRentable();
             if(!allRentables[i].getStatusStr().equals(RentableStatusPending.statusName)) {
