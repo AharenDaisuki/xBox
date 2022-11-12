@@ -43,8 +43,8 @@ public class RecordStorer implements XBoxStorer<Record>{
         Rentable rentable;
         Date dueDate=new Date();
         boolean isPaid;
-        client=ClientStorer.getClientByJSONObject(new JSONObject(jsonObject.getString("client")));
-        rentable=RentableStorer.getRentableByJSONObject(new JSONObject(jsonObject.getString("rentable")));
+        client=ClientStorer.getClientByJSONObject(new JSONObject(jsonObject.get("client").toString()));
+        rentable=RentableStorer.getRentableByJSONObject(new JSONObject(jsonObject.get("rentable").toString()));
         dueDate.setTime(jsonObject.getLong("dueDate"));
         isPaid=(jsonObject.getBoolean("isPaid"));
         return new Record(client,rentable,dueDate,isPaid);

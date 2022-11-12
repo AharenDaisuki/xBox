@@ -23,6 +23,7 @@ public class confirmReturn implements IO{
 	private JPanel panel1;
 	private JLabel label1;
 	private JLabel label2;
+	//private JLabel label3;
 	private JLabel label4;
 
 	private JTextField jt1;
@@ -34,7 +35,8 @@ public class confirmReturn implements IO{
 	public JPanel show() {
 		panel1 = new JPanel();
 		label1 = new JLabel("Confirm Checkin");
-		label2 = new JLabel("Client Email:");
+		label2 = new JLabel("Email&ID:");
+		//label3 = new JLabel("Item ID: ");
 		jt1 = new JTextField();
 
 	    
@@ -46,6 +48,7 @@ public class confirmReturn implements IO{
 		panel1.setLayout(null);
 		label1.setBounds(160, 50, 150, 40);
 		label2.setBounds(110,100,100,40);
+		//label3.setBounds(110,150,100,40);
 
 		jt1.setBounds(210,105,120,30);
 	    
