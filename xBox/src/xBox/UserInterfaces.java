@@ -136,9 +136,11 @@ public class UserInterfaces {
     */
 	
 	public String summary(String[] cmdLine) {
+	    double requestTotal = 0.0;
+	    double recordTotal = 0.0;
 	    String ret = "Summary:\n";
 	    
-	    ret += String.format("%-15s%-15s%-10s\n", "[ID]", "[STATUS]", "[DUE]");
+	    ret += String.format("%-15s%-15s%-10s    %s\n", "[ID]", "[STATUS]", "[DUE]", "[PRICE]");
 	    // System.out.printf("%-7s%-50s\n", "[ID]", "[STATUS]");
 	    RequestSearcher requestSearcher = RequestSearcher.getInstance();
 	    RecordSearcher recordSearcher = RecordSearcher.getInstance();
@@ -146,14 +148,21 @@ public class UserInterfaces {
 	    ArrayList<Request> allRequests = requestSearcher.searchAllByKeyword(user.getEmail());
 	    //ret += "My requests:\n";
 	    for(Request request : allRequests) {
-	        ret += String.format("%s%tF\n", request.getRentable().toString(), request.getDue());
+	        double price = request.getRentable().getPrice();
+	        requestTotal += price;
+	        ret += String.format("%s%tF    %.2f\n", request.getRentable().toString(), request.getDue(), price);
 	    }
 	    
 	    ArrayList<Record> allRecords = recordSearcher.searchAllByKeyword(user.getEmail());
 	    //ret += "My records:\n";
 	    for(Record record : allRecords) {
-	        ret += String.format("%s%tF\n", record.getRentable().toString(), record.getDue());
+	        double price = record.getRentable().getPrice();
+	        recordTotal += price;
+	        ret += String.format("%s%tF    %.2f\n", record.getRentable().toString(), record.getDue(), price);
 	    }
+	    // print total
+	    ret += String.format("unused total: %.2f\n", requestTotal);
+	    ret += String.format("used total: %.2f", recordTotal);
 	    return ret;
 	}
 	

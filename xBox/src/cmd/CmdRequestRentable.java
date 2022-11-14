@@ -70,7 +70,7 @@ public class CmdRequestRentable extends Undoable{
         //}catch(ExNoSufficientRentable ex) {
         //    ret += ex.getMessage() + "\n";
         //}
-        addUndo(this);
+        addUndo(this); 
         clearList();
         return ret;
     }
