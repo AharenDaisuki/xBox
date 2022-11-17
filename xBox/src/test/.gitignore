@@ -3,3 +3,6 @@
 /TestUserInterfaces.class
 /TestClientStorer.class
 /TestStorer.class
+/TestCmdRequestRentable.class
+/TestCmdRequestRentable$Client_stub.class
+/TestCmdRequestRentable$Rentable_stub.class
