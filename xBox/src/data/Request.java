@@ -9,9 +9,7 @@ public class Request {
 	// private int requestId;
 	private Date date;
 	
-	public Request() {
-	
-	}
+	// public Request() {}
 	
 	public Request(Client aClient, Rentable aRentable, Date aDate){
 		client = aClient;
