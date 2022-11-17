@@ -9,92 +9,75 @@ package test;
  */
 
 import org.junit.Test;
-//import org.junit.runners.MethodSorters;
-//import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
+import org.junit.FixMethodOrder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Date;
+import org.junit.After;
+import org.junit.Before;
 
 import cmd.Command;
+import cmd.Undoable;
 import cmd.CmdRequestRentable;
-
+import data.Bag;
 import data.Client;
+import data.ClientStudent;
 import data.Rentable;
-import data.RentableStatus;
 import data.RentableManager;
 import data.RentableStatusAvailable;
+import data.RentableStatusRequested;
 import utils.XBoxDate;
 
+@FixMethodOrder
 public class TestCmdRequestRentable {
-    private class Client_stub extends Client{
-        public Client_stub(String email_, String phoneNo_, String password_) {
-            super(email_, phoneNo_, password_);
-            // TODO Auto-generated constructor stub
-        }
-
-        @Override
-        public double getDiscount() {
-            // TODO Auto-generated method stub
-            return 0.9;
-        }
-
-        @Override
-        public int getMaxBorrowedCount() {
-            // TODO Auto-generated method stub
-            return 10;
-        }
-    }
-    
-    private class Rentable_stub extends Rentable{
-
-        public Rentable_stub(String rentableID_, RentableStatus status_) {
-            super("TYP" + rentableID_ , status_);
-            // TODO Auto-generated constructor stub
-        }
-
-        @Override
-        public String getType() {
-            // TODO Auto-generated method stub
-            return "TYP";
-        }
-
-        @Override
-        public double getPrice() {
-            // TODO Auto-generated method stub
-            return 10.0;
-        }
-        
-    }
-    
     private RentableManager rentableManager = RentableManager.getInstance();
     private XBoxDate systemDate = XBoxDate.getInstance();
+    
+    private Command requestRentable;
+    private Client client;
+    private Rentable rentable1 = new Bag("0001", new RentableStatusAvailable());
+    private Rentable rentable2 = new Bag("0002", new RentableStatusAvailable());
+    private Rentable rentable3 = new Bag("0003", new RentableStatusAvailable());
+    
+    
+    @Before
+    public void init() {
+        this.requestRentable = new CmdRequestRentable();
+        this.client = new ClientStudent("xyli45-c@my.cityu.edu.hk", "12345678", "11111111");
+    }
+    
+    @After
+    public void clear() {
+        this.requestRentable = null;
+        this.client = null;
+    }
     
     // n > max count(10)
     @Test
     public void test_01() {
-        Command requestRentable = new CmdRequestRentable();
+        //Command requestRentable = new CmdRequestRentable();
         try {
-            Client_stub client = new Client_stub("xyli45-c@my.cityu.edu.hk", "12345678", "11111111");
+            // Client client = new ClientStudent("xyli45-c@my.cityu.edu.hk", "12345678", "11111111");
             String[] cmdLine = {
-                    "TYP", // dummy type
+                    "BAG", // dummy type
                     "11", // number > max count
                     "1" // month
             };
             String log = requestRentable.execute(cmdLine, client);
         }catch(Exception ex) {
-            assertEquals("[Error] No more than 10 TYP per user!", ex.getMessage());
+            assertEquals("[Error] No more than 10 BAG per user!", ex.getMessage());
         }
     }
     
     // n <= 0
     @Test 
     public void test_02() {
-        Command requestRentable = new CmdRequestRentable();
+        //Command requestRentable = new CmdRequestRentable();
         String log = null;
         try {
-            Client_stub client = new Client_stub("xyli45-c@my.cityu.edu.hk", "12345678", "11111111");
+            //Client client = new ClientStudent("xyli45-c@my.cityu.edu.hk", "12345678", "11111111");
             String[] cmdLine = {
-                    "TYP", // dummy type
+                    "BAG", // dummy type
                     "-1", // number <= 0
                     "1" // month
             };
@@ -109,14 +92,14 @@ public class TestCmdRequestRentable {
     // n = 1
     @Test
     public void test_03() {
-        Command requestRentable = new CmdRequestRentable();
+        //Command requestRentable = new CmdRequestRentable();
         String log = null;
-        rentableManager.addNewRentable(new Rentable_stub("0001", new RentableStatusAvailable()));
+        rentableManager.addNewRentable(rentable1);
         
         try {
-            Client_stub client = new Client_stub("xyli45-c@my.cityu.edu.hk", "12345678", "11111111");
+            //Client client = new ClientStudent("xyli45-c@my.cityu.edu.hk", "12345678", "11111111");
             String[] cmdLine = {
-                    "TYP", // dummy type
+                    "BAG", // dummy type
                     "1", // number = 1
                     "1" // month
             };
@@ -124,6 +107,67 @@ public class TestCmdRequestRentable {
         }catch(Exception ex) {
             System.out.println(ex.getMessage());
         }
-        assertEquals("[request list]\n" + String.format("> %-10s%tF\n", "TYP0001", systemDate.getDayAfterNMonth("1")), log);
+        assertEquals("[request list]\n" + String.format("> %-10s%tF\n", "BAG0001", systemDate.getDayAfterNMonth("1")), log);
+        assertEquals(RentableStatusRequested.statusName, rentable1.getStatusStr());
+    }
+    
+    // n > 1
+    @Test
+    public void test_04() {
+        //Command requestRentable = new CmdRequestRentable();
+        String log = null;
+        rentableManager.addNewRentable(rentable2);
+        rentableManager.addNewRentable(rentable3);
+        
+        try {
+            //Client client = new ClientStudent("xyli45-c@my.cityu.edu.hk", "12345678", "11111111");
+            String[] cmdLine = {
+                    "BAG", // dummy type
+                    "2", // number > 1
+                    "1" // month
+            };
+            log = requestRentable.execute(cmdLine, client);
+        }catch(Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        assertEquals("[request list]\n" 
+        + String.format("> %-10s%tF\n", "BAG0002", systemDate.getDayAfterNMonth("1"))
+        + String.format("> %-10s%tF\n", "BAG0003", systemDate.getDayAfterNMonth("1")), log);
+        assertEquals(RentableStatusRequested.statusName, rentable2.getStatusStr());
+        assertEquals(RentableStatusRequested.statusName, rentable3.getStatusStr());
+    }
+    
+    // test undo
+    @Test
+    public void test_05() {
+        String log = null;
+        try {
+            log = Undoable.undoCmd();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        assertEquals("[Undo]\n" 
+        + String.format("> send request %s\n", "BAG0002")
+        + String.format("> send request %s\n", "BAG0003"), log);
+        
+        assertEquals(RentableStatusAvailable.statusName, rentable2.getStatusStr());
+        assertEquals(RentableStatusAvailable.statusName, rentable3.getStatusStr());
+    }
+    
+    // test redo
+    @Test
+    public void test_06() {
+        String log = null;
+        try {
+            log = Undoable.redoCmd();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        assertEquals("[Redo]\n" 
+        + String.format("> send request %s\n", "BAG0002")
+        + String.format("> send request %s\n", "BAG0003"), log);
+        // assertEquals(RentableStatusRequested.statusName, rentable2.getStatusStr());
+        // assertEquals(RentableStatusRequested.statusName, rentable3.getStatusStr());
     }
 }
