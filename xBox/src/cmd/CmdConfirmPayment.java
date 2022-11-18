@@ -61,6 +61,8 @@ public class CmdConfirmPayment extends Undoable{
         tot *= aClient.getDiscount();
         ret += String.format("\ndiscount: %.0f percent off\n", (1-aClient.getDiscount()) * 100);
         ret += String.format("total: $%.2f\n", tot);
+        addUndo(this);
+        clearList();
         return ret;
     }
     
@@ -74,6 +76,7 @@ public class CmdConfirmPayment extends Undoable{
             allRentable[i].setStatus(allStatus[i]);
             ret += String.format("> confirm request[%s] unused\n", request.getRentable().getId());
         }
+        addRedo(this);
         return ret;
     }
     
@@ -87,6 +90,7 @@ public class CmdConfirmPayment extends Undoable{
             allRentable[i].setStatus(allNewStatus[i]);
             ret += String.format("> confirm request[%s] unused\n", request.getRentable().getId());
         }
+        addUndo(this);
         return ret;
     }
 }

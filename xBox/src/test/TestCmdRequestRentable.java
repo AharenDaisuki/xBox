@@ -24,6 +24,7 @@ import data.Client;
 import data.ClientStudent;
 import data.Rentable;
 import data.RentableManager;
+import data.RentableSearcher;
 import data.RentableStatusAvailable;
 import data.RentableStatusRequested;
 import utils.XBoxDate;
@@ -31,10 +32,12 @@ import utils.XBoxDate;
 @FixMethodOrder
 public class TestCmdRequestRentable {
     private RentableManager rentableManager = RentableManager.getInstance();
+    private RentableSearcher rentableSearcher = RentableSearcher.getInstance();
     private XBoxDate systemDate = XBoxDate.getInstance();
     
     private Command requestRentable;
     private Client client;
+    private String log;
     private Rentable rentable1 = new Bag("0001", new RentableStatusAvailable());
     private Rentable rentable2 = new Bag("0002", new RentableStatusAvailable());
     private Rentable rentable3 = new Bag("0003", new RentableStatusAvailable());
@@ -44,6 +47,7 @@ public class TestCmdRequestRentable {
     public void init() {
         this.requestRentable = new CmdRequestRentable();
         this.client = new ClientStudent("xyli45-c@my.cityu.edu.hk", "12345678", "11111111");
+        this.log = null;
     }
     
     @After
@@ -63,7 +67,7 @@ public class TestCmdRequestRentable {
                     "11", // number > max count
                     "1" // month
             };
-            String log = requestRentable.execute(cmdLine, client);
+            log = requestRentable.execute(cmdLine, client);
         }catch(Exception ex) {
             assertEquals("[Error] No more than 10 BAG per user!", ex.getMessage());
         }
@@ -73,7 +77,6 @@ public class TestCmdRequestRentable {
     @Test 
     public void test_02() {
         //Command requestRentable = new CmdRequestRentable();
-        String log = null;
         try {
             //Client client = new ClientStudent("xyli45-c@my.cityu.edu.hk", "12345678", "11111111");
             String[] cmdLine = {
@@ -93,7 +96,6 @@ public class TestCmdRequestRentable {
     @Test
     public void test_03() {
         //Command requestRentable = new CmdRequestRentable();
-        String log = null;
         rentableManager.addNewRentable(rentable1);
         
         try {
@@ -115,7 +117,6 @@ public class TestCmdRequestRentable {
     @Test
     public void test_04() {
         //Command requestRentable = new CmdRequestRentable();
-        String log = null;
         rentableManager.addNewRentable(rentable2);
         rentableManager.addNewRentable(rentable3);
         
@@ -140,7 +141,6 @@ public class TestCmdRequestRentable {
     // test undo
     @Test
     public void test_05() {
-        String log = null;
         try {
             log = Undoable.undoCmd();
         } catch (Exception ex) {
@@ -151,14 +151,15 @@ public class TestCmdRequestRentable {
         + String.format("> send request %s\n", "BAG0002")
         + String.format("> send request %s\n", "BAG0003"), log);
         
-        assertEquals(RentableStatusAvailable.statusName, rentable2.getStatusStr());
-        assertEquals(RentableStatusAvailable.statusName, rentable3.getStatusStr());
+        assertEquals(RentableStatusAvailable.statusName, rentableSearcher.searchByKeyword("BAG0002").getStatusStr());
+        assertEquals(RentableStatusAvailable.statusName, rentableSearcher.searchByKeyword("BAG0003").getStatusStr());
+        // assertEquals(2, Undoable.undoList.size());
+        // assertEquals(1, Undoable.redoList.size());
     }
     
     // test redo
     @Test
     public void test_06() {
-        String log = null;
         try {
             log = Undoable.redoCmd();
         } catch (Exception ex) {
@@ -167,7 +168,7 @@ public class TestCmdRequestRentable {
         assertEquals("[Redo]\n" 
         + String.format("> send request %s\n", "BAG0002")
         + String.format("> send request %s\n", "BAG0003"), log);
-        // assertEquals(RentableStatusRequested.statusName, rentable2.getStatusStr());
-        // assertEquals(RentableStatusRequested.statusName, rentable3.getStatusStr());
+        assertEquals(RentableStatusRequested.statusName, rentableSearcher.searchByKeyword("BAG0002").getStatusStr());
+        assertEquals(RentableStatusRequested.statusName, rentableSearcher.searchByKeyword("BAG0003").getStatusStr());
     }
 }

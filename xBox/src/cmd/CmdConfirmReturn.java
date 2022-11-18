@@ -58,13 +58,15 @@ public class CmdConfirmReturn extends Undoable{
             allRecords[i] = record;
             recordManager.delete(record);
         }
+        addUndo(this);
+        clearList();
         return ret;
     }
     
     @Override
     public String redo(){
         RecordManager recordManager = RecordManager.getInstance();
-        String ret = "";
+        String ret = "[Redo]\n";
         for(int i = 0; i < num; ++i) {
             ret += String.format("> Confirm checkin [%s]\n", allRentables[i].getId());
             allRentables[i].setStatus(allNewStatus[i]);
@@ -77,7 +79,7 @@ public class CmdConfirmReturn extends Undoable{
     @Override
     public String undo(){
         RecordManager recordManager = RecordManager.getInstance();
-        String ret = "";
+        String ret = "[Undo]\n";
         for(int i = 0; i < num; ++i) {
             ret += String.format("> Confirm checkin [%s]\n", allRentables[i].getId());
             allRentables[i].setStatus(allStatus[i]);

@@ -80,6 +80,7 @@ public class CmdRequestRentable extends Undoable{
     @Override
     public String undo() {
         String ret = "[Undo]\n";
+        // System.out.println("undo");
         RequestManager requestManager = RequestManager.getInstance();
         // undo current command
         for(int i = 0; i < this.requestN; ++i) {
@@ -87,6 +88,7 @@ public class CmdRequestRentable extends Undoable{
             requestManager.removeRequest(allRequests[i]);
             // change status
             allRentables[i].setStatus(allStatus[i]);
+            // System.out.println(allRentables[i].getStatusStr());
             ret += String.format("> send request %s\n", allRentables[i].getId());
         }
         // add this to redoList
@@ -97,11 +99,12 @@ public class CmdRequestRentable extends Undoable{
     @Override
     public String redo() {
         String ret = "[Redo]\n";
+        // System.out.println("redo");
         RequestManager requestManager = RequestManager.getInstance();
         // redo current command
         for(int i = 0; i < this.requestN; ++i) {
             allRentables[i].setStatus(allNewStatus[i]);
-            System.out.println(allRentables[i].getStatusStr());
+            // System.out.println(allRentables[i].getStatusStr());
             requestManager.newRequest(allRequests[i]);
             ret += String.format("> send request %s\n", allRentables[i].getId());
         }
