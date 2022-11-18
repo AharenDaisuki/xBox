@@ -55,11 +55,11 @@ public class CmdStoreRentable extends Undoable{
             for (int i = 0; i < len; ++i){
                 // remember status
                 allRequests[i] = requestSearcher.searchByKeyword(cmdLine[i]); // TODO: no such request
-                if(allRequests[i] == null || allRequests[i].getClient() != aClient) {
+                if(allRequests[i] == null) {
                     throw new ExEntryNotFound(String.format("Request[%s] is not found", cmdLine[i]));
                 }
-                if(allRequests[i].getRentable().getStatusStr().equals(RentableStatusOccupied.statusName)) {
-                    throw new ExEntryNotFound(String.format("%s has been stored for <%s>", cmdLine[i], aClient.getEmail()));
+                if(!allRequests[i].getClient().getEmail().equals(aClient.getEmail())) {
+                    throw new ExEntryNotFound(String.format("Request[%s] is not found", cmdLine[i]));
                 }
                 this.number++;
                 // allDates[i] = allRequests[i].getDue();

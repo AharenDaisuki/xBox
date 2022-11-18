@@ -43,11 +43,11 @@ public class CmdRequestReturn extends Undoable{
                 Record tgt = recordSearcher.searchByKeyword(rentableId);
                 // TODO: not belongs to the client
                 if(tgt == null || tgt.getClient() != aClient) {
-                    new ExEntryNotFound(String.format("Rent record [%s] not found", rentableId));
+                    throw new ExEntryNotFound(String.format("Rent record [%s] not found", rentableId));
                 }
                 // TODO: done
                 if(tgt.getRentable().getStatusStr().equals(RentableStatusPending.statusName)) {
-                    new ExEntryNotFound(String.format("Checkin notification[%s]'s been sent", rentableId));
+                    throw new ExEntryNotFound(String.format("Checkin notification[%s]'s been sent", rentableId));
                 }
                 this.num++;
                 allRentables[i] = tgt.getRentable();

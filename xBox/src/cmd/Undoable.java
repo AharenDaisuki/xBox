@@ -23,7 +23,7 @@ public abstract class Undoable implements Command {
 	public abstract String undo();
 	public abstract String redo();
 	
-	// undo list & redo list
+	// undo list & redo list // TODO
 	private static ArrayList<Undoable> undoList = new ArrayList<>(); /// <This is the undo list to store command objects to undo 
 	private static ArrayList<Undoable> redoList = new ArrayList<>(); /// <This is the redo list to store command objects to redo
 
