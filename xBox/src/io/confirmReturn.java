@@ -23,45 +23,39 @@ public class confirmReturn implements IO{
 	private JButton btn1;
 	private JButton btn2;
 	
-	@Override
-	public JPanel show() {
-		panel1 = new JPanel();
-		label1 = new JLabel("Confirm Checkin");
-		label2 = new JLabel("Client Email:");
-		jt1 = new JTextField();
+	public confirmReturn(AdminInterfaces a) {
+	    label1 = new JLabel("Confirm Checkin");
+        label2 = new JLabel("Client Email:");
+        jt1 = new JTextField();
 
-	    
+        
 
-		btn1=new JButton("Run");
-		btn2=new JButton("Back");
+        btn1=new JButton("Run");
+        btn2=new JButton("Back");
+        
+        label1.setBounds(160, 50, 150, 40);
+        label2.setBounds(110,100,100,40);
 
-		panel1.setBounds(0, 0, 450, 300);
-		panel1.setLayout(null);
-		label1.setBounds(160, 50, 150, 40);
-		label2.setBounds(110,100,100,40);
+        jt1.setBounds(210,105,120,30);
+        
 
-		jt1.setBounds(210,105,120,30);
-	    
+        btn1.setBounds(275,140,50,35);
+        btn2.setBounds(270,55,50,35);
 
-		btn1.setBounds(275,140,50,35);
-		btn2.setBounds(270,55,50,35);
-
-		label4 = new JLabel("[console log]:");
-		label4.setBounds(10,260,100,30);
-		panel1.add(label4);
-		
-		btn2.addActionListener(new ActionListener() {
+        label4 = new JLabel("[console log]:");
+        label4.setBounds(10,260,100,30);
+        btn2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                AdminPage.load();
+                AdminPage.load(a);
             }
-        });	
-		btn1.addActionListener(new ActionListener() {
+        }); 
+        btn1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                login_or_register.load();
-            	String[] cmdLine= {jt1.getText()};
-            	String results;
+                String[] cmdLine= {jt1.getText()};
+                String results;
                 try {
-                    results = AdminInterfaces.getInstance().confirmReturn(cmdLine);
+                    results = a.confirmReturn(cmdLine);
                     System.out.println(results);
                     Xbox.output(results);
                 } catch (Exception e1) {
@@ -69,7 +63,18 @@ public class confirmReturn implements IO{
                 }
 
             }
-        });	
+        }); 
+	}
+	@Override
+	public JPanel show() {
+		panel1 = new JPanel();
+		
+		panel1.setBounds(0, 0, 450, 300);
+		panel1.setLayout(null);
+		
+		panel1.add(label4);
+		
+	
 
 		panel1.add(label1);
 		panel1.add(label2);
@@ -83,11 +88,18 @@ public class confirmReturn implements IO{
 		return panel1;
 	}
 
-	public static void load() {
+	public static void load(AdminInterfaces a) {
 		Xbox main = Xbox.getInstance();
-		confirmReturn page =new confirmReturn();
+		confirmReturn page =new confirmReturn(a);
 		// System.out.println("Confirm return page");
-		main.show_page(page.show());
+		main.show_page(page.show(),"confirmReturn");
 		return;
+	}
+	public void clickbtn1(String a) {
+	    this.jt1.setText(a);
+	    this.btn1.doClick();
+	}
+	public void clickbtn2() {
+	    this.btn2.doClick();
 	}
 }

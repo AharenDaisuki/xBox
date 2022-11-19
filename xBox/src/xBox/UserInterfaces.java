@@ -15,15 +15,9 @@ import cmd.CmdRequestRentable;
 
 public class UserInterfaces {
 	// singleton
-    private static UserInterfaces instance = new UserInterfaces();
 	
 	private Client user; 
 	
-	private UserInterfaces() {}
-	
-	public static UserInterfaces getInstance() {
-		return instance;
-	}
 	
 	// debug
 	public boolean verifyLoginUser(String email) {
@@ -81,6 +75,7 @@ public class UserInterfaces {
 	public String login(String[] cmdLine) throws ExEntryNotFound, ExInvalidPassword{
 	    // email
 	    // password
+	    
 	    String email = cmdLine[0];
 	    String password = cmdLine[1];
 	    ClientSearcher searcher = ClientSearcher.getInstance();
@@ -88,7 +83,7 @@ public class UserInterfaces {
 	    
 	    if(user_ == null) {
 	        // TODO: no such user, please register first
-	        throw new ExEntryNotFound(String.format("[Error] No user <%s>, please register first!", email));
+            throw new ExEntryNotFound(String.format("[Error] No user <%s>, please register first!", email));
 	    }
 	    
 	    if(!user_.verifyPassword(password)) {

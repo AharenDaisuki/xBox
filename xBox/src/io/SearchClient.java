@@ -22,9 +22,7 @@ public class SearchClient implements IO{
     private JButton btn1;
     private JButton btn2;
     
-    @Override
-    public JPanel show() {
-        panel1 = new JPanel();
+    public SearchClient(AdminInterfaces a) {
         label1 = new JLabel("Search Client");
         label2 = new JLabel("Client Email:");
         jt1 = new JTextField();
@@ -33,9 +31,7 @@ public class SearchClient implements IO{
 
         btn1=new JButton("Run");
         btn2=new JButton("Back");
-
-        panel1.setBounds(0, 0, 450, 300);
-        panel1.setLayout(null);
+        
         label1.setBounds(160, 50, 150, 40);
         label2.setBounds(110,100,100,40);
 
@@ -47,14 +43,12 @@ public class SearchClient implements IO{
 
         label4 = new JLabel("[console log]:");
         label4.setBounds(10,260,100,30);
-        panel1.add(label4);
-        
-        String ret = AdminInterfaces.getInstance().summaryAllClients();
+        String ret = a.summaryAllClients();
         Xbox.output(ret);
         
         btn2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                AdminPage.load();
+                AdminPage.load(a);
             }
         }); 
         
@@ -64,7 +58,7 @@ public class SearchClient implements IO{
                 String[] cmdLine= {jt1.getText()};
                 String results;
                 try {
-                    results = AdminInterfaces.getInstance().summaryClient(cmdLine);
+                    results = a.summaryClient(cmdLine);
                     System.out.println(results);
                     Xbox.output(results);
                 } catch (Exception e1) {
@@ -72,6 +66,18 @@ public class SearchClient implements IO{
                 }
             }
         }); 
+    }
+    @Override
+    public JPanel show() {
+        panel1 = new JPanel();
+       
+
+        panel1.setBounds(0, 0, 450, 300);
+        panel1.setLayout(null);
+       
+        panel1.add(label4);
+        
+        
 
         panel1.add(label1);
         panel1.add(label2);
@@ -85,12 +91,18 @@ public class SearchClient implements IO{
         return panel1;
     }
 
-    public static void load() {
+    public static void load(AdminInterfaces a) {
         Xbox main = Xbox.getInstance();
-        SearchClient page = new SearchClient();
+        SearchClient page = new SearchClient(a);
         // System.out.println("Store page");
-        main.show_page(page.show());
+        main.show_page(page.show(),"SearchClient");
         return;
     }
-
+    public void clickbtn1(String a) {
+        this.jt1.setText(a);
+        this.btn1.doClick();
+    }
+    public void clickbtn2() {
+        this.btn2.doClick();
+    }
 }
