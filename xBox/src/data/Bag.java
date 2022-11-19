@@ -24,7 +24,7 @@ public class Bag extends Rentable{
     
     public String toJSONString()
     {
-    	String str=super.toJSONString();
-    	return str.substring(0,str.length()-1)+",\"type\":\"BAG\"}";
+        String str=super.toJSONString();
+        return str.substring(0,str.length()-1)+",\"type\":\"BAG\"}";
     }
 }
