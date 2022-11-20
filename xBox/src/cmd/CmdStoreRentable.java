@@ -8,9 +8,14 @@ import ex.ExEntryNotFound;
 
 import java.util.Date;
 
-/*
- * User command [Store *]
- * */
+/**
+ *
+ * @brief user command: store
+ * 
+ * This class implements store operation for user interface.
+ *  
+ * 
+ */
 
 public class CmdStoreRentable extends Undoable{
     private final int size = 100;
@@ -24,6 +29,15 @@ public class CmdStoreRentable extends Undoable{
     // private final Date[] allDates = new Date[size];
     private int number = 0;
     
+    
+    /**
+    * 
+    * @param cmdLine command parameters [0:n-1 item Id]
+    * 
+    * @param aClient the active client
+    *  
+    * @return string, log to be output
+    */
     public String execute(String[] cmdLine,Client aClient) throws ExEntryNotFound{
         /*
          * [0:n-1 rentableId]
@@ -41,11 +55,11 @@ public class CmdStoreRentable extends Undoable{
             for (int i = 0; i < len; ++i){
                 // remember status
                 allRequests[i] = requestSearcher.searchByKeyword(cmdLine[i]); // TODO: no such request
-                if(allRequests[i] == null || allRequests[i].getClient() != aClient) {
+                if(allRequests[i] == null) {
                     throw new ExEntryNotFound(String.format("Request[%s] is not found", cmdLine[i]));
                 }
-                if(allRequests[i].getRentable().getStatusStr().equals(RentableStatusOccupied.statusName)) {
-                    throw new ExEntryNotFound(String.format("%s has been stored for <%s>", cmdLine[i], aClient.getEmail()));
+                if(!allRequests[i].getClient().getEmail().equals(aClient.getEmail())) {
+                    throw new ExEntryNotFound(String.format("Request[%s] is not found", cmdLine[i]));
                 }
                 this.number++;
                 // allDates[i] = allRequests[i].getDue();
@@ -64,7 +78,7 @@ public class CmdStoreRentable extends Undoable{
         //}
         // not used
         ret += "[unused list]\n";
-        ArrayList<Request> allNotUsed = requestSearcher.searchAllByKeyword(aClient);
+        ArrayList<Request> allNotUsed = requestSearcher.searchAllByKeyword(aClient.getEmail());
         for(Request request : allNotUsed) {
             ret += String.format("> %s is requested but not used\n", request.getRentable().getId());
         }

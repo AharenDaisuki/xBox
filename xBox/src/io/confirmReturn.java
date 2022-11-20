@@ -12,10 +12,18 @@ import xBox.Xbox;
 
 import java.awt.*;
 
+/**
+ * @author dongjiajie
+ * @brief ConfirmReturn
+ * 
+ * UI Interface for admin function [confirmReturn]
+ */
+
 public class confirmReturn implements IO{
 	private JPanel panel1;
 	private JLabel label1;
 	private JLabel label2;
+	//private JLabel label3;
 	private JLabel label4;
 
 	private JTextField jt1;
@@ -23,22 +31,16 @@ public class confirmReturn implements IO{
 	private JButton btn1;
 	private JButton btn2;
 	
+
 	public confirmReturn(AdminInterfaces a) {
 	    label1 = new JLabel("Confirm Checkin");
-        label2 = new JLabel("Client Email:");
+        label2 = new JLabel("Email&ID:");
         jt1 = new JTextField();
-
-        
-
         btn1=new JButton("Run");
         btn2=new JButton("Back");
-        
         label1.setBounds(160, 50, 150, 40);
         label2.setBounds(110,100,100,40);
-
         jt1.setBounds(210,105,120,30);
-        
-
         btn1.setBounds(275,140,50,35);
         btn2.setBounds(270,55,50,35);
 
@@ -52,8 +54,9 @@ public class confirmReturn implements IO{
         btn1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                login_or_register.load();
-                String[] cmdLine= {jt1.getText()};
-                String results;
+
+            	String[] cmdLine= jt1.getText().split(" ");
+            	String results;
                 try {
                     results = a.confirmReturn(cmdLine);
                     System.out.println(results);

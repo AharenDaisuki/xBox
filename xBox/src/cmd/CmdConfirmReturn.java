@@ -7,10 +7,14 @@ import data.Record;
 
 import ex.ExEntryNotFound;
 
-/*
- * Admin command [Confirm checkin *]
- * 
- * */
+/**
+*
+* @brief admin command: confirm return request
+* 
+* This class implements request confirming operation of item returning for admin interface.
+*  
+* 
+*/
 
 public class CmdConfirmReturn extends Undoable{
     private int num = 0;
@@ -20,10 +24,15 @@ public class CmdConfirmReturn extends Undoable{
     private final RentableStatus[] allNewStatus = new RentableStatus[size];
     private final Record[] allRecords = new Record[size];
     
+    /**
+    * 
+    * @param cmdLine command parameters [0:n-1 item Id]
+    * 
+    * @param aClient the active client
+    *  
+    * @return string, log to be output
+    */
     public String execute(String[] cmdLine,Client aClient) throws ExEntryNotFound{
-        /*
-         * [0:n-1 rentableId]
-        */
         
         RecordSearcher recordSearcher = RecordSearcher.getInstance();
         RecordManager recordManager = RecordManager.getInstance();
@@ -31,11 +40,11 @@ public class CmdConfirmReturn extends Undoable{
         int len = cmdLine.length;
         String ret = "[Checkin list]\n";
         
-        for(int i = 0; i < len; ++i) {
-            String rentableId = cmdLine[i];
+        for(int i = 0; i < len-1; ++i) {
+            String rentableId = cmdLine[i+1];
             Record record = recordSearcher.searchByKeyword(rentableId);
             if(record == null) {
-                throw new ExEntryNotFound(String.format("Record[%s] is not found!", rentableId));
+                throw new ExEntryNotFound(String.format("Record [%s] is not found!", rentableId));
             }
             allRentables[i] = record.getRentable();
             if(!allRentables[i].getStatusStr().equals(RentableStatusPending.statusName)) {
@@ -49,13 +58,15 @@ public class CmdConfirmReturn extends Undoable{
             allRecords[i] = record;
             recordManager.delete(record);
         }
+        addUndo(this);
+        clearList();
         return ret;
     }
     
     @Override
     public String redo(){
         RecordManager recordManager = RecordManager.getInstance();
-        String ret = "";
+        String ret = "[Redo]\n";
         for(int i = 0; i < num; ++i) {
             ret += String.format("> Confirm checkin [%s]\n", allRentables[i].getId());
             allRentables[i].setStatus(allNewStatus[i]);
@@ -68,7 +79,7 @@ public class CmdConfirmReturn extends Undoable{
     @Override
     public String undo(){
         RecordManager recordManager = RecordManager.getInstance();
-        String ret = "";
+        String ret = "[Undo]\n";
         for(int i = 0; i < num; ++i) {
             ret += String.format("> Confirm checkin [%s]\n", allRentables[i].getId());
             allRentables[i].setStatus(allStatus[i]);

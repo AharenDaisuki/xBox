@@ -11,6 +11,13 @@ import xBox.Xbox;
 
 import java.awt.*;
 
+/**
+ * @author dongjiajie
+ * @brief store
+ * 
+ * UI Interface for user function [store]
+ */
+
 public class storeBox implements IO{
 	private JPanel panel1;
 	private JLabel label1;

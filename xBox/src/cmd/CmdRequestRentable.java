@@ -8,12 +8,13 @@ import utils.XBoxDate;
 import ex.ExNoSufficientRentable;
 
 /**
- * 
- *
- * User command: [Request *]
- * 
- *  
- */
+*
+* @brief user command: item request
+* 
+* This class implements request operation of item for user interface.
+*  
+* 
+*/
 
 public class CmdRequestRentable extends Undoable{
     private final int size = 100;
@@ -25,6 +26,16 @@ public class CmdRequestRentable extends Undoable{
     private final Rentable[] allRentables = new Rentable[size];
     private final Request[] allRequests = new Request[size];
     private final RentableStatus[] allStatus = new RentableStatus[size];
+    private final RentableStatus[] allNewStatus = new RentableStatus[size];
+    
+    /**
+    * 
+    * @param cmdLine command parameters [0: type] [1: quantity] [2: rent duration]
+    * 
+    * @param aClient the active client
+    *  
+    * @return string, log to be output
+    */
     
     public String execute(String[] cmdLine, Client aClient) throws ExNoSufficientRentable {
         /*
@@ -49,9 +60,10 @@ public class CmdRequestRentable extends Undoable{
                 // return rentable
                 allRentables[i] = rentableAllocator.borrowRentable(user, rentableType);
                 this.requestN++;
-                allStatus[i] = new RentableStatusRequested(user);
+                allStatus[i] = allRentables[i].getStatus();
+                allNewStatus[i] = new RentableStatusRequested(user);
                 // set status
-                allRentables[i].setStatus(allStatus[i]);
+                allRentables[i].setStatus(allNewStatus[i]);
                 // new a request
                 allRequests[i] = new Request(user, allRentables[i], dueDate);
                 requestManager.newRequest(allRequests[i]);
@@ -60,7 +72,7 @@ public class CmdRequestRentable extends Undoable{
         //}catch(ExNoSufficientRentable ex) {
         //    ret += ex.getMessage() + "\n";
         //}
-        addUndo(this);
+        addUndo(this); 
         clearList();
         return ret;
     }
@@ -68,17 +80,15 @@ public class CmdRequestRentable extends Undoable{
     @Override
     public String undo() {
         String ret = "[Undo]\n";
+        // System.out.println("undo");
         RequestManager requestManager = RequestManager.getInstance();
         // undo current command
-        for(int i = this.requestN-1; i>=0; --i) {
-            // TODO: skip empty slots
-            if(allRequests[i] == null) {
-                continue;
-            }
+        for(int i = 0; i < this.requestN; ++i) {
             // remove request
             requestManager.removeRequest(allRequests[i]);
             // change status
-            allRentables[i].setStatus(new RentableStatusAvailable());
+            allRentables[i].setStatus(allStatus[i]);
+            // System.out.println(allRentables[i].getStatusStr());
             ret += String.format("> send request %s\n", allRentables[i].getId());
         }
         // add this to redoList
@@ -89,14 +99,12 @@ public class CmdRequestRentable extends Undoable{
     @Override
     public String redo() {
         String ret = "[Redo]\n";
+        // System.out.println("redo");
         RequestManager requestManager = RequestManager.getInstance();
         // redo current command
         for(int i = 0; i < this.requestN; ++i) {
-            // TODO: skip empty slots
-            if(allRequests[i] == null) {
-                continue;
-            }
-            allRentables[i].setStatus(allStatus[i]);
+            allRentables[i].setStatus(allNewStatus[i]);
+            // System.out.println(allRentables[i].getStatusStr());
             requestManager.newRequest(allRequests[i]);
             ret += String.format("> send request %s\n", allRentables[i].getId());
         }

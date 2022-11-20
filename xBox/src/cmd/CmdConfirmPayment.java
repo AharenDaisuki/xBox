@@ -5,14 +5,23 @@ import java.util.ArrayList;
 import data.*;
 import data.Record;
 
-/*
- * Admin command [Confirm payment *]
- * 
- * */
+/**
+*
+* @brief admin command: confirm item request
+* 
+* This class implements request confirming operation of item for admin interface.
+*  
+* 
+*/
 
 public class CmdConfirmPayment extends Undoable{
     private final int size = 100;
     private final Request[] allRequests = new Request[size]; 
+    private final Rentable[] allRentable = new Rentable[size];
+    private final RentableStatus[] allStatus = new RentableStatus[size];
+    private final RentableStatus[] allNewStatus = new RentableStatus[size];
+    private int num = 0;
+    
     public String execute(String[] cmdLine, Client aClient){
         /*
          * email
@@ -22,15 +31,20 @@ public class CmdConfirmPayment extends Undoable{
         RecordSearcher recordSearcher = RecordSearcher.getInstance();
         RequestManager requestManager = RequestManager.getInstance();
         
-        ArrayList<Request> requestList = requestSearcher.searchAllByKeyword(aClient);
+        ArrayList<Request> requestList = requestSearcher.searchAllByKeyword(aClient.getEmail());
         ArrayList<Record> recordList = recordSearcher.searchAllByKeyword(aClient.getEmail());
         
         String ret = "[Payment]\n";
         // TODO: remove remaining request
-        int cnt = 0;
+        this.num = 0;
         for(Request request : requestList) {
-            allRequests[cnt++] = request;
-            requestManager.removeRequest(request);
+            allRequests[num] = request;
+            allRentable[num] = request.getRentable();
+            allStatus[num] = allRentable[num].getStatus();
+            requestManager.removeRequest(request); // remove request
+            allNewStatus[num] = new RentableStatusAvailable(); // set available
+            allRentable[num].setStatus(allNewStatus[num]);
+            this.num++;
         }
         // TODO: compute amount
         double tot = 0.0;
@@ -47,6 +61,8 @@ public class CmdConfirmPayment extends Undoable{
         tot *= aClient.getDiscount();
         ret += String.format("\ndiscount: %.0f percent off\n", (1-aClient.getDiscount()) * 100);
         ret += String.format("total: $%.2f\n", tot);
+        addUndo(this);
+        clearList();
         return ret;
     }
     
@@ -54,10 +70,13 @@ public class CmdConfirmPayment extends Undoable{
     public String undo(){
         String ret = "[Undo]\n";
         RequestManager requestManager = RequestManager.getInstance();
-        for(Request request : allRequests) {
+        for(int i = 0; i < this.num; ++i) {
+            Request request = allRequests[i];
             requestManager.newRequest(request);
+            allRentable[i].setStatus(allStatus[i]);
             ret += String.format("> confirm request[%s] unused\n", request.getRentable().getId());
         }
+        addRedo(this);
         return ret;
     }
     
@@ -65,10 +84,13 @@ public class CmdConfirmPayment extends Undoable{
     public String redo(){
         String ret = "[Redo]\n";
         RequestManager requestManager = RequestManager.getInstance();
-        for(Request request : allRequests) {
+        for(int i = 0; i < this.num; ++i) {
+            Request request = allRequests[i];
             requestManager.removeRequest(request);
+            allRentable[i].setStatus(allNewStatus[i]);
             ret += String.format("> confirm request[%s] unused\n", request.getRentable().getId());
         }
+        addUndo(this);
         return ret;
     }
 }

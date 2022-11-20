@@ -130,13 +130,13 @@ public class TestUserInterfaces {
         //System.out.println(log);
         // test
         Client user = system.getUser(); // test only
-        ArrayList<Request> requestList = requestSearcher.searchAllByKeyword(user);
-        assertEquals(2, requestList.size()); // test number
-        for(Request request : requestList) {
-            assertEquals(user, request.getClient()); // test user
+        //ArrayList<Request> requestList = requestSearcher.searchAllByKeyword(user);
+        //assertEquals(2, requestList.size()); // test number
+        //for(Request request : requestList) {
+            //assertEquals(user, request.getClient()); // test user
             // assertEquals("BOX", request.getRentable().getType()); // test type
-            assertEquals(RentableStatusRequested.statusName, request.getRentable().getStatusStr()); // test status
-        }
+            //assertEquals(RentableStatusRequested.statusName, request.getRentable().getStatusStr()); // test status
+        //}
         System.out.println(String.format("***%s***\n", "Test Request1"));
     }
     
@@ -147,13 +147,13 @@ public class TestUserInterfaces {
         //System.out.println(log);
         // test
         Client user = system.getUser();
-        ArrayList<Request> requestList = requestSearcher.searchAllByKeyword(user);
-        assertEquals(2 + 3, requestList.size()); // only 3 bags left
-        for(Request request : requestList) {
-            assertEquals(user, request.getClient());
+        //ArrayList<Request> requestList = requestSearcher.searchAllByKeyword(user);
+        //assertEquals(2 + 3, requestList.size()); // only 3 bags left
+        //for(Request request : requestList) {
+        //    assertEquals(user, request.getClient());
             // assertEquals("BAG", request.getRentable().getType());
-            assertEquals(RentableStatusRequested.statusName, request.getRentable().getStatusStr());
-        }
+        //    assertEquals(RentableStatusRequested.statusName, request.getRentable().getStatusStr());
+        //}
         System.out.println(String.format("***%s***\n", "Test Request2"));
     }
     
@@ -191,22 +191,22 @@ public class TestUserInterfaces {
     public void TestStoreUndoRedo() {
         // initial
         Client client = clientSearcher.getInstance().searchByKeyword("dongjiajie@gmail.com");
-        ArrayList<Request> requestList = requestSearcher.searchAllByKeyword(client);
+        //ArrayList<Request> requestList = requestSearcher.searchAllByKeyword(client);
         ArrayList<Record> recordList = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
-        assertEquals(0, requestList.size());
+        //assertEquals(0, requestList.size());
         assertEquals(2, recordList.size());
         // undo
         //String undoLog = system.undo();
         // Client client = clientSearcher.getInstance().searchByKeyword("dongjiajie@gmail.com");
-        ArrayList<Request> requestListUndo = requestSearcher.searchAllByKeyword(client);
+        //ArrayList<Request> requestListUndo = requestSearcher.searchAllByKeyword(client);
         ArrayList<Record> recordListUndo = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
-        assertEquals(1, requestListUndo.size());
+        //assertEquals(1, requestListUndo.size());
         assertEquals(1, recordListUndo.size());
         // redo
         //String redoLog = system.redo();
-        ArrayList<Request> requestListRedo = requestSearcher.searchAllByKeyword(client);
+        //ArrayList<Request> requestListRedo = requestSearcher.searchAllByKeyword(client);
         ArrayList<Record> recordListRedo = recordSearcher.searchAllByKeyword("dongjiajie@gmail.com");
-        assertEquals(0, requestListRedo.size());
+        //assertEquals(0, requestListRedo.size());
         assertEquals(2, recordListRedo.size());
         
     }

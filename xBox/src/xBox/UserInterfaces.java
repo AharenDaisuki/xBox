@@ -13,6 +13,14 @@ import cmd.CmdStoreRentable;
 import cmd.CmdRequestReturn;
 import cmd.CmdRequestRentable;
 
+/**
+ * @author lixiaoyang
+ * 
+ * @brief User Interface
+ * 
+ * User interfaces are defined here
+ */
+
 public class UserInterfaces {
 	// singleton
 	
@@ -36,7 +44,17 @@ public class UserInterfaces {
 	
 	/*User Interface*/
 	
-	// register TODO: DONE
+
+    /**
+    * 
+    * @param cmdLine interface parameters [0:email] [1:phoneNo] [2:password] [3:type]
+    * 
+    * @exception Account exists
+    * @exception Info missing
+    *  
+    * @return string, log to be output
+    */
+	
 	public String register(String[] cmdLine) throws ExAccountExists, ExInfoMissing{
 	    // email = user name
 	    // phone number
@@ -71,7 +89,16 @@ public class UserInterfaces {
 	    }
 	}
 	
-	// login TODO: DONE
+    /**
+    * 
+    * @param cmdLine interface parameters [0:email] [1:password]
+    * 
+    * @exception entry not found
+    * @exception invalid password
+    * 
+    * @return string, log to be output
+    */
+	
 	public String login(String[] cmdLine) throws ExEntryNotFound, ExInvalidPassword{
 	    // email
 	    // password
@@ -95,30 +122,52 @@ public class UserInterfaces {
 	    return String.format("Login Success <%s>", email);
 	}
 	
-	// summary all rentables
+	
+    /**
+    * 
+    * @brief summary
+    * 
+    * summary all items
+    */
+	
 	public String summary(String[] cmdLine) {
+	    double requestTotal = 0.0;
+	    double recordTotal = 0.0;
 	    String ret = "Summary:\n";
 	    
-	    ret += String.format("%-15s%-15s%-10s\n", "[ID]", "[STATUS]", "[DUE]");
+	    ret += String.format("%-15s%-15s%-10s    %s\n", "[ID]", "[STATUS]", "[DUE]", "[PRICE]");
 	    // System.out.printf("%-7s%-50s\n", "[ID]", "[STATUS]");
 	    RequestSearcher requestSearcher = RequestSearcher.getInstance();
 	    RecordSearcher recordSearcher = RecordSearcher.getInstance();
 	    
-	    ArrayList<Request> allRequests = requestSearcher.searchAllByKeyword(user);
+	    ArrayList<Request> allRequests = requestSearcher.searchAllByKeyword(user.getEmail());
 	    //ret += "My requests:\n";
 	    for(Request request : allRequests) {
-	        ret += String.format("%s%tF\n", request.getRentable().toString(), request.getDue());
+	        double price = request.getRentable().getPrice();
+	        requestTotal += price;
+	        ret += String.format("%s%tF    %.2f\n", request.getRentable().toString(), request.getDue(), price);
 	    }
 	    
 	    ArrayList<Record> allRecords = recordSearcher.searchAllByKeyword(user.getEmail());
 	    //ret += "My records:\n";
 	    for(Record record : allRecords) {
-	        ret += String.format("%s%tF\n", record.getRentable().toString(), record.getDue());
+	        double price = record.getRentable().getPrice();
+	        recordTotal += price;
+	        ret += String.format("%s%tF    %.2f\n", record.getRentable().toString(), record.getDue(), price);
 	    }
+	    // print total
+	    ret += String.format("unused total: %.2f\n", requestTotal);
+	    ret += String.format("used total: %.2f", recordTotal);
 	    return ret;
 	}
 	
-	// undo
+    /**
+    * 
+    * @brief undo
+    * 
+    * undo the very last command
+    */
+	
 	public String undo() throws ExEmptyVector {
 	    String ret = ">> Undo the following operations?\n";
 	    //try {
@@ -131,7 +180,14 @@ public class UserInterfaces {
 	    return ret;
 	}
 	
-	// redo
+    /**
+    * 
+    * @brief redo
+    * 
+    * redo the very last command
+    * 
+    */
+	
 	public String redo() throws ExEmptyVector {
 	    String ret = ">> Redo the following operations?\n";
 	    //try {
@@ -144,21 +200,39 @@ public class UserInterfaces {
 	    return ret;
 	}
 	
-	// request rentable
+    /**
+    * 
+    * @brief request
+    * 
+    * user interface for requesting items
+    */
+	
 	public String request(String[] cmdLine) throws ExNoSufficientRentable {
         String ret = (new CmdRequestRentable()).execute(cmdLine, user) + "\n";
         ret += summary(null);
         return ret; // TODO: sorting options
 	}
 	
-	// store rentable
+    /**
+    * 
+    * @brief store
+    * 
+    * user interface for storing items
+    */
+	
 	public String store(String[] cmdLine) throws ExEntryNotFound {
 	    String ret = (new CmdStoreRentable()).execute(cmdLine, user) + "\n";
 	    ret += summary(null);
 	    return ret;
 	}
 	
-	// return rentable
+    /**
+    * 
+    * @brief return
+    * 
+    * user interface for returning items
+    */
+	
 	public String unload(String[] cmdLine) throws ExEntryNotFound {
 	    String ret = (new CmdRequestReturn()).execute(cmdLine, user) + "\n";
 	    ret += summary(null);

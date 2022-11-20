@@ -5,10 +5,14 @@ import data.Record;
 
 import ex.ExEntryNotFound;
 
-/*
- * User command [Return *]
- * 
- * */
+/**
+*
+* @brief user command: return request
+* 
+* This class implements request operation of item returning for user interface.
+*  
+* 
+*/
 
 public class CmdRequestReturn extends Undoable{
     private final int size = 100;
@@ -16,6 +20,15 @@ public class CmdRequestReturn extends Undoable{
     private final Rentable[] allRentables = new Rentable[size];
     private final RentableStatus[] allStatus = new RentableStatus[size];
     private final RentableStatus[] allNewStatus = new RentableStatus[size];
+    
+    /**
+    * 
+    * @param cmdLine command parameters [0:n-1 item Id]
+    * 
+    * @param aClient the active client
+    *  
+    * @return string, log to be output
+    */
     
     public String execute(String[] cmdLine,Client aClient) throws ExEntryNotFound {
         /*
@@ -30,11 +43,11 @@ public class CmdRequestReturn extends Undoable{
                 Record tgt = recordSearcher.searchByKeyword(rentableId);
                 // TODO: not belongs to the client
                 if(tgt == null || tgt.getClient() != aClient) {
-                    new ExEntryNotFound(String.format("Rent record [%s] not found", rentableId));
+                    throw new ExEntryNotFound(String.format("Rent record [%s] not found", rentableId));
                 }
                 // TODO: done
                 if(tgt.getRentable().getStatusStr().equals(RentableStatusPending.statusName)) {
-                    new ExEntryNotFound(String.format("Checkin notification[%s]'s been sent", rentableId));
+                    throw new ExEntryNotFound(String.format("Checkin notification[%s]'s been sent", rentableId));
                 }
                 this.num++;
                 allRentables[i] = tgt.getRentable();
