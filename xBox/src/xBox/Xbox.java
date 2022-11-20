@@ -21,6 +21,13 @@ import data.Database;
 
 public class Xbox {
 	private static Xbox instance;
+	private String now_page = null;
+	private static boolean iftest = false;
+	private JFrame jframe = init(!iftest);
+	private JPanel content = null;
+	private JScrollPane content_data = null;
+	private String data =null;
+    private static String error_message =null;
 
 	public static Xbox getInstance() {
 		if(instance ==null) {
@@ -28,12 +35,9 @@ public class Xbox {
 		}
 		return instance;
 	}
-	private JFrame jframe = init();
-	private JPanel content = null;
-	private JScrollPane content_data = null;
-	private String data =null;
 	
-	private JFrame init(){
+
+	private JFrame init(boolean test){
 	    Database db = Database.getInstance();
 	    String[] files = {
 	      System.getProperty("user.dir") + "/src/datasrc/RentableStorer.json", // TODO: to be modified
@@ -55,7 +59,7 @@ public class Xbox {
         (int) (height - jFrame.getHeight()) / 2);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jFrame.setLayout(null);
-		jFrame.setVisible(true);
+		jFrame.setVisible(test);
 		jFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -82,7 +86,8 @@ public class Xbox {
 		return jt;
 	}
 	
-	public void show_page(JPanel a) {
+	public void show_page(JPanel a,String page) {
+	    now_page = page;
 		if(this.content != a) {
 			if(this.content!=null) {
 				this.jframe.remove(this.content);
@@ -114,18 +119,23 @@ public class Xbox {
 		return;
 	}
 	public static void error(Exception a) {
-        JOptionPane.showMessageDialog(null, a.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	    error_message = a.getMessage();
+	    if(iftest==false) {
+	        JOptionPane.showMessageDialog(null, a.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	    }
 
 	}
-	
-	
-	public static void main(String[] args) {
-		Xbox main = Xbox.getInstance();
-//    	new Client("Admin","1");
-//    	new Client("1","1");
-
-//		UserPage.load("1");
-		login_or_register.load();
+	public String get_page() {
+	    return now_page;
+	}
+	public static void totest() {
+	    iftest = true;
+	}
+	public String get_data() {
+	    return data;
+	}
+	public static String get_error_message() {
+	    return error_message;
 	}
 
 

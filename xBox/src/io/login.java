@@ -23,59 +23,62 @@ public class login implements IO{
 	private JButton btn2;
 	
 	private final String adminEmail = "admin@xbox.com.hk";
+	
+	public login(UserInterfaces u, AdminInterfaces a) {
+        label1 = new JLabel("Email:");
+        label2 = new JLabel("Password:");
+        label3 = new JLabel("login into the Xbox");
 
+        label4 = new JLabel("[console log]:");
+        label4.setBounds(10,260,100,40);
+        jt1 = new JTextField();
+        jt2 = new JTextField();
+        btn1 = new JButton("Login");
+        btn2 = new JButton("Back");
+        
+        label1.setBounds(100,80,100,50);
+        label2.setBounds(100,130,100,50);
+        label3.setBounds(150,30,150,50);
+
+
+        jt1.setBounds(200, 90, 150,30);
+        jt2.setBounds(200, 140, 150,30);
+        btn1.setBounds(300, 180, 50, 40);
+        btn2.setBounds(300,40, 50, 35);
+        
+        btn1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                String[] cmdLine = {jt1.getText(),jt2.getText()};
+                try {
+                    String results = u.login(cmdLine); // invoke
+                    Xbox.output(results);
+                    if(jt1.getText().equals(adminEmail)) {
+                        AdminPage.load(a);
+                    }else {
+                        UserPage.load(u);
+                    }
+                }catch (Exception e1) {
+                    Xbox.error(e1);
+                }
+            }
+        });
+        btn2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                login_or_register.load();
+            }
+        });
+                
+	}
 	@Override
 	public JPanel show() {
 		panel1 = new JPanel();
 		panel1.setBounds(0, 0, 450, 300);
 		panel1.setLayout(null);
-		label1 = new JLabel("Email:");
-		label2 = new JLabel("Password:");
-		label3 = new JLabel("login into the Xbox");
 
-		label4 = new JLabel("[console log]:");
-		label4.setBounds(10,260,100,40);
 		panel1.add(label4);
 		
-		jt1 = new JTextField();
-		jt2 = new JTextField();
-		btn1 = new JButton("Login");
-		btn2 = new JButton("Back");
-		
-		label1.setBounds(100,80,100,50);
-		label2.setBounds(100,130,100,50);
-		label3.setBounds(150,30,150,50);
 
-
-		jt1.setBounds(200, 90, 150,30);
-		jt2.setBounds(200, 140, 150,30);
-		btn1.setBounds(300, 180, 50, 40);
-		btn2.setBounds(300,40, 50, 35);
-		
-		btn1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	// System.out.println(jt1.getText());
-            	// System.out.println(jt2.getText());
-            	String[] cmdLine = {jt1.getText(),jt2.getText()};
-            	try {
-            	    String results = UserInterfaces.getInstance().login(cmdLine); // invoke
-            	    Xbox.output(results);
-            	    if(jt1.getText().equals(adminEmail)) {
-            	        AdminPage.load();
-            	    }else {
-                        UserPage.load();
-            	    }
-            	}catch (Exception e1) {
-            	    Xbox.error(e1);
-            	}
-            }
-        });
-		btn2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	login_or_register.load();
-            }
-        });
-		
 		panel1.add(label1);
 		panel1.add(label2);
 		panel1.add(label3);
@@ -89,11 +92,19 @@ public class login implements IO{
 		return panel1;
 	}
 
-	public static void load() {
+	public static void load(UserInterfaces u, AdminInterfaces a) {
 		Xbox main = Xbox.getInstance();
-		login page =new login();
+		login page =new login(u,a);
 		// System.out.println("Login page");
-		main.show_page(page.show());
+		main.show_page(page.show(),"login");
 		return;
+	}
+	public void clickbtn1(String a,String b) {
+	    this.jt1.setText(a);
+	    this.jt2.setText(b);
+	    this.btn1.doClick();
+    }
+	public void clickbtn2() {
+	    this.btn2.doClick();
 	}
 }

@@ -5,9 +5,11 @@ package xBox;
 
 import data.*;
 import data.Record;
+import ex.ExEmptyVector;
 import ex.ExEntryNotFound;
 import cmd.CmdConfirmPayment;
 import cmd.CmdConfirmReturn;
+import cmd.Undoable;
 
 /**
  * @author lixiaoyang
@@ -18,20 +20,7 @@ import cmd.CmdConfirmReturn;
  */
 
 public class AdminInterfaces {
-	private static AdminInterfaces instance = new AdminInterfaces();
-	
-	private AdminInterfaces() {}
-	
-	public static AdminInterfaces getInstance() {
-		return instance;
-	}
-	
-	// private Client admin;
-	
-	/*example*/
-	// public String help() {}
-	// int login(String[] params); // return uid
-	// int register(String[] params); // return uid
+
 	
     /**
     * 
@@ -187,7 +176,31 @@ public class AdminInterfaces {
         if(client == null) {
             throw new ExEntryNotFound(String.format("[Error] <%s> not found!", cmdLine[0]));
         }
-	    String ret = (new CmdConfirmReturn()).execute(cmdLine, client);
-	    return ret;
-	}
+        String ret = (new CmdConfirmReturn()).execute(cmdLine, client);
+        return ret;
+    }
+	public String undo() throws ExEmptyVector {
+        String ret = ">> Undo the following operations?\n";
+        //try {
+            ret += Undoable.undoCmd();
+        //} catch (ExEmptyVector ex) {
+            // TODO Auto-generated catch block
+            // e.printStackTrace();
+        //    System.out.println(ex.getMessage());
+        //}
+        return ret;
+    }
+    
+    // redo
+    public String redo() throws ExEmptyVector {
+        String ret = ">> Redo the following operations?\n";
+        //try {
+            ret += Undoable.redoCmd();
+        //} catch (ExEmptyVector ex) {
+            // TODO Auto-generated catch block
+            // e.printStackTrace();
+        //    System.out.println(ex.getMessage());
+        //}
+        return ret;
+    }
 }
