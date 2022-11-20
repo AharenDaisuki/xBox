@@ -81,7 +81,7 @@ public class RentableStorer implements XBoxStorer<Rentable>{
             Client client=ClientStorer.getClientByJSONObject(clientJSONObject);
             status=new RentableStatusPending(client);
         }
-        else status=null; //Exception needed
+        else return null; //Exception needed
         if(jsonObject.get("type").toString().equals("BAG"))
             //r=new Bag(jsonObject.get("id").toString().substring(3),status);
             r=new Bag(jsonObject.get("id").toString(),status);
@@ -89,7 +89,7 @@ public class RentableStorer implements XBoxStorer<Rentable>{
             //r=new Box(jsonObject.get("id").toString().substring(3),status);
             r=new Box(jsonObject.get("id").toString(),status);
         else
-            r=null; //Exception needed
+            return null; //Exception needed
         return r;
     }
 
@@ -100,26 +100,7 @@ public class RentableStorer implements XBoxStorer<Rentable>{
         // id
         jo.put("id", r.getId().substring(3));
         // status
-        if(r.getStatusStr().equals("Available")){
-            //jo.put("id", r.getId());
-            jo.put("status", new JSONObject(r.getStatus().toJSONString()));
-            //jo.put("type", r.getType());
-        }
-        else if(r.getStatusStr().equals("Occupied")){
-            //jo.put("id", r.getId());
-            jo.put("status", new JSONObject(r.getStatus().toJSONString()));
-            //jo.put("type", r.getType());
-        }
-        else if(r.getStatusStr().equals("Requested")){
-            //jo.put("id", r.getId());
-            jo.put("status", new JSONObject(r.getStatus().toJSONString()));
-            //jo.put("type", r.getType());
-        }
-        else if(r.getStatusStr().equals("Pending")){
-            //jo.put("id", r.getId());
-            jo.put("status", new JSONObject(r.getStatus().toJSONString()));
-            //jo.put("type", r.getType());
-        }
+        jo.put("status", new JSONObject(r.getStatus().toJSONString()));
         // type
         jo.put("type", r.getType());
         
