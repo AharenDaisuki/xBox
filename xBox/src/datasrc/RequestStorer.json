@@ -1,1 +1,1 @@
-[]
+[{"rentable":{"id":"1005","type":"BOX","status":{"client":{"password":"1","type":"student","email":"1","phoneNo":"1"},"status":"Requested"}},"dueDate":1671529516990,"client":{"password":"1","type":"student","email":"1","phoneNo":"1"}},{"rentable":{"id":"1008","type":"BOX","status":{"client":{"password":"1","type":"student","email":"1","phoneNo":"1"},"status":"Requested"}},"dueDate":1671529516990,"client":{"password":"1","type":"student","email":"1","phoneNo":"1"}}]
