@@ -11,7 +11,7 @@ public class TestRentableAllocator {
     Client student1 = new ClientStudent("zy@gmail.com","46464646","myPassword");
     
     @Test
-    public void test_01() throws ExNoSufficientRentable {
+    public void test_01() {
         RentableAllocator ra = RentableAllocator.getInstance();
         RentableManager rm = RentableManager.getInstance();
         RentableStatus rs = new RentableStatusAvailable();
