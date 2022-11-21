@@ -11,7 +11,7 @@ public class TestRentableAllocator {
     Client student1 = new ClientStudent("zy@gmail.com","46464646","myPassword");
     
     @Test
-    public void test_01() {
+    public void test_01() throws ExNoSufficientRentable {
         RentableAllocator ra = RentableAllocator.getInstance();
         RentableManager rm = RentableManager.getInstance();
         RentableStatus rs = new RentableStatusAvailable();
@@ -29,7 +29,7 @@ public class TestRentableAllocator {
         RentableAllocator ra = RentableAllocator.getInstance();
         RentableManager rm = RentableManager.getInstance();
         RentableStatus rs = new RentableStatusAvailable();
-        
+
         try {
             int a=1;
             ra.borrowRentable(student1, "BAG");
@@ -37,5 +37,6 @@ public class TestRentableAllocator {
             e.printStackTrace();
         }
     }
+    
     
 }
