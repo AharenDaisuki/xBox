@@ -11,20 +11,32 @@ public class TestRentableAllocator {
     Client student1 = new ClientStudent("zy@gmail.com","46464646","myPassword");
     
     @Test
-    public void test_01() throws ExNoSufficientRentable {
+    public void test_01() {
         RentableAllocator ra = RentableAllocator.getInstance();
         RentableManager rm = RentableManager.getInstance();
         RentableStatus rs = new RentableStatusAvailable();
         rm.addNewRentable(new Box("0001",rs));
-        ra.borrowRentable(student1, "BOX");
+        
+        try {
+            ra.borrowRentable(student1, "BOX");
+        } catch (ExNoSufficientRentable e) {
+            e.printStackTrace();
+        }
     }
     
     @Test
-    public void test_02() throws ExNoSufficientRentable {
+    public void test_02() {
         RentableAllocator ra = RentableAllocator.getInstance();
         RentableManager rm = RentableManager.getInstance();
         RentableStatus rs = new RentableStatusAvailable();
-        ra.borrowRentable(student1, "BAG");
+
+        try {
+            int a=1;
+            ra.borrowRentable(student1, "BAG");
+        } catch (ExNoSufficientRentable e) {
+            e.printStackTrace();
+        }
     }
+    
     
 }

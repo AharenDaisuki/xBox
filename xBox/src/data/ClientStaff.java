@@ -5,7 +5,7 @@ public class ClientStaff extends Client{
     
     public ClientStaff(String email, String phoneNo, String password) {
 		super(email, phoneNo, password);
-		this.borrowedCount = getMaxBorrowedCount(); 
+        this.borrowedCount = getMaxBorrowedCount();
 	}
     
     public void changeBorrowedCount(int number) {
