@@ -119,6 +119,19 @@ public class TestClient {
        assertEquals("{\"email\":\"zy@gmail.com\",\"phoneNo\":\"46464646\",\"password\":\"zyPassword\",\"type\":\"student\"}",str1);
     }
     
+    @Test
+    public void test_19() {
+        Staff1.changeBorrowedCount(-2);
+        int res = Staff1.getBorrowCount();
+        assertEquals(18,res);
+    }
+    
+    @Test
+    public void test_20() {
+        student1.changeBorrowedCount(-1);
+        int res = student1.getBorrowCount();
+        assertEquals(9,res);
+    }
     
     
 

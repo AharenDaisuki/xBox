@@ -92,6 +92,16 @@ public class TestClientStorer {
 			public int getMaxBorrowedCount() {
 				return 0;
 			}
+
+            @Override
+            public int getBorrowCount() {
+                // TODO Auto-generated method stub
+                return 0;
+            }
+
+            @Override
+            public void changeBorrowedCount(int number) {     
+            }
 		}
 		Client c=new ClientTemp("1","1","1");
 		c.getDiscount();
