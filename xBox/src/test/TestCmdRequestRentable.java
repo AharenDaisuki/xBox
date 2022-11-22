@@ -69,7 +69,7 @@ public class TestCmdRequestRentable {
             };
             log = requestRentable.execute(cmdLine, client);
         }catch(Exception ex) {
-            assertEquals("[Error] No more than 10 BAG per user!", ex.getMessage());
+            assertEquals("[Error] Only 10 quotas remain for <xyli45-c@my.cityu.edu.hk>!", ex.getMessage());
         }
     }
     

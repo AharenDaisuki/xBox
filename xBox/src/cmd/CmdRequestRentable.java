@@ -22,6 +22,7 @@ public class CmdRequestRentable extends Undoable{
     private Client user;
     //private String rentableType;
     private int requestN = 0;
+    private int quotaN = 0;
     //private String monthN;
     private final Rentable[] allRentables = new Rentable[size];
     private final Request[] allRequests = new Request[size];
@@ -48,8 +49,8 @@ public class CmdRequestRentable extends Undoable{
         this.user = aClient;
         String rentableType = cmdLine[0];
         int len = Integer.parseInt(cmdLine[1]);
-        if(len > aClient.getMaxBorrowedCount()) {
-            throw new ExNoSufficientRentable(String.format("[Error] No more than %d %s per user!", aClient.getMaxBorrowedCount(), rentableType));
+        if(len > aClient.getBorrowCount()) {
+            throw new ExNoSufficientRentable(String.format("[Error] Only %d quotas remain for <%s>!", aClient.getBorrowCount(), aClient.getEmail()));
         }
         String monthN = cmdLine[2]; 
         String ret = "[request list]\n";
@@ -60,6 +61,8 @@ public class CmdRequestRentable extends Undoable{
                 // return rentable
                 allRentables[i] = rentableAllocator.borrowRentable(user, rentableType);
                 this.requestN++;
+                this.quotaN++;
+                aClient.changeBorrowedCount(-1);
                 allStatus[i] = allRentables[i].getStatus();
                 allNewStatus[i] = new RentableStatusRequested(user);
                 // set status
@@ -91,6 +94,7 @@ public class CmdRequestRentable extends Undoable{
             // System.out.println(allRentables[i].getStatusStr());
             ret += String.format("> send request %s\n", allRentables[i].getId());
         }
+        user.changeBorrowedCount(this.quotaN);
         // add this to redoList
         addRedo(this);
         return ret;
@@ -108,6 +112,7 @@ public class CmdRequestRentable extends Undoable{
             requestManager.newRequest(allRequests[i]);
             ret += String.format("> send request %s\n", allRentables[i].getId());
         }
+        user.changeBorrowedCount(-this.quotaN);
         addUndo(this);
         return ret;
     }
