@@ -15,6 +15,10 @@ public abstract class Client{
     
     public abstract double getDiscount();
     
+    public abstract int getBorrowCount();
+    
+    public abstract void changeBorrowedCount(int number);
+    
     public abstract int getMaxBorrowedCount();
     
     public String getEmail() { return this.email; }

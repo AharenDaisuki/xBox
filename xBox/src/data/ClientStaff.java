@@ -8,9 +8,13 @@ public class ClientStaff extends Client{
 		this.borrowedCount = getMaxBorrowedCount(); 
 	}
     
+    @Override
     public void changeBorrowedCount(int number) {
         this.borrowedCount += number;
     }
+    
+    @Override
+    public int getBorrowCount() { return this.borrowedCount; }
 
     @Override
     public double getDiscount() {
