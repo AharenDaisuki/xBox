@@ -51,9 +51,13 @@ For More Details, Please check the [User_Manuals.pdf]()
 |[ZHANG Tiantian](https://github.com/crystal-cheung) |  Program Designer, Program Developer|
 |[ZHENG Shangkun](https://github.com/bnxcvd) | Assistant Program Manager, Program Developer|
 |[ZHOU Yu](https://github.com/yzhou442) | Program Developer, Program Tester|
+
+
 ##6.Project link
+[Overview](https://github.com/AharenDaisuki/xBox/blob/djj/xBox/docs/overview.pdf)
+[Self assessment](https://github.com/AharenDaisuki/xBox/blob/djj/xBox/docs/cs3343_self_assessment_report.pdf)
 [Release Summary]()
-[Project Plan]()
+[Project Plan](https://github.com/AharenDaisuki/xBox/blob/djj/xBox/docs/CS3343%20Project%20Plan.pdf)
 [Design Report]()
 [Test Report]()
-[Bug Report]()
+[Bug Report](https://github.com/AharenDaisuki/xBox/blob/djj/xBox/docs/cs3343%20bug%20report%20(1).pdf)
