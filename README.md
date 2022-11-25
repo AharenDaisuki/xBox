@@ -23,7 +23,7 @@ The Admin can input the client id to know the amount of the bills and check whet
 And input the client id and boxid to get the empty boxes returned by the users.
 The System also provides details search functions.
 
-For More Details, Please check the [User_Manuals.pdf]()
+For More Details, Please check the [User_Manuals.pdf](https://github.com/AharenDaisuki/xBox/blob/djj/xBox/docs/User_Manual.pdf)
 
 ## 4.Release Version
 > + 1.0  Command Line Version
