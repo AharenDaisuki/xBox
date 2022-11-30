@@ -1,7 +1,7 @@
 package data;
 
 public class ClientStudent extends Client{
-    private int borrowedCount;
+	private int borrowedCount;
     
 	public ClientStudent(String email, String phoneNo, String password) {
 		super(email, phoneNo, password);

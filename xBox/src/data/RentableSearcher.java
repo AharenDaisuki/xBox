@@ -21,13 +21,17 @@ public class RentableSearcher {
     public Rentable searchByKeyword(String rentableId) {
         RentableStorer storer = RentableStorer.getInstance();
         // TODO: the first three letter is type
-        for(Rentable rentable : storer.getList(rentableId.substring(0, 3))) {
-            if(rentable.getId().equals(rentableId)) {
-                return rentable;
+        
+        if (storer.getList(rentableId.substring(0, 3)) != null){
+            for(Rentable rentable : storer.getList(rentableId.substring(0, 3))) {
+                if(rentable.getId().equals(rentableId)) {
+                    return rentable;
+                }
             }
         }
-        // throw new ExEntryNotFound(String.format("Item[%s] is not found", rentableId));
         return null;
+        // throw new ExEntryNotFound(String.format("Item[%s] is not found", rentableId));
+
     }
     
     public ArrayList<Rentable> searchAllByKeyword(String type){

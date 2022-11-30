@@ -27,6 +27,7 @@ public class Database {
 
     public void initialize(String[] filePathNames) throws IOException
     {
+    	System.out.println(filePathNames[1]);
         rentableStorer.readFromJson(filePathNames[0]);
         recordStorer.readFromJson(filePathNames[1]);
         clientStorer.readFromJson(filePathNames[2]);
