@@ -58,7 +58,7 @@ public class TestRequestStorer {
 	@Test
 	public void test_05() throws IOException
 	{
-		rs.readFromJson("test/testRequestJSON.json");
+		rs.readFromJson("src/test/testRequestJSON.json");
 		System.out.println("-------------");
 		System.out.println(rs.getList().get(0).toString());
 		assertEquals(rs.getList().get(0).toString(),request.toString());
@@ -67,8 +67,8 @@ public class TestRequestStorer {
 	@Test
 	public void test_06() throws IOException
 	{
-		rs.writeToJson("test/testRequestJSON.json");;
-		rs.readFromJson("test/testRequestJSON.json");
+		rs.writeToJson("src/test/testRequestJSON.json");;
+		rs.readFromJson("src/test/testRequestJSON.json");
 		assertEquals(rs.getList().get(0).toString(),request.toString());
 	}
 }

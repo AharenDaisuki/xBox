@@ -64,15 +64,15 @@ public class TestRecordStorer {
 	@Test
 	public void test_05() throws IOException
 	{
-		rs.readFromJson("test/testRecordJSON.json");
+		rs.readFromJson("src/test/testRecordJSON.json");
 		assertEquals(rs.getList().get(0).toString(),record.toString());
 	}
 	
 	@Test
 	public void test_06() throws IOException
 	{
-		rs.writeToJson("test/testRecordJSON.json");;
-		rs.readFromJson("test/testRecordJSON.json");
+		rs.writeToJson("src/test/testRecordJSON.json");;
+		rs.readFromJson("src/test/testRecordJSON.json");
 		assertEquals(rs.getList().get(0).toString(),record.toString());
 	}
 }

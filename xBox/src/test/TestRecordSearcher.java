@@ -2,13 +2,14 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
 import org.junit.Test;
 
 import data.*;
-import data.Record;
+import xBox.Xbox;
 
 public class TestRecordSearcher {
 	private RecordStorer rs=RecordStorer.getInstance();
@@ -19,12 +20,25 @@ public class TestRecordSearcher {
 	private Date d=new Date(114514);
 	
 	private Record record=new Record(c,r,d,false);
-	
+	Xbox xbox;
 	public TestRecordSearcher()
 	{
+	    Xbox.totest();
+        xbox = Xbox.getInstance();
+        Database db = Database.getInstance();
+        String[] files = {
+          System.getProperty("user.dir") + "/src/test/testRentableJSON.json", // TODO: to be modified
+          System.getProperty("user.dir") + "/src/test/testRecordJSON.json",
+          System.getProperty("user.dir") + "/src/test/testClientJSON.json",
+          System.getProperty("user.dir") + "/src/test/testRequestJSON.json"
+        };
+        // initialization
+        try {
+            db.initialize(files);
+        } catch (IOException ex) {
+        }
 		rm.insert(record);
-	}
-	
+	}		
 	@Test
 	public void test_01()
 	{

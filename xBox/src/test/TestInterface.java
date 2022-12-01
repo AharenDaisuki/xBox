@@ -3,6 +3,9 @@ package test;
 
 import ex.*;
 import org.junit.Test;
+
+import app.Main;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import io.*;
@@ -265,6 +268,11 @@ public class TestInterface {
         ret = ">> Redo the following operations?\n";
         ret += Undoable.redoCmd();
         assertEquals(ret,xbox.get_data());
+    }
+    @Test
+    public void SystemTest() {
+        Main main=new Main();
+        main.main(null);
     }
     
 }

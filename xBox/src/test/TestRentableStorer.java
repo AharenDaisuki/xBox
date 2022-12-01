@@ -131,14 +131,14 @@ public class TestRentableStorer {
     
     @Test
     public void test_11() throws IOException {
-    	rs.readFromJson("test/testRentableJSON.json");
+    	rs.readFromJson("src/test/testRentableJSON.json");
     	assertEquals(rs.getList("BAG").get(0).toJSONString(),"{\"id\":\"001\",\"status\":{\"status\":\"Available\"},\"type\":\"BAG\"}");
     }
     
     @Test
     public void test_12() throws IOException {
-    	rs.writeToJson("test/testRentableJSON.json");
-    	rs.readFromJson("test/testRentableJSON.json");
+    	rs.writeToJson("src/test/testRentableJSON.json");
+    	rs.readFromJson("src/test/testRentableJSON.json");
     	assertEquals(rs.getList("BAG").get(0).toJSONString(),"{\"id\":\"001\",\"status\":{\"status\":\"Available\"},\"type\":\"BAG\"}");
     }
     
