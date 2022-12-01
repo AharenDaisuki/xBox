@@ -40,6 +40,11 @@ public abstract class Undoable implements Command {
 		redoList.clear();
 	}
 	
+	public static void clearAll() {
+	    redoList.clear();
+	    undoList.clear();
+	}
+	
 	// fetch undoable and execute undo or redo function
 	
 	/**
