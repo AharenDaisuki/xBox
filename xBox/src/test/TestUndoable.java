@@ -29,6 +29,7 @@ public class TestUndoable {
     @Test
     public void test_01() {
         try {
+            Undoable.clearAll();
             Undoable.undoCmd();
         } catch (Exception ex) {
             assertEquals("[Error] Nothing to undo!", ex.getMessage());
@@ -39,6 +40,7 @@ public class TestUndoable {
     @Test
     public void test_02() {
         try {
+            Undoable.clearAll();
             Undoable.redoCmd();
         } catch (Exception ex) {
             assertEquals("[Error] Nothing to redo!", ex.getMessage());
