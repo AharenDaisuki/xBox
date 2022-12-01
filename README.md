@@ -8,7 +8,6 @@ As a multicultural education city, Hong Kong colleges have many international st
 
 Get our project from <https://github.com/AharenDaisuki/xBox>
 Using the branch main 
-click the run.bat at the Release fold.
 
 
 ## 3.User Guide
@@ -54,16 +53,18 @@ For More Details, Please check the [User_Manuals.pdf](https://github.com/AharenD
 
 
 ## 6.Project link
-[Overview](https://github.com/AharenDaisuki/xBox/blob/djj/xBox/docs/overview.pdf)
+[Class Reference](https://github.com/AharenDaisuki/xBox/blob/main/xBox/Docs/CS3343_Xbox_Class_Reference_Group13.pdf)
 
-[Self assessment](https://github.com/AharenDaisuki/xBox/blob/djj/xBox/docs/cs3343_self_assessment_report.pdf)
+[User Manual](https://github.com/AharenDaisuki/xBox/blob/main/xBox/Docs/Javadoc/User_Manual.pdf)
 
-[Release Summary]()
+[Self-assessment](https://github.com/AharenDaisuki/xBox/blob/main/xBox/Docs/CS3343_Self_Assessment_Report_Group13.pdf)
 
-[Project Plan](https://github.com/AharenDaisuki/xBox/blob/djj/xBox/docs/CS3343%20Project%20Plan.pdf)
+[Release Summary](https://github.com/AharenDaisuki/xBox/blob/main/xBox/Docs/CS3343_Release_Summary_Group13.pdf)
 
-[Design Report]()
+[Project Plan](https://github.com/AharenDaisuki/xBox/blob/main/xBox/Docs/CS3343_Project%20_Plan_Group13.pdf)
 
-[Test Report]()
+[Design Report](https://github.com/AharenDaisuki/xBox/blob/main/xBox/Docs/CS3343_Analysis_and_Design_Report_Group13.pdf)
 
-[Bug Report](https://github.com/AharenDaisuki/xBox/blob/djj/xBox/docs/cs3343%20bug%20report%20(1).pdf)
+[Test Report](https://github.com/AharenDaisuki/xBox/blob/main/xBox/Docs/CS3343_Test_Report_Group13.pdf)
+
+[Bug Report](https://github.com/AharenDaisuki/xBox/blob/main/xBox/Docs/CS3343_Bug_Report_Group13.pdf)
