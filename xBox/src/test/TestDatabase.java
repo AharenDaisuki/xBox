@@ -25,7 +25,7 @@ public class TestDatabase {
     @Test
     public void test_01() throws IOException
     {
-    	String[] str=new String[]{"test/testRentableJSON.json","test/testRecordJSON.json","test/testClientJSON.json","test/testRequestJSON.json"};
+    	String[] str=new String[]{"src/test/testRentableJSON.json","src/test/testRecordJSON.json","src/test/testClientJSON.json","src/test/testRequestJSON.json"};
     	database.initialize(str);
     	System.out.println(recordStorer.getList().size());
     	assertEquals(rentableStorer.getList("BAG").get(0).toString(),r.toString());
@@ -37,7 +37,7 @@ public class TestDatabase {
     @Test
     public void test_02() throws IOException
     {
-    	String[] str=new String[]{"test/testRentableJSON.json","test/testRecordJSON.json","test/testClientJSON.json","test/testRequestJSON.json"};
+    	String[] str=new String[]{"src/test/testRentableJSON.json","src/test/testRecordJSON.json","src/test/testClientJSON.json","src/test/testRequestJSON.json"};
     	database.storeUp(str);
     	database.initialize(str);
     	assertEquals(rentableStorer.getList("BAG").get(0).toString(),r.toString());

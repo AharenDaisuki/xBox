@@ -112,15 +112,15 @@ public class TestClientStorer {
 	@Test
 	public void test_07() throws IOException
 	{
-		cs.readFromJson("test/testClientJSON.json");
+		cs.readFromJson("src/test/testClientJSON.json");
 		assertEquals(cs.getList().get(0).toJSONString(), "{\"email\":\"123@abc.com\",\"phoneNo\":\"1234\",\"password\":\"123\",\"type\":\"staff\"}");
 	}
 	
 	@Test
 	public void test_08() throws IOException
 	{
-		cs.writeToJson("test/testClientJSON.json");
-		cs.readFromJson("test/testClientJSON.json");
+		cs.writeToJson("src/test/testClientJSON.json");
+		cs.readFromJson("src/test/testClientJSON.json");
 		assertEquals(cs.getList().get(0).toJSONString(), "{\"email\":\"123@abc.com\",\"phoneNo\":\"1234\",\"password\":\"123\",\"type\":\"staff\"}");
 	}
 }

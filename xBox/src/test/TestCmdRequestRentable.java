@@ -13,8 +13,11 @@ import org.junit.runners.MethodSorters;
 import org.junit.FixMethodOrder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 
 import cmd.Command;
 import cmd.Undoable;
@@ -22,12 +25,14 @@ import cmd.CmdRequestRentable;
 import data.Bag;
 import data.Client;
 import data.ClientStudent;
+import data.Database;
 import data.Rentable;
 import data.RentableManager;
 import data.RentableSearcher;
 import data.RentableStatusAvailable;
 import data.RentableStatusRequested;
 import utils.XBoxDate;
+import xBox.Xbox;
 
 @FixMethodOrder
 public class TestCmdRequestRentable {
@@ -42,6 +47,27 @@ public class TestCmdRequestRentable {
     private Rentable rentable2 = new Bag("0002", new RentableStatusAvailable());
     private Rentable rentable3 = new Bag("0003", new RentableStatusAvailable());
     
+    
+    @BeforeClass
+    public static void TestCmdRequestRentable()
+    {
+        Xbox xbox;
+        Xbox.totest();
+        xbox = Xbox.getInstance();
+        Database db = Database.getInstance();
+        String[] files = {
+          System.getProperty("user.dir") + "/src/test/empty.json", // TODO: to be modified
+          System.getProperty("user.dir") + "/src/test/empty.json",
+          System.getProperty("user.dir") + "/src/test/empty.json",
+          System.getProperty("user.dir") + "/src/test/empty.json"
+        };
+        // initialization
+        try {
+            db.initialize(files);
+        } catch (IOException ex) {
+        }
+        
+    }
     
     @Before
     public void init() {
