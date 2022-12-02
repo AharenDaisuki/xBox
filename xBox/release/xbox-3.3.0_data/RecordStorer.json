@@ -1,0 +1,1 @@
+[{"isPaid":false,"rentable":{"id":"1000","type":"BOX","status":{"due":1671529516990,"client":{"password":"1","type":"student","email":"1","phoneNo":"1"},"status":"Occupied"}},"dueDate":1671529516990,"client":{"password":"1","type":"student","email":"1","phoneNo":"1"}}]
