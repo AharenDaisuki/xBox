@@ -3,6 +3,7 @@ package xBox;
 import java.util.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.File;
 import java.io.IOException;
 
 import ex.*;
@@ -11,6 +12,7 @@ import io.*;
 import java.awt.*;
 import data.Client;
 import data.Database;
+import java.net.URL;
 
 /**
  * 
@@ -22,6 +24,7 @@ import data.Database;
 public class Xbox {
 	private static Xbox instance;
 	private String now_page = null;
+	private static String[] saveFilePaths;
 	private static boolean iftest = false;
 	private JFrame jframe = init(!iftest);
 	private JPanel content = null;
@@ -36,21 +39,12 @@ public class Xbox {
 		return instance;
 	}
 	
+	public static void setSaveFilePaths(String[] saveFilePaths_) { saveFilePaths = saveFilePaths_; }
+	
 
 	private JFrame init(boolean test){
 	    Database db = Database.getInstance();
-	    String[] files = {
-	      System.getProperty("user.dir") + "/src/datasrc/RentableStorer.json", // TODO: to be modified
-	      System.getProperty("user.dir") + "/src/datasrc/RecordStorer.json",
-	      System.getProperty("user.dir") + "/src/datasrc/ClientStorer.json",
-	      System.getProperty("user.dir") + "/src/datasrc/RequestStorer.json"
-	    };
-	    // initialization
-	    try {
-            db.initialize(files);
-        } catch (IOException ex) {
-            System.out.println("[Error] Fail to read json file!");
-        }
+
 		JFrame jFrame = new JFrame();
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
@@ -66,9 +60,10 @@ public class Xbox {
                 super.windowClosing(e);
                 // store up
                 try {
-                    db.storeUp(files);
+                    db.storeUp(saveFilePaths);
                 } catch (IOException ex) {
-                    System.out.println("Fail to save json file!");
+                    Xbox.error(ex);
+                    // System.out.println("Fail to save json file!");
                 }
            }
         });

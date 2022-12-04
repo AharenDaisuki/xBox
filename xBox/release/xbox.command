@@ -1,0 +1,11 @@
+#!/bin/sh
+
+WORKING_DIR=$(cd $(dirname $0); pwd)
+JAR_FILE_PATH_NAME="$WORKING_DIR/xbox-3.3.0.jar"
+RENTABLE_FILE_PATH_NAME="$WORKING_DIR/xbox-3.3.0_data/RentableStorer.json"
+CLIENT_FILE_PATH_NAME="$WORKING_DIR/xbox-3.3.0_data/ClientStorer.json"
+REQUEST_FILE_PATH_NAME="$WORKING_DIR/xbox-3.3.0_data/RequestStorer.json"
+RECORD_FILE_PATH_NAME="$WORKING_DIR/xbox-3.3.0_data/RecordStorer.json"
+# echo ${WORKING_DIR}
+
+java -jar $JAR_FILE_PATH_NAME $RENTABLE_FILE_PATH_NAME $RECORD_FILE_PATH_NAME $CLIENT_FILE_PATH_NAME $REQUEST_FILE_PATH_NAME
